@@ -16,18 +16,14 @@ public class Cart {
     @Column(name = "cart_no")
     private Long no;
 
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_no")
     private User users;
 
-    @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_no")
-    private Order orders;
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name ="book_no")
+    private Book books;
 
-    @OneToMany(mappedBy = "cart")
-    private List<Book> book = new ArrayList<>();
-
-    private int OrderPrice;
     private int count;
 
 }

@@ -1,9 +1,12 @@
 package com.dabook.dabook.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static jakarta.persistence.FetchType.*;
 
@@ -16,16 +19,19 @@ public class Book {
     private Long no;
 
     private String bookName;
-    private String publisher;
     private int price;
-    private LocalDateTime publishDate;
     private String author;
+    private String publisher;
+    private LocalDateTime publishDate;
     private int salesVolume;
-
-    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "cart_no")
-    private Cart cart;
 
     @Embedded
     private BookDetail bookDetail;
+
+    @OneToMany(mappedBy = "books")
+    private List<Cart> carts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "books")
+    private List<Review> reviews = new ArrayList<>();
+
 }
