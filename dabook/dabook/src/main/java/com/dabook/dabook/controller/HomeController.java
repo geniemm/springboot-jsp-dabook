@@ -16,6 +16,29 @@ public class HomeController {
         return "test";
     }
 
+    @RequestMapping("/login")
+    public String login(){
+        System.out.println("login");
+        return "main/login";
+    }
+
+    @RequestMapping("/join")
+    public String join(){
+        System.out.println("Join");
+        return "main/join";
+    }
+
+    @RequestMapping("/mypage")
+    public String mypage(){
+        System.out.println("mypage");
+        return "main/mypage";
+    }
+
+    @RequestMapping("/modifyInfo")
+    public String modifyInfo(){
+        System.out.println("modifyInfo");
+        return "main/modifyInfo";
+    }
 
 
 }
