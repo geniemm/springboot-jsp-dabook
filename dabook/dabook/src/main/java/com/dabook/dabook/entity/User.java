@@ -13,7 +13,8 @@ import static jakarta.persistence.FetchType.*;
 @Getter
 public class User {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "user_no")
     private Long no;
 
@@ -29,8 +30,8 @@ public class User {
     @OneToMany(mappedBy = "users")
     private List<Address> address;
 
-    @Enumerated(EnumType.STRING)
-    private GuestCheck guestCheck;
+//    @Enumerated(EnumType.STRING)
+//    private GuestCheck guestCheck;
 
     @OneToMany(mappedBy = "users")
     private List<Order> orders = new ArrayList<>();

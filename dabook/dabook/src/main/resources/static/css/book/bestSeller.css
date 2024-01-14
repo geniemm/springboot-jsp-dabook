@@ -1,0 +1,32 @@
+.wholeSpace{
+    border-top: 2px solid darkgray;
+    height: auto;
+}
+
+.bookSpace{
+    margin-left: 100px;
+}
+.row{
+    height: 200px;
+    display: flex;
+}
+.oneBookSpace{
+    margin: 10px 20px;
+}
+button{
+    background: none;
+    border-style: none;
+}
+img{
+    height: 180px;
+    width: auto;
+}
+#bookTitle{
+    margin-top: 10px;
+    font-size: medium;
+}
+#author{
+    margin: 10px 0 0 5px;
+    font-size: small;
+    color: darkgray;
+}
