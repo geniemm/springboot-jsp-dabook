@@ -4,12 +4,10 @@
 }
 
 .bookSpace{
-    margin-left: 150px;
+    margin-left: 100px;
 }
 .row{
     height: 200px;
-}
-.oneBookLine{
     display: flex;
 }
 .oneBookSpace{

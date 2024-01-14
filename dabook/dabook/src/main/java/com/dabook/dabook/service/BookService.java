@@ -1,6 +1,7 @@
 package com.dabook.dabook.service;
 
 import com.dabook.dabook.entity.Book;
+import com.dabook.dabook.entity.BookDetail;
 import com.dabook.dabook.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class BookService {
 
     @Transactional(readOnly = true) //한건조회
     public Book getBookInfo(Long no) {
-        return bookRepository.findById(no)
-                .orElseThrow(()->new IllegalArgumentException("id를 확인해주세요"));
+        return bookRepository.findBookInfo(no);
     }
+
 }

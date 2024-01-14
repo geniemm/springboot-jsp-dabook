@@ -1,0 +1,44 @@
+.bookInfoSpace{
+    display: flex;
+    height: 400px;
+    margin: 30px 0 10px 400px;
+}
+img{
+    height: 350px;
+    width: auto;
+}
+.text{
+    margin-left: 50px;
+}
+.title{
+    padding: 20px;
+    width: 300px;
+    border-bottom: 1px solid grey;
+}
+.info{
+    padding: 20px;
+    width: 300px;
+    border-bottom: 1px solid grey;
+}
+.price{
+    padding: 20px;
+    width: 300px;
+    border-bottom: 1px solid grey;
+}
+.count{
+    padding: 20px;
+    width: 300px;
+    display: flex;
+    font-size: medium;
+}
+.btn-count{
+    width: 30px;
+    height: 30px;
+    padding-bottom: 10px;
+    border: 1px solid darkgray;
+    background: none;
+    border-radius: 15%;
+}
+.cart{
+    padding: 20px;
+}
