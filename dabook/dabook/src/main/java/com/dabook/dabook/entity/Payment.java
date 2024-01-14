@@ -13,7 +13,8 @@ public class Payment {
     @Column(name = "payment_no")
     private Long no;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "payment")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_no")
     private Order orders;
 
     private LocalDateTime payDate;
