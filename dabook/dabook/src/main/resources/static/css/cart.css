@@ -1,13 +1,14 @@
 .cart-goods-div{
-    padding: 50px 330px 0px 330px;
+    text-align: -webkit-center;
 }
 .img-class{
-    height: 300px;
-    width: 200px;
+    height: 200px;
+    width: 180px;
 }
 .goods-title{
+    text-align: left;
     padding-top: 30px;
-    padding-left: 15px;
+    padding-left: 45px;
     width: 450px;
 }
 .title-fontsize{
@@ -17,28 +18,16 @@
     font-weight: bold;
 }
 .volume-div{
-    padding: 30px 0;
-    width: 100px;
+    padding-top: 30px;
+    width: 150px;
 }
-.volume{
-    text-align: center;
-    display: flex;
-    justify-content: center;
-}
-.volume-btn{
-    width: 30px;
-    height: 30px;
-    border: none;
-    border: 2px solid black;
-    font-size: 20px;
-}
+
 .free-delivery{
-    padding: 25px 10px 10px 10px;
     text-align: right;
-    width: 930px;
-    height: 30px;
-    font-size: 23px;
-    border-bottom: 2px solid lightgray;
+    width: 465px;
+    padding-right: 20px;
+    font-size: 15px;
+    padding-top: 5px;
 }
 .pay-count{
     padding: 40px 10px;
@@ -62,7 +51,6 @@
     justify-content: space-around;
 }
 .order-btn{
-    padding: 30px 330px;
     text-align: center;
 }
 .order-button{
@@ -71,11 +59,9 @@
     font-size: 25px;
 }
 .goods-count{
-    padding: 25px 10px 10px 10px;
-    width: 930px;
-    font-size: 23px;
-    height: 40px;
-    border-bottom: 2px solid lightgray;
+    width: 465px;
+    font-size: 20px;
+    padding-left: 65px;
     text-align: left;
 }
 .count{
@@ -85,11 +71,51 @@
     font-weight: bold;
 }
 .a-div{
-    padding: 50px 100px 50px 0px;
+    padding: 50px 0;
     display: flex;
     width: 800px;
-    border-bottom: 2px solid lightgray;
 }
-.chbox{
+.chkBuy{
     margin: 25px;
+}
+.line{
+    width: 930px;
+    border-top: 1px solid lightgray;
+}
+.selectBy{
+     text-align: center;
+     width: 800px;
+     display: flex;
+ }
+.chkAll{
+    text-align: left;
+    padding-left: 30px;
+    padding-top: 7px;
+    width: 400px;
+}
+.chkDel{
+    text-align: right;
+    padding-right: 30px;
+    width: 400px;
+}
+
+.feePrice{
+    padding: 10px;
+}
+.isLine{
+    display: flex;
+    border-top: 2px solid lightgray;
+    border-bottom: 2px solid lightgray;
+    width: 930px;
+    height: 55px;
+    padding-top: 10px;
+}
+.emptyCart{
+    width: 800px;
+    font-size: xxx-large;
+    text-align: center;
+}
+.emptyline{
+    width: 930px;
+    border-top: 2px solid lightgray;
 }
