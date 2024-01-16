@@ -9,7 +9,7 @@
     }
 </style>
 
-<div class="b-example-divider"></div>
+<div class="b-example-divider mt-5"></div>
     <div class="container">
         <footer class="py-2 my-4">
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">

@@ -43,10 +43,13 @@
                         <a class="nav-link active" aria-current="page" href="#">베스트셀러</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">요즘 이 책</a>
+                        <a class="nav-link active" href="#">요즘 이 책</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/login">LOGIN</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/cart/1">CART</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
