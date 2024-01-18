@@ -1,0 +1,79 @@
+.pay{
+    margin: 100px 380px 100px 380px;
+}
+.pay-div{
+    margin: 30px 50px 30px 50px;
+}
+.font-span{
+    font-weight: bold;
+}
+.product-div{
+    display: flex;
+    border-top: 2px solid black;
+    margin-top: 10px;
+}
+.product-name{
+    margin: 10px;
+    padding: 15px;
+    width: 77%;
+}
+.mini{
+    padding: 5px;
+}
+.product-price{
+    margin: 10px;
+    padding: 15px;
+    font-weight: bold;
+    text-align: right;
+    width: 23%;
+}
+.buyer-div{
+    display: flex;
+    margin-top: 10px;
+    border-top: 2px solid black;
+}
+.buyer{
+    padding: 10px 50px 10px 10px;
+}
+.buyer-info{
+    padding: 10px;
+}
+.delivery{
+    margin-top: 10px;
+    border-top: 2px solid black;
+}
+.delivery-api{
+    margin: 10px;
+}
+.delivery-div{
+    display: flex;
+}
+.receiver{
+    padding: 10px 50px 10px 10px;
+}
+.receiver-info{
+    padding: 10px;
+}
+.pay-type{
+    border-top: 2px solid black;
+    margin-top: 10px;
+}
+
+.btn-div{
+    padding: 20px 120px;
+}
+.pat-btn{
+    text-align: center;
+    height: 50px;
+    width: 300px;
+}
+.postNum{
+    display: flex;
+    padding: 5px;
+}
+
+.inputC{
+    margin-right: 10px;
+    border:  1px solid lightgray;
+    width: 250px;
+}
