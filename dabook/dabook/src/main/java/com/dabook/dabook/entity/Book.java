@@ -2,7 +2,10 @@ package com.dabook.dabook.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,6 +15,9 @@ import static jakarta.persistence.FetchType.*;
 
 @Entity
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Book {
 
     @Id @GeneratedValue
@@ -34,4 +40,7 @@ public class Book {
     @OneToMany(mappedBy = "books")
     private List<Review> reviews = new ArrayList<>();
 
+    public void setPublishDate(LocalDateTime publishDate) {
+        this.publishDate = publishDate;
+    }
 }

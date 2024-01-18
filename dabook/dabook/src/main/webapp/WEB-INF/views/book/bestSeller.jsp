@@ -14,10 +14,14 @@
 </script>
 <link rel="stylesheet" href="/css/book/bestSeller.css" />
 <body>
-<h4>베스트 셀러</h4><div class="wholeSpace">
+<h4>베스트 셀러</h4>
+<div class="wholeSpace">
     <div class="bookSpace">
         <div class="row">
-            <c:forEach var="books" items="${books}">
+            <c:forEach var="books" items="${books}" varStatus="rowStatus">
+                <c:if test="${rowStatus.index % 6 ==0}">
+                <div class="oneBookLine">
+                 </c:if>
                 <div class="oneBookSpace">
                     <button type="submit" onclick="location.href=`/dabook/book?no=${books.no}`">
                         <img src="/images/bookImage/book${books.no}.jpg" alt="${books.bookName}"></button>
@@ -28,6 +32,9 @@
                             ${books.author}
                     </div>
                 </div>
+                <c:if test="${rowStatus.index % 6 == 5 or rowStatus.last}">
+                    </div>
+                </c:if>
             </c:forEach>
         </div>
     </div>

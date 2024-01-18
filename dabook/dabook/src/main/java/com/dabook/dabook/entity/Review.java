@@ -1,14 +1,19 @@
 package com.dabook.dabook.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
 import static jakarta.persistence.FetchType.*;
 
 @Entity
+@Setter
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Review {
 
     @Id @GeneratedValue
@@ -24,7 +29,14 @@ public class Review {
     private User users;
 
     private String reviewContent;
+
+    @CreatedDate
+    @Column(nullable = false,updatable = false)
     private LocalDateTime reviewDate;
+
     private int rating; // 별점
 
+    public void setReviewDate(LocalDateTime reviewDate) {
+        this.reviewDate = reviewDate;
+    }
 }

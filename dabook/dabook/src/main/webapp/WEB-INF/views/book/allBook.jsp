@@ -10,16 +10,6 @@
 
 <link rel="stylesheet" href="/css/book/allBook.css"/>
 <script>
-    // $.ajax({
-    //     url:"dabook/allBook",
-    //     type:"get",
-    //     dataType:"json",
-    //     success: viewBookList,
-    //     error: function (){alert("오류가 발생했습니다.");}
-    // });
-    // }
-    // function loadBookList(){
-
 </script>
 <body>
 <h4>책 전체보기</h4>
