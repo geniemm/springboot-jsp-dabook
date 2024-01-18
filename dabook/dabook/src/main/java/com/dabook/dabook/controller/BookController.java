@@ -2,7 +2,9 @@ package com.dabook.dabook.controller;
 
 import com.dabook.dabook.entity.Book;
 import com.dabook.dabook.entity.BookDetail;
+import com.dabook.dabook.entity.Review;
 import com.dabook.dabook.service.BookService;
+import com.dabook.dabook.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -48,7 +52,6 @@ public class BookController {
         log.info("책번호: "+bookInfo.getNo());
         return "book/bookInfo";
     }
-
 
     // 지금 이 책
     @GetMapping("/nowBook")
