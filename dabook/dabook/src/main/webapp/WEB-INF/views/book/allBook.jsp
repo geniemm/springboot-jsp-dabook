@@ -12,7 +12,8 @@
 <script>
 </script>
 <body>
-<h4>책 전체보기</h4>
+<jsp:include page="../main/header.jsp" />
+<h3>BOOK</h3>
 <div class="wholeSpace">
     <div class="bookSpace">
         <div class="row">
@@ -39,6 +40,6 @@
     </div>
 </div>
 
-
+<jsp:include page="../main/footer.jsp" />
 </body>
 </html>

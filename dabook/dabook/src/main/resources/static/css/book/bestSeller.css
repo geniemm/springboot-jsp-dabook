@@ -1,6 +1,10 @@
+h3{
+    font-family: "Kim jung chul Myungjo Regular", serif;
+    letter-spacing: 2px;
+}
 .wholeSpace{
     border-top: 2px solid darkgray;
-    height: auto;
+    height: 1000px;
 }
 
 .bookSpace{

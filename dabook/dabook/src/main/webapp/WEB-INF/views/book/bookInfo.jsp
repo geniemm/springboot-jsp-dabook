@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <%@ include file="../default/style.jsp" %>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title> book </title>
@@ -38,6 +39,7 @@
 <link rel="stylesheet" href="/css/book/bookInfo.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 <body>
+<jsp:include page="../main/header.jsp" />
 <div class="bookInfoSpace">
     <div class="bookImg">
         <img src="/images/bookImage/${book.bookDetail.photo}.jpg" alt="${book.bookName}">
@@ -79,6 +81,7 @@
         </div>
     </div>
 </div>
+<jsp:include page="../main/footer.jsp" />
 </body>
 <script>
     var publishDateSpan = document.getElementById('publishDateSpan');
@@ -93,13 +96,13 @@
 <script>
     $(document).ready(function() {
         $('input[name="show"]').change(function() {
-            // 선택된 radio 버튼의 id를 확인
+
             var selectedTabId = $('input[name="show"]:checked').attr('id');
 
             // bookReview가 선택되었을 때만 AJAX로 review.jsp를 불러옴
             if (selectedTabId === 'bookReview') {
                 $.ajax({
-                    url: '/dabook/review?no='+${book.no}, // review.jsp의 실제 경로로 수정
+                    url: '/dabook/review?no='+${book.no},
                     type: 'GET',
                     success: function(response) {
                         $('#reviewContainer').html(response);

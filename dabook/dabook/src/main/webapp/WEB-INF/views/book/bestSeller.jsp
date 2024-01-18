@@ -14,7 +14,8 @@
 </script>
 <link rel="stylesheet" href="/css/book/bestSeller.css" />
 <body>
-<h4>베스트 셀러</h4>
+<jsp:include page="../main/header.jsp" />
+<h3>BEST SELLER</h3>
 <div class="wholeSpace">
     <div class="bookSpace">
         <div class="row">
@@ -39,5 +40,6 @@
         </div>
     </div>
 </div>
+<jsp:include page="../main/footer.jsp" />
 </body>
 </html>

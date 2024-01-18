@@ -24,6 +24,7 @@ public class ReviewController {
 
 
 
+    //리뷰 보기
     @GetMapping("/review")
     public String getReview(Model model, @RequestParam(value = "no") Long no){
         List<Review> reviews = reviewService.getReviewsByBookNo(no);
@@ -31,6 +32,7 @@ public class ReviewController {
         return "review/review";
     }
 
+    //리뷰 작성
     @PostMapping("/review")
     public String addReview(@RequestParam(value = "no") Long no,
                             @RequestBody Review review,

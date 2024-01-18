@@ -133,7 +133,7 @@
     executeRating(ratingStars);
 
     function submitReview() {
-        var no = $("#bookNo").val(); /* 여기에 도서 번호 입력 */
+        var no = $("#bookNo").val();
         var reviewContent = $("#reviewContent").val();
 
         console.log("no:" + no);
@@ -144,7 +144,7 @@
             no:no,
             reviewContent: reviewContent,
             rating: selectedStarts,
-            // 다른 필요한 데이터 추가
+
         };
 
         $.ajax({
