@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class CartRepositoryImpl {
+public class CartRepositoryImpl{
 
     private final EntityManager em;
 

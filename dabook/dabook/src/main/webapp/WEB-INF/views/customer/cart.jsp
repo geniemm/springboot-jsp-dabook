@@ -26,7 +26,7 @@
     function itemAll(){
         var count = 0;
         var price = 0;
-        var fee = 0;
+        var fee = 3000;
 
         for(var i=0; i < CartData.length; i++){
             if(document.querySelectorAll('.chkBuy')[i].checked) {
@@ -34,8 +34,8 @@
                 price += CartData[i].total;
             }
         }
-        if (price < 30000){
-            fee = 3000;
+        if (price >= 30000 || price === 0){
+            fee = 0;
         }
 
         var chkCount = document.querySelector('.productCount');
@@ -100,7 +100,7 @@
     // 수량 update 후 data reload
     function reloadUpdate(index) {
         $.ajax({
-            url: '/cart/data/1',
+            url: '/cart/data/2',
             type: 'get',
             success: function (data) {
                 console.log('리로드 성공: ', data);
@@ -169,7 +169,7 @@
     // 삭제 후 데이터 reload
     function reloadDelelte(index) {
         $.ajax({
-            url: '/cart/data/1',
+            url: '/cart/data/2',
             type: 'get',
             success: function (data) {
                 console.log('리로드 성공');
@@ -219,7 +219,7 @@
     // checked 상품 삭제 후 data,page reload
     function reloadChkDel(){
         $.ajax({
-            url: '/cart/data/1',
+            url: '/cart/data/2',
             type: 'get',
             success: function (data) {
                 console.log('리로드 성공');
@@ -231,6 +231,31 @@
             }
         });
     }
+
+    function orderBtn(){
+        var orderList = docChkItems();
+
+        if(orderList.length){
+            $.ajax({
+                url: '/orderList',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    data: orderList
+                }),
+                success: function (data){
+                    console.log("성공: ", data);
+                    location.href='/order';
+                },
+                error: function (err){
+                    console.log('실패 ', err)
+                }
+            });
+        } else {
+            alert('장바구니가 비어있습니다.');
+        }
+    }
+
 
 </script>
 
@@ -326,7 +351,7 @@
     </div>
 
     <div class="order-btn">
-        <button class="btn btn-outline-success order-button mt-5" onclick="location.href='/user/pay'">주문하기</button>
+        <button class="btn btn-outline-success order-button mt-5" onclick="orderBtn()">주문하기</button>
     </div>
 <br />
 <br />

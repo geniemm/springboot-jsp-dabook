@@ -58,6 +58,14 @@ public class CartService {
             return false;
         }
     }
+
+    public List<CartDTO> orderItems(List<Long> noList){
+        List<Cart> chkCart = cartRepository.orderItems(noList);
+
+        return chkCart.stream()
+                .map(CartDTO::new)
+                .collect(Collectors.toList());
+    }
 }
 
 

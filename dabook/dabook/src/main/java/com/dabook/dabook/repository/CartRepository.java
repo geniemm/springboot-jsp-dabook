@@ -21,4 +21,11 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
     @Modifying
     @Query("delete from Cart c where c.no in :noList")
     void delCartItems(@Param("noList") List<Long> noList);
+
+    @Query("select c from Cart c " +
+            "join fetch c.users u " +
+            "join fetch c.books b " +
+            "where c.no in :noList")
+    List<Cart> orderItems(@Param("noList") List<Long> noList);
+
 }

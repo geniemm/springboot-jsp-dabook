@@ -15,20 +15,7 @@ public class CartDTO {
     private int bookCount;
     private int total;
 
-    public CartDTO() {
-
-    }
-
-    public CartDTO(Long userNo, Long bookNo, Long cartNo, String bookName, String bookPhoto, int bookPrice, int bookCount, int total) {
-        this.userNo = userNo;
-        this.bookNo = bookNo;
-        this.cartNo = cartNo;
-        this.bookName = bookName;
-        this.bookPhoto = bookPhoto;
-        this.bookPrice = bookPrice;
-        this.bookCount = bookCount;
-        this.total = bookCount * bookPrice;
-    }
+    public CartDTO() { }
 
     public CartDTO(Cart cart) {
         userNo = cart.getUsers().getNo();
