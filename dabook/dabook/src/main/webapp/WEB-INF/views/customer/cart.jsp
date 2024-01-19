@@ -78,7 +78,7 @@
     function countUpdate(cartNo, action, index){
         if(docCount(index, action)){
             $.ajax({
-                url: '/countUpdate/' + cartNo,
+                url: '/dabook/countUpdate/' + cartNo,
                 type: 'put',
                 data: {
                     cartNo : cartNo,
@@ -100,7 +100,7 @@
     // 수량 update 후 data reload
     function reloadUpdate(index) {
         $.ajax({
-            url: '/cart/data/1',
+            url: '/dabook/cart/data/1',
             type: 'get',
             success: function (data) {
                 console.log('리로드 성공: ', data);
@@ -153,7 +153,7 @@
     function delCart(cartNo, index){
         console.log("삭제할 cartNo: ", cartNo);
         $.ajax({
-            url: '/delCartItem/' + cartNo,
+            url: '/dabook/delCartItem/' + cartNo,
             type: 'delete',
             data: cartNo,
             success: function (data) {
@@ -169,7 +169,7 @@
     // 삭제 후 데이터 reload
     function reloadDelelte(index) {
         $.ajax({
-            url: '/cart/data/1',
+            url: '/dabook/cart/data/1',
             type: 'get',
             success: function (data) {
                 console.log('리로드 성공');
@@ -200,7 +200,7 @@
         var delList = docChkItems();
 
         $.ajax({
-            url: '/cart/chkDel',
+            url: '/dabook/cart/chkDel',
             type: 'delete',
             contentType: 'application/json',
             data: JSON.stringify({
@@ -219,7 +219,7 @@
     // checked 상품 삭제 후 data,page reload
     function reloadChkDel(){
         $.ajax({
-            url: '/cart/data/1',
+            url: '/dabook/cart/data/1',
             type: 'get',
             success: function (data) {
                 console.log('리로드 성공');
@@ -326,7 +326,7 @@
     </div>
 
     <div class="order-btn">
-        <button class="btn btn-outline-success order-button mt-5" onclick="location.href='/user/pay'">주문하기</button>
+        <button class="btn btn-outline-success order-button mt-5" onclick="location.href='/dabook/user/pay'">주문하기</button>
     </div>
 <br />
 <br />

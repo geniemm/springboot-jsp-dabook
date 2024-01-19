@@ -33,4 +33,9 @@ public class BookService {
         return bookRepository.findBookInfo(no);
     }
 
+    @Transactional(readOnly = true) // 요즘 이책
+    public List<Book> getNowBook(){
+        return bookRepository.findNowBook();
+    }
+
 }

@@ -37,14 +37,14 @@
                             </div>
                         </div>
                         <div class="review-content">
-                            <div class="review-text">${reviews.reviewContent}!</div>
+                            <div class="review-text">${reviews.reviewContent}</div>
                         </div>
                     </div>
                 </c:forEach>
         </div>
     </div>
     <div class="write-review">
-        <button type="button" class="btn btn-primary"
+        <button type="button" class="reviewBtn"
                 data-bs-toggle="modal" data-bs-target="#WriteReview">리뷰작성
         </button>
     </div>
@@ -55,7 +55,7 @@
             <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h5 class="modal-title" id="WriteReviewLabel">리뷰 작성</h5>
+                    <h5 class="modal-title" id="WriteReviewLabel"><b>리뷰 작성</b></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                 </div>

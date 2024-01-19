@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/dabook")
 public class CartController {
 
     private final CartService cartService;

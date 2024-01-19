@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
 .bookInfoSpace{
     display: flex;
     height: 400px;
@@ -9,22 +15,29 @@
 }
 .text{
     margin-left: 50px;
+    font-family: 'Pretendard-Regular', serif;
 }
 .title{
     padding: 20px;
     width: 300px;
+    border-width: thin;
     border-bottom: 1px solid grey;
+    font-size: x-large;
 }
 .info{
     display: flex;
     padding: 20px;
     width: 300px;
+    border-width: thin;
     border-bottom: 1px solid grey;
+    font-size: medium;
 }
 .price{
     padding: 20px;
     width: 300px;
+    border-width: thin;
     border-bottom: 1px solid grey;
+    font-size: large;
 }
 .count{
     padding: 20px;
@@ -42,15 +55,59 @@
 }
 .cart{
     padding: 20px;
+    font-family: 'Pretendard-Regular', serif;
+}
+.cart .cartBtn{
+    height: 40px;
+    width: 100px;
+    color: #444444;
+    background: #F3F3F3;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 10pt;
+    outline: none;
+}
+.cart .cartBtn:hover{
+    border: 1px #C6C6C6 solid;
+    box-shadow: 1px 1px 1px #EAEAEA;
+    color: #333333;
+    background: #F7F7F7;
+}
+.cart .cartBtn:active{
+    box-shadow: inset 1px 1px 1px #DFDFDF;
+}
+.cart .payBtn{
+    height: 40px;
+    width: 100px;
+    color: white;
+    background: #7D9C36;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 10pt;
+    outline: none;
+}
+.cart .payBtn:hover {
+    border: 1px #6B9900 solid;
+    box-shadow: 0 1px 1px #EAEAEA, inset 0 1px 0 #AAD34A;
+    color: #333333;
+    background: #86AF26;
+}
+.cart .payBtn:active {
+    box-shadow: inset 0 2px 5px #6B9900;
 }
 
-/* 상세정보, 리뷰 탭 css */
+    /* 상세정보, 리뷰 탭 css */
 .bookInfoContent input[type=radio]{
     display: none;
 }
 #bookDetail:checked ~ .tab label:nth-child(1),
 #bookReview:checked ~ .tab label:nth-child(2){
-    background: darkolivegreen;
+    background: #598700;
+    color:white;
     box-shadow: none;
 }
 .content >div {
@@ -70,6 +127,8 @@
     margin-left: 180px;
 }
 .tab label{
+    position: relative;
+    font-family: 'Pretendard-Regular', serif;
     margin-right: 20px;
     font-size: 14px;
     cursor: pointer;
@@ -80,13 +139,15 @@
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 2px;
-
+    border-radius: 20px;
 }
 /* 상세정보 css */
 .content {
     height: auto;
+
 }
 .content-bookDetail{
+    height: 800px;
     padding: 50px 0;
     line-height: 1.5;
 }
