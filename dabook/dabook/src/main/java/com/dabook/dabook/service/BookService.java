@@ -1,7 +1,6 @@
 package com.dabook.dabook.service;
 
 import com.dabook.dabook.entity.Book;
-import com.dabook.dabook.entity.BookDetail;
 import com.dabook.dabook.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

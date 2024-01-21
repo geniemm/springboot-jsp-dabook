@@ -1,7 +1,6 @@
 package com.dabook.dabook.repository;
 
 import com.dabook.dabook.entity.Book;
-import com.dabook.dabook.entity.BookDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

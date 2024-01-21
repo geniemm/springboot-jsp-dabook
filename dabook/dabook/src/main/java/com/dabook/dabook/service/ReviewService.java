@@ -2,7 +2,6 @@ package com.dabook.dabook.service;
 
 import com.dabook.dabook.entity.Book;
 import com.dabook.dabook.entity.Review;
-import com.dabook.dabook.entity.User;
 import com.dabook.dabook.repository.BookRepository;
 import com.dabook.dabook.repository.ReviewRepository;
 import com.dabook.dabook.repository.UserRepository;
