@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="/css/cart.css" />
+    <link rel="stylesheet" href="/css/main/cart.css" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>장바구니</title>
 
@@ -129,8 +129,6 @@
         updateCount.textContent = ' ' + CartData[index].bookCount + ' ';
     }
 
-
-
     // checked 상품 번호 가져오기
     function docChkItems(){
         var del = document.querySelectorAll('.chkBuy');
@@ -208,7 +206,7 @@
             }),
             success: function (data){
                 console.log('성공: ', data);
-                reloadChkDel(delList);
+                location.reload();  // 선택 삭제 후 페이지 리로드
             },
             error: function (err){
                 console.log('실패: ', err);
@@ -216,22 +214,7 @@
         })
     }
 
-    // checked 상품 삭제 후 data,page reload
-    function reloadChkDel(){
-        $.ajax({
-            url: '/cart/data/2',
-            type: 'get',
-            success: function (data) {
-                console.log('리로드 성공');
-                CartData = data;
-                location.reload();  // 선택 삭제 후 페이지 리로드
-            },
-            error: function (err){
-                console.log('리로드 실패', err);
-            }
-        });
-    }
-
+    // checked된 상품 세션 저장, 페이지 넘기기
     function orderBtn(){
         var orderList = docChkItems();
 
@@ -255,7 +238,6 @@
             alert('장바구니가 비어있습니다.');
         }
     }
-
 
 </script>
 

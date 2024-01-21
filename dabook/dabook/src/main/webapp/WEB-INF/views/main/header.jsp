@@ -37,13 +37,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">모든 책</a>
+                        <a class="nav-link active" aria-current="page" href="/dabook/allBook">모든 책</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">베스트셀러</a>
+                        <a class="nav-link active" aria-current="page" href="/dabook/bestSeller">베스트셀러</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">요즘 이 책</a>
+                        <a class="nav-link active" href="/dabook/nowBook">요즘 이 책</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/login">LOGIN</a>
@@ -59,7 +59,7 @@
                             <li><a class="dropdown-item" href="/mypage">회원정보</a></li>
                             <li><a class="dropdown-item" href="#">배송조회</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">뭐든</a></li>
+                            <li><a class="dropdown-item" href="/mypage/address">주소 관리</a></li>
                         </ul>
                     </li>
 
