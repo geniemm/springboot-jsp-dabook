@@ -15,8 +15,6 @@ public class CartDTO {
     private int bookCount;
     private int total;
 
-    public CartDTO() { }
-
     public CartDTO(Cart cart) {
         userNo = cart.getUsers().getNo();
         bookNo = cart.getBooks().getNo();

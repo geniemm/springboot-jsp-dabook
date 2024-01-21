@@ -29,8 +29,8 @@ public class CartController {
         ObjectMapper objectMapper = new ObjectMapper();
         String list = objectMapper.writeValueAsString(cartData);
 
-        model.addAttribute("data", cartData);
-        model.addAttribute("list", list);
+        model.addAttribute("data", cartData);   // html
+        model.addAttribute("list", list);       // script
 
         return "/customer/cart";
     }
@@ -40,19 +40,6 @@ public class CartController {
     @ResponseBody
     public List<CartDTO> cartData() {
         return cartService.cartList("2");
-    }
-
-    // 장바구니 상품 삭제
-    @DeleteMapping("/delCartItem/{cartNo}")
-    public ResponseEntity<String> delCartItem(@PathVariable("cartNo") String cartNo) {
-        Long no = Long.parseLong(cartNo);
-        boolean isDelete = cartService.delCartItem(no);
-
-        if (isDelete) {
-            return new ResponseEntity<>("삭제 성공", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("삭제 실패", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
     }
 
     // 장바구니 수량 변경
@@ -73,7 +60,20 @@ public class CartController {
         }
     }
 
-    // 장바구니 선택삭제
+    // 장바구니 상품 삭제
+    @DeleteMapping("/delCartItem/{cartNo}")
+    public ResponseEntity<String> delCartItem(@PathVariable("cartNo") String cartNo) {
+        Long no = Long.parseLong(cartNo);
+        boolean isDelete = cartService.delCartItem(no);
+
+        if (isDelete) {
+            return new ResponseEntity<>("삭제 성공", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("삭제 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    // 장바구니 선택 삭제
     @DeleteMapping("/cart/chkDel")
     public ResponseEntity<String> chkDel(@RequestBody Map<String, List<Integer>> delList){
         List<Integer> list = (delList.get("data"));
@@ -90,7 +90,7 @@ public class CartController {
         }
     }
 
-    // 주문리스트
+    // 주문 리스트 session 저장
     @PostMapping("/orderList")
     @ResponseBody
     public List<CartDTO> orderItems(@RequestBody Map<String, List<Integer>> orderList, HttpSession session){

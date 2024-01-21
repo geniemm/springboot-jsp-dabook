@@ -1,12 +1,11 @@
 package com.dabook.dabook.entity;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-import static jakarta.persistence.FetchType.*;
+import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
 @Getter

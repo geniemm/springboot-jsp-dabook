@@ -3,10 +3,7 @@ package com.dabook.dabook.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static jakarta.persistence.FetchType.*;
+import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
 @Getter

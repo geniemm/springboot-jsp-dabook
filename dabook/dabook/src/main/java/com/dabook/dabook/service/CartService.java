@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,7 +24,6 @@ public class CartService {
         return cartList.stream()
                 .map(CartDTO::new)
                 .collect(Collectors.toList());
-
     }
 
     public boolean delCartItem(Long no){
