@@ -64,7 +64,14 @@
                             Mypage
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/dabook/user/mypage?id=${userId}">회원정보</a></li>
+                            <c:choose>
+                                <c:when test="${userId == null}">
+                                    <li><a class="dropdown-item" href="/dabook/main/login" onclick="infoAlert()">회원정보</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li><a class="dropdown-item" href="/dabook/user/mypage?id=${userId}">회원정보</a></li>
+                                </c:otherwise>
+                            </c:choose>
                             <li><a class="dropdown-item" href="#">배송조회</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="/mypage/address">주소 관리</a></li>
@@ -81,3 +88,11 @@
         </div>
     </nav>
 </div>
+
+<script>
+    function infoAlert(){
+        alert("로그인 먼저 해주세요");
+        window.location = '/dabook/main/login';
+    }
+</script>
+

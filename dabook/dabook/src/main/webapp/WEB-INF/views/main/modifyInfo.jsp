@@ -25,6 +25,10 @@
             <input type="email" class="form-control" id="floatingEmail" name="email" value="${info.email}" />
             <label for="floatingEmail">Email</label>
         </div>
+        <div class="form-floating mb-3">
+            <%--기능 따로 만들기--%>
+            <button type="button" class="btn btn-outline-secondary">중복 검사</button>
+        </div>
 
 
         <div class="d-flex gap-5 justify-content-center">
@@ -39,6 +43,7 @@
 <br/>
 <jsp:include page="footer.jsp" />
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
 
     const onlyNumber = (target) => {
@@ -46,5 +51,33 @@
             .replace(/[^0-9]/g, '')
             .replace(/^(\d{3})(\d{4})(\d{4})$/, `$1-$2-$3`);
     }
+
+    $(document).ready(function() {
+        //이메일 중복 확인
+        $("#floatingEmail").on("focusout", function(){
+
+            var email = $("#floatingEmail").val();
+            console.log("email: " + email);
+
+            $.ajax({
+                url : '/dabook/user/emailCheck',
+                data : {
+                    email : email
+                },
+                type : 'POST',
+                dataType: 'json',
+                success : function(result){
+                    if(result == true){
+                        $("#emailResult").css("color", "black").text("사용 가능한 email 입니다.");
+                    }else{
+                        $("#emailResult").css("color", "red").text("사용 불가능한 email 입니다.");
+                        $("#floatingEmail").val('');
+                    }
+                }
+
+            });
+
+        });
+    })
 
 </script>

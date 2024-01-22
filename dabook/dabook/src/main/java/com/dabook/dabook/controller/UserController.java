@@ -35,22 +35,15 @@ public class UserController {
         return "main/login";
     }
 
-    //세션 만들기
+    //로그인 성공 - 세션 만들기
     @RequestMapping("/main/success")
     public String loginSuccess(HttpSession session){
         String id = SecurityContextHolder.getContext().getAuthentication().getName();
         session.setAttribute("userId", id);
-        //System.out.println("id = " + id);
         return "redirect:/dabook/user/mypage?id=" + id ;
     }
-/*
-    @RequestMapping("/main/successLogout")
-    public String logoutSuccess(HttpServletRequest req){
-        HttpSession session = req.getSession();
-        System.out.println("session = " + session);
-        return "redirect:/dabook/main/login";
-    }
-*/
+
+
     //회원가입 페이지 연결
     @GetMapping("/main/joinForm")
     public String joinForm(Model model){
@@ -73,7 +66,7 @@ public class UserController {
         out.print(msg);
     }
 
-    //아이디 중복체크
+    //회원가입 - 아이디 중복체크
     @PostMapping("/main/idCheck")
     @ResponseBody
     public Boolean idCheck(@RequestParam String id){
@@ -90,21 +83,20 @@ public class UserController {
         return result;
     }
 
-    //이메일 중복체크
+    //회원가입 - 이메일 중복체크
     @PostMapping("/main/emailCheck")
     @ResponseBody
     public Boolean emailCheck(String email){
-        boolean result = true;
-        if(email.trim().isEmpty()){
-            result = false;
-        }else{
-            if(userService.emailCheck(email)){
-                result = false; //중복 이메일 있음
-            }else{
-                return result;
-            }
-        }
-        return result;
+        return userService.emailCheck(email);
+    }
+
+
+    //정보수정 - 이메일 중복 체크
+    @PostMapping("/user/emailCheck")
+    @ResponseBody
+    public Boolean modiEmailCheck(String email){
+        System.out.println("정보수정 이메일체크");
+        return userService.emailCheck(email);
     }
 
     //마이페이지
@@ -136,6 +128,8 @@ public class UserController {
         PrintWriter out = res.getWriter();
         out.print(msg);
     }
+
+
 
     //장바구니
     @GetMapping("/user/cart")

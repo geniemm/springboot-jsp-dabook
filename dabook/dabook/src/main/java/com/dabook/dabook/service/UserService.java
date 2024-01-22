@@ -66,8 +66,8 @@ public class UserService {
         return result;
     }
 
-    //회원가입 - email체크
-    public boolean emailCheck(String email) {
+    //db - email체크
+    public boolean email(String email) {
 
         boolean result = true;
         List<User> emailCheck = userRepository.findByEmail(email);
@@ -75,6 +75,23 @@ public class UserService {
             return result;
         }else {
             result = false;
+        }
+        return result;
+    }
+
+    //input - email체크
+    public boolean emailCheck(String email){
+        boolean result = true;
+
+
+        if(email.trim().isEmpty()){
+            result = false;
+        }else{
+            if(email(email)){
+                result = false;
+            }else{
+                return result;
+            }
         }
         return result;
     }
