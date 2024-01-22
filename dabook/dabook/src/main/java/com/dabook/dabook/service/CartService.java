@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,12 +19,13 @@ public class CartService {
     private final CartRepositoryImpl cartRepositoryImpl;
     private final CartRepository cartRepository;
 
-    public List<CartDTO> cartList(String no) {
-        List<Cart> cartList = cartRepositoryImpl.cartList(no);
+    // 장바구니 리스트
+    public List<CartDTO> cartList(String userId) {
+        List<Cart> cartList = cartRepositoryImpl.cartList(userId);
+        System.out.println(cartList);
         return cartList.stream()
                 .map(CartDTO::new)
                 .collect(Collectors.toList());
-
     }
 
     public boolean delCartItem(Long no){
@@ -57,6 +57,14 @@ public class CartService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public List<CartDTO> orderItems(List<Long> noList){
+        List<Cart> chkCart = cartRepository.orderItems(noList);
+
+        return chkCart.stream()
+                .map(CartDTO::new)
+                .collect(Collectors.toList());
     }
 }
 

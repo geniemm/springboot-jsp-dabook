@@ -1,12 +1,11 @@
 package com.dabook.dabook.entity;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-import static jakarta.persistence.FetchType.*;
+import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
 @Getter
@@ -17,7 +16,7 @@ public class Order {
     @Column(name = "order_no")
     private Long no;
 
-    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "user_no")
     private User users;
 

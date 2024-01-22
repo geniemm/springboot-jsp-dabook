@@ -1,0 +1,132 @@
+.pay{
+    text-align: -webkit-center;
+}
+.pay-div{
+    text-align: center;
+    width: 800px;
+}
+.font-span{
+    font-weight: bold;
+    font-size: large;
+}
+.cartList{
+    border-top: 2px solid black;
+}
+.product-div{
+    display: flex;
+    border-bottom: 1px solid lightgray;
+    height: 70px;
+    padding-top: 25px;
+}
+.product-name{
+    margin-left: 50px;
+    width: 70%;
+    text-align: left;
+}
+.product-count{
+    width: 10%;
+}
+.product-price{
+    margin-right: 80px;
+    text-align: right;
+    width: 20%;
+}
+
+.chkInfo{
+    display: flex;
+    text-align: center;
+    margin-top: 50px;
+}
+.chkSame{
+    width: 30%;
+    text-align: left;
+    margin-left: 20px;
+    padding-top: 10px;
+}
+.info{
+    width: 40%;
+}
+.addrBtn{
+    width: 30%;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.buyer-div{
+    display: flex;
+    border-top: 2px solid black;
+}
+.buyer{
+    width: 200px;
+    text-align: left;
+    margin-left: 50px;
+}
+.mini{
+    padding: 10px;
+}
+.buyer-info{
+    width: 600px;
+    text-align: left;
+}
+
+.delivery{
+    border-top: 2px solid black;
+}
+.delivery-div{
+    display: flex;
+}
+.receiver{
+    width: 120px;
+    text-align: left;
+    margin-left: 50px;
+    padding: 15px;
+}
+.receiver-info{
+    width: 370px;
+    text-align: left;
+    padding: 10px;
+}
+.inputR{
+    width: 250px;
+    height: 35px;
+    text-align: center;
+}
+.searchAddr{
+    width: 200px;
+    padding: 8px;
+    text-align: left;
+}
+
+.pay-type{
+    border-top: 2px solid black;
+    margin-top: 10px;
+}
+
+.btn-div{
+    padding: 20px 120px;
+}
+.pay-btn{
+    height: 50px;
+    width: 300px;
+}
+
+
+.dataAddr{
+    display: flex;
+    padding: 20px;
+    border-bottom: 1px solid lightgray;
+}
+.oneChk{
+    width: 15%;
+    padding: 35px;
+}
+.addrList{
+    padding-top: 20px;
+    width: 65%;
+    text-align: left;
+}
+.addrChoose{
+    width: 20%;
+    padding: 25px;
+}
+

@@ -20,24 +20,23 @@ public class Review {
     @Column(name = "review_no")
     private Long no;
 
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "book_no", nullable = false)
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "book_no")
     private Book books;
 
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "user_no",nullable = false)
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_no")
     private User users;
 
     private String reviewContent;
 
     @CreatedDate
-    @Column(nullable = false, updatable = false)
-    @Builder.Default
-    private LocalDateTime reviewDate = LocalDateTime.now();
+    @Column(nullable = false,updatable = false)
+    private LocalDateTime reviewDate;
 
     private int rating; // 별점
 
-//    public void setReviewDate(LocalDateTime reviewDate) {
-//        this.reviewDate = reviewDate;
-//    }
+    public void setReviewDate(LocalDateTime reviewDate) {
+        this.reviewDate = reviewDate;
+    }
 }

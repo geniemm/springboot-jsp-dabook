@@ -1,0 +1,55 @@
+.all{
+    text-align: center;
+    width: 900px;
+}
+
+.control{
+    border-top: 2px solid lightgray;
+    border-bottom: 2px solid lightgray;
+    padding: 5px 0;
+    display: flex;
+    text-align: -webkit-center;
+    width: 900px;
+}
+.chkAll{
+    width: 50%;
+    padding: 7px 40px;
+    text-align: left;
+}
+.addrAdd{
+    width: 100%;
+}
+.chkDel{
+    width: 45%;
+    text-align: right;
+}
+
+.info{
+    display: flex;
+    width: 900px;
+    border-bottom: 1px solid lightgray;
+    height: 100px;
+}
+.oneChk{
+    width: 15%;
+    padding: 35px;
+}
+.oneAddr{
+    padding-top: 20px;
+    width: 65%;
+    text-align: left;
+}
+.twoBtn{
+    width: 20%;
+    padding: 25px;
+}
+
+.inputAddr{
+    display: none;
+    width: 500px;
+}
+
+.postBtn{
+    width: 200px;
+    padding-top: 5px;
+}

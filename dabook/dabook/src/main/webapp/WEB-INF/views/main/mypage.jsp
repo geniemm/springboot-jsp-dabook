@@ -40,7 +40,7 @@
                 type="button"
                 class="btn btn-outline-secondary"
                 style="width: 13rem"
-                onclick="location.href='/dabook/modifyInfo'"
+                onclick="location.href='/modifyInfo'"
             >
                 정보 수정
             </button>
