@@ -29,7 +29,7 @@
         </div>
 
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="name" id="floatingName" placeholder="name"  required="required" />
+            <input type="text" class="form-control" name="name" id="floatingName" placeholder="userName"  required="required" />
             <label for="floatingName">Name</label>
         </div>
         <div class="form-floating mb-3">

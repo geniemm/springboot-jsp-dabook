@@ -14,7 +14,7 @@
             <label for="floatingId">ID</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingName" name="name" value="${info.username}" />
+            <input type="text" class="form-control" id="floatingName" name="userName" value="${info.username}" />
             <label for="floatingName">Name</label>
         </div>
         <div class="form-floating mb-3">

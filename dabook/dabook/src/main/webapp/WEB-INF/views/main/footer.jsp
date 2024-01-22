@@ -1,15 +1,5 @@
-<style>
-    .b-example-divider {
-    width: 100%;
-    height: 2rem;
-    background-color: rgba(0, 0, 0, .1);
-    border: solid rgba(0, 0, 0, .15);
-    border-width: 1px 0;
-    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-    }
-</style>
 
-<div class="b-example-divider"></div>
+<div class="b-example-divider mt-5"></div>
     <div class="container">
         <footer class="py-2 my-4">
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">
@@ -26,3 +16,15 @@
 
 </body>
 </html>
+
+<style>
+    .b-example-divider {
+        width: 100%;
+        height: 2rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+    }
+</style>
+

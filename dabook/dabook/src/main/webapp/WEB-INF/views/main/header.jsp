@@ -18,18 +18,14 @@
 
 <div class="text-center mt-3 mb-5">
     <a href="/">
-        <img src="/images/main/DABOOK.jpg"
-             class="rounded"
-             alt="asdf"
-             width="15%"
-        >
+        <img src="/images/DABOOK.jpg" class="rounded" alt="asdf" width="15%" >
     </a>
 </div>
 
 <div>
     <nav class="navbar navbar-expand-lg mt-3 mb-5">
         <div class="container-xl">
-            <a class="navbar-brand" href="/">DABOOK</a>
+            <a class="navbar-brand" href="#">DABOOK</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -37,16 +33,19 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">모든 책</a>
+                        <a class="nav-link active" aria-current="page" href="/dabook/allBook">모든 책</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">베스트셀러</a>
+                        <a class="nav-link active" aria-current="page" href="/dabook/bestSeller">베스트셀러</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">요즘 이 책</a>
+                        <a class="nav-link active" href="/dabook/nowBook">요즘 이 책</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/dabook/main/login">LOGIN</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/cart/2">CART</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -55,9 +54,8 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="/dabook/user/mypage?id=${userId}">회원정보</a></li>
                             <li><a class="dropdown-item" href="#">배송조회</a></li>
-                            <li><a class="dropdown-item" href="/dabook/user/addressList">배송주소록</a> </li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">뭐든</a></li>
+                            <li><a class="dropdown-item" href="/mypage/address">주소 관리</a></li>
                         </ul>
                     </li>
 

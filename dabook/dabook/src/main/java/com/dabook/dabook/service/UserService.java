@@ -29,7 +29,7 @@ public class UserService {
 
         dto.setGuestCheck(GuestCheck.valueOf("ROLE_USER"));
 
-        User user = User.toUserEntity(dto.getUserId(), dto.getPassword(), dto.getName(), dto.getPhone(), dto.getEmail(), dto.getGuestCheck());
+        User user = User.toUserEntity(dto.getUserId(), dto.getPassword(), dto.getUserName(), dto.getPhone(), dto.getEmail(), dto.getGuestCheck());
 
         if(userRepository.saveAndFlush(user) != null){
             return GetMessage.getMessage("회원가입 완료하였습니다.", "/dabook/main/login");
@@ -99,7 +99,6 @@ public class UserService {
 
         return info;
     }
-
 
 
 }

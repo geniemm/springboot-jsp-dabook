@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap');
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+/* 리뷰 css */
+.content-review{
+    padding: 50px 0;
+    margin-left: 10px;
+}
+.sub-title{
+    letter-spacing: 2px;
+    margin-left: 10px;
+    font-family: 'Pretendard-Regular', serif;
+    font-size: large;
+}
+.review-wrap{
+    border-top : 1px solid darkgray;
+}
+.review-item{
+    border-bottom: 1px solid darkgray;
+}
+.user-info-box{
+    display: flex;
+}
+.left-info{
+    text-align: left;
+}
+.info-item{
+    font-size: small;
+    margin: 5px 0 0 10px;
+}
+.right-info{
+    margin-left: 480px;
+    font-size: medium;
+    letter-spacing: -1px;
+
+
+}
+.review-content{
+    height: 80px;
+    margin : 10px 0 0 10px;
+    font-family: 'Pretendard-Regular', serif;
+    font-style: normal;
+}
+.write-review{
+    margin : 20px 0 0 680px;
+}
+
+/* 모달 css */
+.modal-backdrop {
+    background-color: rgba(220, 220, 220, 0.7);
+}
+.rating_box{
+    font-size: medium;
+    display: flex;
+    width: 180px;
+}
+.rating__star {
+    cursor: pointer;
+    color: #dabd18b2;
+}

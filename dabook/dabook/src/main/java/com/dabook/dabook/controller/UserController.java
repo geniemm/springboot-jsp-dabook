@@ -27,12 +27,6 @@ public class UserController {
     private final BCryptPasswordEncoder encode;
 
 
-    //주소페이지
-    @GetMapping("/user/addressList")
-    public String addressList(){
-        return "customer/addressList";
-    }
-
     //로그인 페이지 연결
     @GetMapping("/main/login")
     public String login(@RequestParam(value = "error", required = false) String error, Model model){
@@ -123,7 +117,7 @@ public class UserController {
     public void modiInfo(UserDTO dto, HttpServletResponse res, Model model,HttpSession session) throws IOException {
 
         String userId = (String)session.getAttribute("userId");
-        String username = dto.getName();
+        String username = dto.getUserName();
         String phone = dto.getPhone();
         String email = dto.getEmail();
 
@@ -145,7 +139,6 @@ public class UserController {
     public String pay(){
         return "/customer/pay";
     }
-
     //구독
     @GetMapping("/user/subscription")
     public String subscription(){

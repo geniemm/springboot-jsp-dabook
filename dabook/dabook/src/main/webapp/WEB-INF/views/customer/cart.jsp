@@ -5,214 +5,321 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="/css/customer/cart.css" />
+    <link rel="stylesheet" href="/css/main/cart.css" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>장바구니</title>
+
 </head>
 <body>
-
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-    bookInfo = [{price : 8000, count: 1, totalPrice: 0}, {price : 10000, count: 1, totalPrice: 0}];
 
-    window.onload = function() {
-        initCart();
+    var CartData = ${list};
 
-        var initPrice = firstPrice(); //18000
-        var productPayElement = document.querySelector('.productPay');
-        productPayElement.textContent = initPrice + '원';
 
-        var chkbox = document.querySelectorAll('.chbox');
+    // 페이지 로드시 바로 적용
+    window.onload = function (){
+        itemAll();
+    }
 
-        chkbox.forEach(function(checkbox){
-            checkbox.addEventListener('change', function(){
-                updateCart();
+    // doc checked 상품 정보 (수량,가격,배송비)
+    function itemAll(){
+        var count = 0;
+        var price = 0;
+        var fee = 3000;
+
+        for(var i=0; i < CartData.length; i++){
+            if(document.querySelectorAll('.chkBuy')[i].checked) {
+                count += CartData[i].bookCount;
+                price += CartData[i].total;
+            }
+        }
+        if (price >= 30000 || price === 0){
+            fee = 0;
+        }
+
+        var chkCount = document.querySelector('.productCount');
+        chkCount.textContent = '총 주문 수량 ' + count + ' 개';
+
+        var chkPrice = document.querySelector('.productPay');
+        chkPrice.textContent = price + ' 원';
+
+        var delivery = document.querySelector('.fee');
+        delivery.textContent = fee + '원';
+
+        var allPrice = price + fee;
+
+        var itemAllPrice = document.querySelector('.allPrice');
+        itemAllPrice.textContent = allPrice + ' 원';
+    }
+
+    // 상품 전체 선택/해제
+    function checkedAll(){
+        var checkboxes = document.querySelectorAll('.chkBuy');
+        var status = document.querySelector('.checkedAll').checked;
+
+        checkboxes.forEach(function(checkbox) {
+            checkbox.checked = status;
+        });
+        itemAll();
+    }
+
+    // (-)버튼 눌렸을 시 수량 check
+    function docCount(index, action) {
+        let isCount = CartData[index].bookCount;
+        if (action == 'decrease') {
+            return isCount >= 2;
+        } else {
+            return true;
+        }
+    }
+
+    // 수량 업데이트 db에 저장
+    function countUpdate(cartNo, action, index){
+        if(docCount(index, action)){
+            $.ajax({
+                url: '/countUpdate/' + cartNo,
+                type: 'put',
+                data: {
+                    cartNo : cartNo,
+                    action: action
+                },
+                success: function (){
+                    console.log('업데이트 성공');
+                    reloadUpdate(index);
+                },
+                error: function (err){
+                    console.log('업데이트 실패: ', err);
+                }
             });
+        }else {
+            alert('최소 구매 수량은 1개 입니다.');
+        }
+    }
+
+    // 수량 update 후 data reload
+    function reloadUpdate(index) {
+        $.ajax({
+            url: '/cart/data/2',
+            type: 'get',
+            success: function (data) {
+                console.log('리로드 성공: ', data);
+                CartData = data;
+                docUpdate(index);
+            },
+            error: function (err){
+                console.log('리로드 실패', err);
+            }
         });
     }
 
-    function initCart(){
-        updateCart();
+    // doc 해당 수량 및 상품 총 가격 변경
+    function docUpdate(index){
+
+        itemAll();
+
+        console.log('실행: ', index);
+        var cartItem = document.querySelectorAll('.a-div')[index];
+
+        let updateTotal = cartItem.querySelector('.total-price');
+        updateTotal.textContent = CartData[index].total + ' 원';
+        console.log("docUpdateTotal: ", CartData[index].total);
+
+        let updateCount = cartItem.querySelector('.count');
+        updateCount.textContent = ' ' + CartData[index].bookCount + ' ';
     }
 
-    function updateCart(){
-        var totalPrice = 0;
-        var totalProductCount = 0;
-
-        for(var i=0; i<bookInfo.length; i++){
-            if(document.querySelectorAll('.chbox')[i].checked){
-                totalProduct(i);
-                totalPrice += bookInfo[i].count * bookInfo[i].price;
-                totalProductCount++;
+    // checked 상품 번호 가져오기
+    function docChkItems(){
+        var del = document.querySelectorAll('.chkBuy');
+        var list = [];
+        for(var i=0; i<CartData.length; i++){
+            if (del[i].checked){
+                list.push(CartData[i].cartNo);
             }
         }
-
-        var productPayElement = document.querySelector('.productPay');
-        var feeElement = document.querySelector('.fee');
-        var allPriceElement = document.querySelector('.allPrice');
-
-        productPayElement.textContent = totalPrice + '원';
-        var fee = delivery(totalPrice);
-        feeElement.textContent = fee + '원';
-
-        var allPrice = totalPrice + fee;
-        allPriceElement.textContent = allPrice + '원';
-
-        updateProductCount(totalProductCount);
+        console.log(list);
+        return list;
     }
 
-    function minus(button, index){
-        var countElement = button.nextElementSibling;
-        var count = parseInt(countElement.textContent);
-
-        if(count >= 2){
-            count --;
-            countElement.textContent = ' ' + count + ' ';
-
-            bookInfo[index].count = count;
-            var totalPrice =  bookInfo[index].count * bookInfo[index].price;
-            bookInfo[index].totalPrice = totalPrice;
-
-            var pay = document.querySelectorAll(".total-price")[index];
-            pay.textContent = totalPrice + '원'
-
-            totalProduct(index);
-            updateCart();
-
-            return pay;
-        }else{
-            alert("최소 구매 수량은 한개 입니다.");
-        }
+    // 해당 상품 삭제 confirm
+    function delItem(cartNo, index){
+        confirm('정말로 삭제하시겠습니까?') && delCart(cartNo, index);
     }
 
-    function plus(button, index){
-        var countElement = button.previousElementSibling;
-        var count = parseInt(countElement.textContent);
-
-        count++;
-        countElement.textContent =  ' ' + count + ' ';
-
-        bookInfo[index].count = count;
-        var totalPrice =  bookInfo[index].count * bookInfo[index].price;
-        bookInfo[index].totalPrice = totalPrice;
-
-        var pay = document.querySelectorAll(".total-price")[index];
-        pay.textContent = totalPrice + '원';
-
-        totalProduct(index);
-        updateCart();
-
-        return pay;
-    }
-
-    function totalProduct(index) { //총 금액
-
-        var div = document.querySelectorAll('.a-div')[index];
-
-        var chkbox = div.querySelector('.chbox');
-        var totalPriceElement = div.querySelector('.total-price');
-        var productPay = document.querySelector('.productPay');
-
-        if (chkbox.checked) {
-            var nowPay = 0;
-            for(var i = 0; i <= index; i++){
-                nowPay += bookInfo[i].price * bookInfo[i].count;
+    // DB 해당 상품 삭제
+    function delCart(cartNo, index){
+        console.log("삭제할 cartNo: ", cartNo);
+        $.ajax({
+            url: '/delCartItem/' + cartNo,
+            type: 'delete',
+            data: cartNo,
+            success: function (data) {
+                console.log('삭제 성공 : ', data);
+                reloadDelelte(index);                // 데이터 리로드
+            },
+            error: function (xhr, status, error){
+                console.error('실패: ', error);
             }
-            productPay.textContent = nowPay + '원'; //nowPay:18000
+        });
+    }
 
-            delivery(nowPay);
-            return nowPay;
+    // 삭제 후 데이터 reload
+    function reloadDelelte(index) {
+        $.ajax({
+            url: '/cart/data/2',
+            type: 'get',
+            success: function (data) {
+                console.log('리로드 성공');
+                CartData = data;
+                docItemDelete(index);           // doc 삭제
+            },
+            error: function (err){
+                console.log('리로드 실패', err);
+            }
+        });
+    }
+
+    // doc 삭제
+    function  docItemDelete(index){
+        console.log('해당 doc index: ', index);
+        var cartItem = document.querySelectorAll('.a-div')[index];
+        if (cartItem) {
+            cartItem.remove();
+            console.log('doc 삭제 성공');
+            itemAll();                      // chk 된 상품 정보
+        }else {
+            console.log('doc 존재 안함');
         }
     }
 
-    function delivery(nowPay){ //배송비
-        var fee = 0;
-        if(nowPay >= 30000) fee = 0;
-        else fee = 3000;
+    // checked 상품 db에서 삭제
+    function chkDel(){
+        var delList = docChkItems();
 
-        return fee;
+        $.ajax({
+            url: '/cart/chkDel',
+            type: 'delete',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                data: delList
+            }),
+            success: function (data){
+                console.log('성공: ', data);
+                location.reload();  // 선택 삭제 후 페이지 리로드
+            },
+            error: function (err){
+                console.log('실패: ', err);
+            }
+        })
     }
 
-    function updateProductCount(count){ //상품 개수
-        var text = document.querySelector('.productCount');
-        text.innerHTML = '총 주문상품' + count + '개';
-    }
+    // checked된 상품 세션 저장, 페이지 넘기기
+    function orderBtn(){
+        var orderList = docChkItems();
 
-    function firstPrice(){ //처음 상품금액
-        var initPrice = 0;
-        for(var i = 0; i< bookInfo.length; i++){
-            initPrice += bookInfo[i].count * bookInfo[i].price;
+        if(orderList.length){
+            $.ajax({
+                url: '/orderList',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    data: orderList
+                }),
+                success: function (data){
+                    console.log("성공: ", data);
+                    location.href='/order';
+                },
+                error: function (err){
+                    console.log('실패 ', err)
+                }
+            });
+        } else {
+            alert('장바구니가 비어있습니다.');
         }
-        return initPrice;
     }
-
-
-
-
 
 </script>
 
+<jsp:include page="../main/header.jsp" />
+
     <div class="cart-goods-div">
-        <h2>장바구니</h2>
+        <h2 class="mb-5 mt-5">장바구니</h2>
 
         <div class="goods-div">
 
-            <div class="a-div">
-                <input type="checkbox" class="chbox" checked >
-                <div>
-                    <img class="img-class" src="/images/cartImage/곰돌이.jpg" alt="">
+            <div class="emptyline"></div>
+
+            <div class="selectBy mt-1 mb-1">
+                <div class="chkAll">
+                    <input type="checkbox" class="checkedAll" onclick="checkedAll()" checked> 전체 선택
                 </div>
-                <div class="goods-title">
-                    <span class="title-fontsize">책이름</span><br><br>
-                    <span class="price" data-price="8000">8000원</span>
-                </div>
-                <div class="volume-div">
-                    <span class="total-price">8000원</span><br><br>
-                    <div class="volume">
-                        <button class="volume-btn" onclick="minus(this, 0)" >-</button>
-                        <span class="count" >&nbsp;1&nbsp;</span>
-                        <button class="volume-btn" onclick="plus(this, 0)" >+</button>
-                    </div>
+                <div class="chkDel">
+                    <button class="btn btn-secondary" onclick="chkDel()"> 선택 삭제 </button>
                 </div>
             </div>
 
-            <div class="a-div">
-                <input type="checkbox" class="chbox" checked  >
-                <div>
-                    <img class="img-class" src="/images/cartImage/곰돌이.jpg" alt="">
-                </div>
-                <div class="goods-title">
-                    <span class="title-fontsize">책이름</span><br><br>
-                    <span class="price" data-price="10000">10000원</span>
-                </div>
-                <div class="volume-div">
-                    <span class="total-price">10000원</span><br><br>
-                    <div class="volume">
-                        <button class="volume-btn" onclick="minus(this, 1)" >-</button>
-                        <span class="count" >&nbsp;1&nbsp;</span>
-                        <button class="volume-btn" onclick="plus(this, 1)" >+</button>
+            <c:if test="${not empty data}">
+                <c:forEach var="data" items="${data}" varStatus="status">
+
+                    <div class="line"></div>
+
+                <div class="a-div">
+                    <input type="checkbox" class="chkBuy" onclick="itemAll()" checked >
+                    <div>
+                        <img class="img-class" src="/images/cartImage/곰돌이.jpg" alt="- 이미지 -">
+                    </div>
+                    <div class="goods-title">
+                        <span class="title-fontsize">${data.bookName}</span><br><br>
+                        <span class="price">${data.bookPrice}</span>
+                    </div>
+                    <div class="volume-div">
+                        <span class="total-price">${data.total} 원</span><br><br>
+
+                        <div class="volume">
+                            <button class="btn btn-secondary volume-btn"
+                                    onclick="countUpdate(${data.cartNo}, 'decrease', ${status.index})">-</button>
+
+                                <span class="count">&nbsp;${data.bookCount}&nbsp;</span>
+
+                            <button class="btn btn-secondary volume-btn"
+                                    onclick="countUpdate(${data.cartNo}, 'increase', ${status.index})">+</button>
+                        </div>
+
+                        <button class="btn btn-outline-secondary delete mt-3" onclick="delItem(${data.cartNo}, ${status.index})">삭제</button>
                     </div>
                 </div>
+                </c:forEach>
+            </c:if>
+            <c:if test="${empty data}">
+
+                <div class="emptyline"></div>
+                <div class="a-div">
+                    <div class="emptyCart">
+                        <span> 텅 ~ </span>
+                    </div>
+                </div>
+            </c:if>
+        </div>
+
+        <div class="isLine">
+            <div class="goods-count">
+                <span class="productCount"></span>
             </div>
-
+            <div class="free-delivery">
+                <span class="feePrice">※ 3만원 이상 구매시 무료배송 ※</span>
+            </div>
         </div>
 
-
-        <div class="free-delivery">
-            <span>3만원 이상 구매시 무료배송</span>
-        </div>
-
-        <div class="goods-count">
-            <span class="productCount"></span>
-        </div>
 
         <div class="pay-count">
             <div class="pay-count-div">
                 <div class="pay-number">
-                    <span class="productPay">0원</span>
+                    <span class="productPay"></span>
                     <span>+</span>
-                    <span class="fee">0원</span>
+                    <span class="fee"></span>
                     <span>=</span>
-                    <span class="allPrice">0원</span>
+                    <span class="allPrice"></span>
                 </div>
                 <div class="pay-text">
                     <span>상품금액</span>
@@ -226,8 +333,13 @@
     </div>
 
     <div class="order-btn">
-        <button class="order-button" onclick="location.href='/user/pay'">주문하기</button>
+        <button class="btn btn-outline-success order-button mt-5" onclick="orderBtn()">주문하기</button>
     </div>
+<br />
+<br />
+<br />
+<br />
+<jsp:include page="../main/footer.jsp" />
 
 
 </body>
