@@ -30,7 +30,6 @@ public class ReviewServiceImpl implements ReviewService{
         return reviewRepository.findReviewsByBookNo(no);
     }
 
-
     public Review saveReview(Long bookNo, Review review){
         Book book = bookRepository.findBookInfo(bookNo);
         review.setBooks(book);

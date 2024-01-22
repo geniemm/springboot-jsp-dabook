@@ -30,7 +30,7 @@
                     <div class="twoBtn">
                         <button class="btn btn-outline-primary"
                                 onclick="modiAddr(${status.index}, ${data.addressNo})"
-                                > 수정
+                        > 수정
                         </button>
 
                         <button class="btn btn-outline-secondary"
@@ -98,7 +98,7 @@
 
     window.onload = function (){
         if (addrInfo){
-           var userNo = addrInfo[0].userNo;
+            var userNo = addrInfo[0].userNo;
         }
     }
 
