@@ -13,7 +13,9 @@
 </script>
 <body>
 <jsp:include page="../main/header.jsp" />
-<h3>BOOK</h3>
+<div class="topSpace">
+    <h3 class="pageTitle"><b class="title">BOOK</b><br>
+        Dabook에 등록된 모든책을 보여드립니다.</h3></div>
 <div class="wholeSpace">
     <div class="bookSpace">
         <div class="row">

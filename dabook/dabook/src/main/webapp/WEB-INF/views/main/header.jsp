@@ -17,7 +17,7 @@
 <body >
 
 <div class="text-center mt-3 mb-5">
-    <a href="#">
+    <a href="/dabook">
         <img src="/images/DABOOK.jpg"
              class="rounded"
              alt="asdf"
@@ -29,7 +29,7 @@
 <div>
     <nav class="navbar navbar-expand-lg mt-3 mb-5">
         <div class="container-xl">
-            <a class="navbar-brand" href="#">DABOOK</a>
+            <a class="navbar-brand" href="/dabook">DABOOK</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

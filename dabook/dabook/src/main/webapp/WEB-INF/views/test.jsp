@@ -9,6 +9,5 @@
     <title>Insert title here</title>
 </head>
 <body>
-<h1>한국어 지원안되냐?</h1>
 </body>
 </html>

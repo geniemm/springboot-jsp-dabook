@@ -1,14 +1,28 @@
-h3{
-    font-family: "Kim jung chul Myungjo Regular", serif;
-    letter-spacing: 2px;
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+.topSpace{
+    width:auto;
+    margin: 0 30px;
+    border-top:1px solid darkgray;
+}
+.pageTitle{
+    margin: 50px 70px;
+    font-family: 'Pretendard-Regular', serif;
+    font-size: medium;
+}
+.pageTitle .title{
+    font-size: x-large;
 }
 .wholeSpace{
-    border-top: 2px solid darkgray;
     height: 1000px;
 }
 
 .bookSpace{
-    margin-left: 150px;
+   margin: 30px 0 30px 180px;
 }
 .row{
     height: 200px;
@@ -23,7 +37,7 @@ button{
     background: none;
     border-style: none;
 }
-img{
+.oneBookSpace img{
     height: 180px;
     width: auto;
 }

@@ -21,22 +21,20 @@ public class Review {
     private Long no;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "book_no")
+    @JoinColumn(name = "book_no", nullable = false)
     private Book books;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "user_no")
+    @JoinColumn(name = "user_no",nullable = false)
     private User users;
 
     private String reviewContent;
 
     @CreatedDate
-    @Column(nullable = false,updatable = false)
-    private LocalDateTime reviewDate;
+    @Column(nullable = false, updatable = false)
+    @Builder.Default
+    private LocalDateTime reviewDate = LocalDateTime.now();
 
     private int rating; // 별점
 
-    public void setReviewDate(LocalDateTime reviewDate) {
-        this.reviewDate = reviewDate;
-    }
 }

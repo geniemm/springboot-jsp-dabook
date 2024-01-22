@@ -36,15 +36,26 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="review-content">
-                            <div class="review-text">${reviews.reviewContent}!</div>
+                        <div class="review-content" id="review-${reviews.no}">
+                            <div class="review-text">${reviews.reviewContent}</div>
+                            <div class="userSpace">
+                                <div class="delModSpace"><button class="modBtn" type="button" onclick="modReview(${reviews.no})">수정</button>
+                                <button class="delBtn" type="button" onclick="delReview(${reviews.no})">삭제</button> </div>
+                            </div>
+                        </div>
+                        <div id="editModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close" onclick="closeEditModal()">&times;</span>
+                                <textarea id="editedReviewContent"></textarea>
+                                <button onclick="saveEditedReview(${reviews.no})">저장</button>
+                            </div>
                         </div>
                     </div>
                 </c:forEach>
         </div>
     </div>
     <div class="write-review">
-        <button type="button" class="btn btn-primary"
+        <button type="button" class="reviewBtn"
                 data-bs-toggle="modal" data-bs-target="#WriteReview">리뷰작성
         </button>
     </div>
@@ -55,7 +66,7 @@
             <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h5 class="modal-title" id="WriteReviewLabel">리뷰 작성</h5>
+                    <h5 class="modal-title" id="WriteReviewLabel"><b>리뷰 작성</b></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                 </div>
@@ -114,6 +125,60 @@
     }
 </script>
 <script>
+    var reviewNo;
+    function modReview(reviewNo){
+        var modal = document.getElementById("editModal");
+        modal.style.display = "block";
+        // 기존 내용 모달에 표시
+        var originalReviewContent = $(`#review-${reviewNo} .review-text`).text();
+        $("#editedReviewContent").val(originalReviewContent);
+        window.reviewNo = reviewNo;
+    }
+        function closeEditModal() {
+            var modal = document.getElementById("editModal");
+            modal.style.display = "none";
+        }
+        function saveEditedReview(reviewNo) {
+            var editedReviewContent = $("#editedReviewContent").val();
+
+            $.ajax({
+                type: 'PUT',
+                url: `/dabook/review/${window.reviewNo}`,
+                data: JSON.stringify({ reviewContent: editedReviewContent}),
+                success: function (response) {
+                    console.log('리뷰 수정 완료', response);
+                    // 수정된 내용을 화면에 반영
+                    $(`#review-${window.reviewNo} .review-text`).text(editedReviewContent);
+                    // 모달 닫기
+                    closeEditModal();
+                },
+                error: function (error) {
+                    console.error('리뷰 수정 실패', error);
+                }
+            });
+    }
+    function delReview(reviewNo) {
+        var result = confirm("리뷰를 삭제하시겠습니까?");
+
+        if (result) {
+            $.ajax({
+                type: 'DELETE',
+                url: '/dabook/review',
+                data: {no: reviewNo},
+                success: function (response) {
+                    console.log('리뷰 삭제 완료',response)
+                    window.location.reload();
+                },
+                error: function (error) {
+                    console.error('리뷰 삭제 실패',error)
+                }
+            });
+        }else{
+            console.log("리뷰 삭제 취소")
+        }
+    }
+</script>
+<script>
     const ratingStars = [...document.getElementsByClassName("rating__star")];
     let selectedStarts = 0;
 
@@ -166,6 +231,5 @@
         $('#WriteReview').modal('hide');
         location.reload(true);
     }
-
 </script>
 </html>

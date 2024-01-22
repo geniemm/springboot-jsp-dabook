@@ -49,7 +49,9 @@ public class BookController {
 
     // 지금 이 책
     @GetMapping("/nowBook")
-    public String nowBook(){
+    public String nowBook(Model model){
+        List<Book> nowBook = bookService.getNowBook();
+        model.addAttribute("books",nowBook);
         return "book/nowBook";
     }
 }

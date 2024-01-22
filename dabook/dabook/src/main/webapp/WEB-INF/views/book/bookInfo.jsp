@@ -46,13 +46,13 @@
     </div>
     <div class="text">
         <div class="title">
-            ${book.bookName}
+            <b>${book.bookName}</b>
         </div>
         <div class="info">
-            ${book.author} | ${book.publisher} |&nbsp; <div id="publishDateSpan">${book.publishDate}</div>
+            ${book.author}  &nbsp;|&nbsp;  ${book.publisher}  &nbsp;|&nbsp;&nbsp;  <div id="publishDateSpan">${book.publishDate}</div>
         </div>
         <div class="price">
-            ${book.price} 원
+            <b>${book.price}</b>원
         </div>
         <div class="count">
             주문수량&nbsp;&nbsp;
@@ -61,8 +61,8 @@
             <button class="btn-count" onclick="changeQuantity(1)">+</button>
         </div>
         <div class="cart">
-            <button class="btn btn-light" onclick="">장바구니</button>&nbsp;&nbsp;
-            <button class="btn btn-primary" onclick="">바로구매</button>
+            <button class="cartBtn" onclick="">장바구니</button>&nbsp;&nbsp;
+            <button class="payBtn" onclick="">바로구매</button>
         </div>
     </div>
 </div>
