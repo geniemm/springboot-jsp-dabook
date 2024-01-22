@@ -10,11 +10,14 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    List<User> findByUserId(String id);
+
+    @Query("select u from User u where u.userId = :userId")
+    List<User> findByUserId(@Param("userId") String id);
 
     List<User> findByEmail(String email);
 
     User saveAndFlush(User user);
+
     List<User> findAllByUserId(String id);
 
     @Modifying

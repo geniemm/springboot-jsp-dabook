@@ -2,8 +2,10 @@ package com.dabook.dabook.service;
 
 import com.dabook.dabook.dto.AddressDTO;
 import com.dabook.dabook.entity.Address;
+import com.dabook.dabook.entity.User;
 import com.dabook.dabook.repository.AddressRepository;
 import com.dabook.dabook.repository.AddressRepositoryImpl;
+import com.dabook.dabook.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,16 @@ public class AddressService {
 
     private final AddressRepositoryImpl addressRepositoryImpl;
     private final AddressRepository addressRepository;
+    private final UserRepository userRepository;
+
+    public Long userNo(String userId){
+        List<User> byUserId = userRepository.findByUserId(userId);
+        for (User user : byUserId) {
+            System.out.println("user.getNo() = " + user.getNo());
+        }
+        return byUserId.get(0).getNo();
+
+    }
 
 
     public List<AddressDTO> addressList(Long no){

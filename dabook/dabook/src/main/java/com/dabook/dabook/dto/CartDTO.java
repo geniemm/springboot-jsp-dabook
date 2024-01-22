@@ -9,6 +9,7 @@ public class CartDTO {
     private Long userNo;
     private Long bookNo;
     private Long cartNo;
+    private String userId;
     private String bookName;
     private String bookPhoto;
     private int bookPrice;
@@ -19,6 +20,7 @@ public class CartDTO {
         userNo = cart.getUsers().getNo();
         bookNo = cart.getBooks().getNo();
         cartNo = cart.getNo();
+        userId = cart.getUsers().getUserId();
         bookCount = cart.getCount();
         bookName = cart.getBooks().getBookName();
         bookPrice = cart.getBooks().getPrice();

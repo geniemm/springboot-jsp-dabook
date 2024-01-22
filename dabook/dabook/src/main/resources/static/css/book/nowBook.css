@@ -18,13 +18,14 @@
 .pageTitle .title{
     font-size: x-large;
 }
-.bannerSpace{
+.wholeSpace{
     margin: 30px 90px 10px 90px;
     height: 380px;
     background-color: rgb(220,220,220,0.5);
     border-radius: 10px;
     border: none;
 }
+
 .w3-content{
     max-width:1200px !important;
     display: flex;
@@ -66,10 +67,9 @@
     width:200px;
     height:300px;
 }
-.wholeSpace{
-    height: 1000px;
+.nowBookRow{
+    height: 800px;
 }
-
 .bookSpace{
     margin: 50px 0 50px 180px;
 }
@@ -99,3 +99,4 @@ button{
     font-size: small;
     color: darkgray;
 }
+

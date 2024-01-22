@@ -14,7 +14,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body >
 
 <div class="text-center mt-3 mb-5">
     <a href="/">
@@ -25,7 +24,7 @@
 <div>
     <nav class="navbar navbar-expand-lg mt-3 mb-5">
         <div class="container-xl">
-            <a class="navbar-brand" href="#">DABOOK</a>
+            <a class="navbar-brand" href="/dabook">DABOOK</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -42,22 +41,21 @@
                         <a class="nav-link active" href="/dabook/nowBook">요즘 이 책</a>
                     </li>
 
-                    <c:choose>
-                        <c:when test="${userId == null}">
-                            <li class="nav-item">
-                                <a class="nav-link" href="/dabook/main/login">LOGIN</a>
-                            </li>
-                        </c:when>
-                        <c:otherwise>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/dabook/main/logout">LOGOUT</a>
-                            </li>
-                        </c:otherwise>
-                    </c:choose>
-
-
                     <li class="nav-item">
-                        <a class="nav-link" href="/user/cart/2">CART</a>
+                        <c:if test="${not empty userId}">
+                            <a class="nav-link" href="/dabook/main/logout">LOGOUT</a>
+                        </c:if>
+                        <c:if test="${empty userId}">
+                            <a class="nav-link" href="/dabook/main/login">LOGIN</a>
+                        </c:if>
+                    </li>
+                    <li class="nav-item">
+                        <c:if test="${not empty userId}">
+                            <a class="nav-link" href="/dabook/user/cart?id=${userId}">CART</a>
+                        </c:if>
+                        <c:if test="${empty userId}">
+                            <a class="nav-link" onclick="infoAlert()">CART</a>
+                        </c:if>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -65,7 +63,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <c:choose>
-                                <c:when test="${userId == null}">
+                                <c:when test="${empty userId}">
                                     <li><a class="dropdown-item" href="/dabook/main/login" onclick="infoAlert()">회원정보</a></li>
                                 </c:when>
                                 <c:otherwise>
@@ -74,7 +72,7 @@
                             </c:choose>
                             <li><a class="dropdown-item" href="#">배송조회</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/mypage/address">주소 관리</a></li>
+                            <li><a class="dropdown-item" href="/dabook/mypage/address">주소 관리</a></li>
                         </ul>
                     </li>
 
@@ -95,4 +93,3 @@
         window.location = '/dabook/main/login';
     }
 </script>
-

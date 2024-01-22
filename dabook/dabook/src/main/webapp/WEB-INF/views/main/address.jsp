@@ -96,6 +96,12 @@
 <script>
     var addrInfo =${addr};
 
+    window.onload = function (){
+        if (addrInfo){
+           var userNo = addrInfo[0].userNo;
+        }
+    }
+
     // DB 해당 주소 삭제
     function delAddr(addressNo){
         console.log("삭제할 addressNo: ", addressNo);
@@ -166,7 +172,7 @@
         form.style.display = 'block';
     }
 
-    // 주소 추가 취소
+    // 주소 추가 form 안보이게
     function hiddenForm(){
         var form = document.querySelector('.inputAddr');
         reset();

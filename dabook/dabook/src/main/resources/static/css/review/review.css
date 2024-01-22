@@ -21,23 +21,72 @@
 }
 .review-item{
     border-bottom: 1px solid darkgray;
+    height: 130px;
 }
 .user-info-box{
+    margin-top: 10px;
     display: flex;
 }
 .left-info{
     text-align: left;
+    color: #8C8C8C;
 }
 .info-item{
     font-size: small;
     margin: 5px 0 0 10px;
 }
-.right-info{
-    margin-left: 480px;
+.right-info {
+    margin-left: 500px;
     font-size: medium;
-    letter-spacing: -1px;
+    letter-spacing: -5px;
+}
+.review-text{
+    height: 50px;
+}
+.userSpace{
+    height: 25px;
+    margin : 10px 0 10px 680px;
+}
+.userSpace .delModSpace{
+    margin-left: 10px;
+}
 
-
+.userSpace .delBtn{
+    height: 20px;
+    width: 40px;
+    border: none;
+    background:none;
+    font-family: 'Pretendard-Regular', serif;
+    font-weight: bold;
+}
+.userSpace .modBtn{
+    height: 20px;
+    width: 40px;
+    border: none;
+    background:none;
+    font-family: 'Pretendard-Regular', serif;
+    font-weight: bold;
+}
+.write-review .reviewBtn{
+    height: 40px;
+    width: 100px;
+    color: white;
+    background: #7D9C36;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 10pt;
+    outline: none;
+}
+.write-review button.reviewBtn:hover {
+    border: 1px #6B9900 solid;
+    box-shadow: 0 1px 1px #EAEAEA, inset 0 1px 0 #AAD34A;
+    color: #333333;
+    background: #86AF26;
+}
+.write-review .reviewBtn:active {
+    box-shadow: inset 0 2px 5px #6B9900;
 }
 .review-content{
     height: 80px;
@@ -50,6 +99,9 @@
 }
 
 /* 모달 css */
+.modal{
+    font-family: 'Pretendard-Regular', serif;
+}
 .modal-backdrop {
     background-color: rgba(220, 220, 220, 0.7);
 }
@@ -57,8 +109,10 @@
     font-size: medium;
     display: flex;
     width: 180px;
+    margin-bottom: 10px;
 }
 .rating__star {
+    margin-top: 5px !important;
     cursor: pointer;
-    color: #dabd18b2;
+    color: #6B9900;
 }

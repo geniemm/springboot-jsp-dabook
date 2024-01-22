@@ -18,6 +18,8 @@ public interface BookRepository extends JpaRepository<Book,Long> {
     @Query("select b from Book b order by b.salesVolume desc")
     List<Book> findBestSeller();
 
-
+    // 요즘 이책(신간) + 이후에 10개만 가져오는 쿼리 추가 'Limit 10'
+    @Query("select b from Book b order by b.publishDate desc")
+    List<Book> findNowBook();
 
 }

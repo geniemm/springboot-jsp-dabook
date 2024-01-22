@@ -2,15 +2,12 @@ package com.dabook.dabook.controller;
 
 import com.dabook.dabook.dto.UserDTO;
 import com.dabook.dabook.service.UserService;
-import jakarta.annotation.Resource;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +37,7 @@ public class UserController {
     public String loginSuccess(HttpSession session){
         String id = SecurityContextHolder.getContext().getAuthentication().getName();
         session.setAttribute("userId", id);
-        return "redirect:/dabook/user/mypage?id=" + id ;
+        return "redirect:/dabook";
     }
 
 
@@ -131,20 +128,5 @@ public class UserController {
 
 
 
-    //장바구니
-    @GetMapping("/user/cart")
-    public String cart(){
-        return "/customer/cart";
-    }
-
-    //결제
-    @GetMapping("/user/pay")
-    public String pay(){
-        return "/customer/pay";
-    }
-    //구독
-    @GetMapping("/user/subscription")
-    public String subscription(){
-        return "/customer/subscription";
-    }
 }
+

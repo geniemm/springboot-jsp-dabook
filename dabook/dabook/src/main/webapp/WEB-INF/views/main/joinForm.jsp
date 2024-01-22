@@ -29,7 +29,7 @@
         </div>
 
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" name="userName" id="floatingName" placeholder="name"  required="required" />
+            <input type="text" class="form-control" name="userName" id="floatingName" placeholder="userName"  required="required" />
             <label for="floatingName">Name</label>
         </div>
         <div class="form-floating mb-3">
@@ -81,9 +81,9 @@
             console.log("id: " + id);
 
             if(id === '' ||  id.length === 0 || !/^[a-zA-Z0-9]+$/.test(id) ){
-                    $("#idResult").css("color", "red").text("한글 및 공백은 ID로 사용할 수 없습니다.");
-                    $("#floatingId").val('');
-                    return false;
+                $("#idResult").css("color", "red").text("한글 및 공백은 ID로 사용할 수 없습니다.");
+                $("#floatingId").val('');
+                return false;
             }
 
             //Ajax 전송
@@ -138,4 +138,3 @@
     })
 
 </script>
-

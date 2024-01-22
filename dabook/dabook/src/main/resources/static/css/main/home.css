@@ -1,0 +1,103 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+.wholeSpace{
+    margin: 30px 20px;
+    height: auto;
+}
+.w3-content img.mySlides {
+    max-width: 1100px;
+    height: 400px;
+    width: 100%;
+}
+
+.mySlides{
+    width: 100%;
+}
+.nowBookSpace{
+    width: 1000px;
+    margin: 0px auto;
+    position: relative;
+
+}
+.nowBookSpace .title{
+    width: 990px;
+    margin: 50px auto 30px auto;
+    font-family: "Kim jung chul Myungjo Regular", serif;
+    font-size: xx-large;
+    padding-bottom: 20px;
+    border-bottom: 1px solid black;
+}
+.next-arrow{
+    font-family: SUITE-Regular, serif ;
+    position:absolute;
+    top:50%;
+    right:10px;
+    font-size:1em;
+    background-color: white;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    border-radius: 50%;
+
+}
+ .prev-arrow{
+     font-family: SUITE-Regular, serif ;
+    position:absolute;
+    top:50%;
+    left:10px;
+    font-size:1em;
+     background-color: white;
+     width: 45px;
+     height: 45px;
+    cursor: pointer;
+     border-radius: 50%;
+}
+ /* slick의 default button 숨기기 */
+.nowBookContent .slick-prev {
+    display: none !important;
+}
+.nowBookContent .slick-next {
+    display: none !important;
+}
+.slick-slider{
+   position: unset !important;
+}
+.nowBookSpace .nowBookContent{
+    width:87%;
+    height:350px;
+    margin:0px 120px;
+    overflow: hidden;
+    padding:10px 0px 10px 0px;
+}
+.nowBookSpace .nowBookContent .bookCard{
+    width:180px;
+    height:300px;
+    margin:0px 10px;
+    display:inline-block;
+    background:white;
+    border-radius: 5px;
+}
+.nowBookSpace .nowBookContent .bookCard .nowSlides{
+    width:180px;
+    height:270px;
+    border-radius:5px;
+}
+.nowBookSpace .nowBookContent .bookCard .bookInfo{
+    font-size:15px;
+    padding: 5px 5px;
+    font-family: 'Pretendard-Regular', serif ;
+}
+.nowBookSpace .nowBookContent .bookCard a{
+    text-decoration: none !important;
+    color: grey;
+}

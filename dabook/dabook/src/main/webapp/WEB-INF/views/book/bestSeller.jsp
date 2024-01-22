@@ -9,13 +9,50 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title> 베스트 셀러 </title>
 </head>
-<script>
-
-</script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="/css/book/bestSeller.css" />
 <body>
 <jsp:include page="../main/header.jsp" />
-<h3>BEST SELLER</h3>
+<div class="topSpace">
+    <h3 class="pageTitle"><b class="title">BEST SELLER</b><br>
+        가장 많이 판매된 도서 순위입니다.</h3></div>
+<div class="bannerSpace">
+    <div class="w3-content">
+        <c:forEach var="book" items="${books}" varStatus="b" begin="0" end="2">
+            <div class="mainContent">
+                <c:if test="${b.index == 0}">
+                    <a href="/dabook/book?no=${book.no}" class="nowBookInfo">
+                        <img class="mySlides" src="/images/bookImage/book${book.no}.jpg"></a>
+                    <div class="bookInfoSpace">
+                        <div class="bookName"><b>${book.bookName}</b></div>
+                        <div class="authorAndPublisher">${book.author} · ${book.publisher}</div>
+                        <div class="bookPrice">${book.price}원</div>
+                        <div class="bookReference"><b>책을 나타내는 문구</b><br>
+                            <p>세상과어쩌고저쩌고저쩌고</p></div>
+                    </div>
+                </c:if>
+                <c:if test="${b.index != 0}">
+                    <a href="/dabook/book?no=${book.no}" class="nowBookInfo">
+                        <img class="mySlides" src="/images/bookImage/book${book.no}.jpg" style="display: none"></a>
+                    <div class="bookInfoSpace" style="display: none">
+                        <div class="bookName"><b>${book.bookName}</b></div>
+                        <div class="authorAndPublisher">${book.author} · ${book.publisher}</div>
+                        <div class="bookPrice">${book.price}원</div>
+                        <div class="bookReference"><b>내마음에도 체력이 필요해</b><br>
+                            <p>정신과 전문의 윤횽균저자가 어쩌고저쩌고 추천하는책!</p></div>
+                    </div>
+                </c:if>
+            </div>
+        </c:forEach>
+        <div class="w3-row-padding w3-section">
+            <c:forEach var="book" items="${books}" varStatus="b" begin="0" end="2">
+                <div class="w3-col s4">
+                    <img class="demo w3-opacity w3-hover-opacity-off" src="/images/bookImage/book${book.no}.jpg" style="height: 200px; width: 140px" onclick="currentDiv(${b.index + 1})">
+                </div>
+            </c:forEach>
+        </div>
+    </div>
+</div>
 <div class="wholeSpace">
     <div class="bookSpace">
         <div class="row">
@@ -42,4 +79,32 @@
 </div>
 <jsp:include page="../main/footer.jsp" />
 </body>
+<script>
+    function currentDiv(n) {
+        showDivs(slideIndex = n);
+    }
+
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+        var bookInfo = document.getElementsByClassName("bookInfoSpace");
+
+        if (n > x.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = x.length }
+
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+            bookInfo[i].style.display = "none"; // 숨기기
+        }
+
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+        }
+
+        x[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " w3-opacity-off";
+        bookInfo[slideIndex-1].style.display = "block"; // 선택된 책 정보 표시
+    }
+</script>
 </html>
