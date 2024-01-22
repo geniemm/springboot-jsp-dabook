@@ -41,9 +41,21 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="/dabook/nowBook">요즘 이 책</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/dabook/main/login">LOGIN</a>
-                    </li>
+
+                    <c:choose>
+                        <c:when test="${userId == null}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/dabook/main/login">LOGIN</a>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/dabook/main/logout">LOGOUT</a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+
+
                     <li class="nav-item">
                         <a class="nav-link" href="/user/cart/2">CART</a>
                     </li>

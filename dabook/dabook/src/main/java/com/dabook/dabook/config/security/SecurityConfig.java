@@ -63,6 +63,7 @@ public class SecurityConfig {
                 .logout((logout)->{
                     logout.logoutUrl("/dabook/main/logout")
                             .logoutSuccessUrl("/");
+                   // .logoutSuccessUrl("/dabook/main/successLogout");
 
                 });
 

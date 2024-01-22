@@ -3,6 +3,7 @@ package com.dabook.dabook.controller;
 import com.dabook.dabook.dto.UserDTO;
 import com.dabook.dabook.service.UserService;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -39,9 +40,17 @@ public class UserController {
     public String loginSuccess(HttpSession session){
         String id = SecurityContextHolder.getContext().getAuthentication().getName();
         session.setAttribute("userId", id);
+        //System.out.println("id = " + id);
         return "redirect:/dabook/user/mypage?id=" + id ;
     }
-
+/*
+    @RequestMapping("/main/successLogout")
+    public String logoutSuccess(HttpServletRequest req){
+        HttpSession session = req.getSession();
+        System.out.println("session = " + session);
+        return "redirect:/dabook/main/login";
+    }
+*/
     //회원가입 페이지 연결
     @GetMapping("/main/joinForm")
     public String joinForm(Model model){
