@@ -21,6 +21,7 @@
 }
 .review-item{
     border-bottom: 1px solid darkgray;
+    height: 130px;
 }
 .user-info-box{
     margin-top: 10px;
@@ -39,10 +40,36 @@
     font-size: medium;
     letter-spacing: -5px;
 }
+.review-text{
+    height: 50px;
+}
+.userSpace{
+    height: 25px;
+    margin : 10px 0 10px 680px;
+}
+.userSpace .delModSpace{
+    margin-left: 10px;
+}
 
+.userSpace .delBtn{
+    height: 20px;
+    width: 40px;
+    border: none;
+    background:none;
+    font-family: 'Pretendard-Regular', serif;
+    font-weight: bold;
+}
+.userSpace .modBtn{
+    height: 20px;
+    width: 40px;
+    border: none;
+    background:none;
+    font-family: 'Pretendard-Regular', serif;
+    font-weight: bold;
+}
 .write-review .reviewBtn{
-    height: 60px;
-    width: 120px;
+    height: 40px;
+    width: 100px;
     color: white;
     background: #7D9C36;
     border: none;

@@ -36,8 +36,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="review-content">
+                        <div class="review-content" id="review-${reviews.no}">
                             <div class="review-text">${reviews.reviewContent}</div>
+                            <div class="userSpace">
+                                <div class="delModSpace"><button class="modBtn" type="button" onclick="modReview(${reviews.no})">수정</button>
+                                <button class="delBtn" type="button" onclick="delReview(${reviews.no})">삭제</button> </div>
+                            </div>
                         </div>
                     </div>
                 </c:forEach>
@@ -114,6 +118,31 @@
     }
 </script>
 <script>
+    function modReview(reviewNo){
+
+    }
+    function delReview(reviewNo) {
+        var result = confirm("리뷰를 삭제하시겠습니까?");
+
+        if (result) {
+            $.ajax({
+                type: 'DELETE',
+                url: '/dabook/review',
+                data: {no: reviewNo},
+                success: function (response) {
+                    console.log('리뷰 삭제 완료',response)
+                    window.location.reload();
+                },
+                error: function (error) {
+                    console.error('리뷰 삭제 실패',error)
+                }
+            });
+        }else{
+            console.log("리뷰 삭제 취소")
+        }
+    }
+</script>
+<script>
     const ratingStars = [...document.getElementsByClassName("rating__star")];
     let selectedStarts = 0;
 
@@ -166,6 +195,5 @@
         $('#WriteReview').modal('hide');
         location.reload(true);
     }
-
 </script>
 </html>

@@ -6,6 +6,7 @@ import com.dabook.dabook.service.ReviewService;
 import com.dabook.dabook.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +41,13 @@ public class ReviewController {
         reviewService.saveReview(no,review);
         return "redirect:/";
     }
+    // 리뷰수정
+//    @PutMapping("review")
 
-
-
+    // 리뷰삭제
+    @DeleteMapping("/review")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delReview(@RequestParam(name="no") Long reviewNo){
+        reviewService.deleteReview(reviewNo);
+    }
 }
