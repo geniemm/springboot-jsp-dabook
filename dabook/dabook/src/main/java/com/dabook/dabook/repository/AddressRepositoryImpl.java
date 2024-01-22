@@ -27,17 +27,5 @@ public class AddressRepositoryImpl {
                 .getResultList();
     }
 
-    @Modifying
-    @Query
-    public void addrAdd(AddressDTO data){
-        em.createQuery(
-                        "insert into Address(user_no, zipcode, city, street) " +
-                                "values(:userNo, :zipcode, :address, :detail)", Address.class)
-                .setParameter("userNo", data.getUserNo())
-                .setParameter("zipcode", data.getZipcode())
-                .setParameter("zipcode", data.getAddress())
-                .setParameter("detail", data.getAddressDetail())
-                .executeUpdate();
-    }
 
 }

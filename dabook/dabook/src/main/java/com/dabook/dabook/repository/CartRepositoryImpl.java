@@ -16,13 +16,13 @@ public class CartRepositoryImpl{
     private final EntityManager em;
 
     @Query
-    public List<Cart> cartList(String no) {
+    public List<Cart> cartList(String userId) {
         return em.createQuery(
                         "select c from Cart c " +
                                 "join fetch c.users u " +
                                 "join fetch c.books b " +
-                                "where u.no = :no", Cart.class)
-                .setParameter("no", no)
+                                "where u.userId = :userId", Cart.class)
+                .setParameter("userId", userId)
                 .getResultList();
     }
 

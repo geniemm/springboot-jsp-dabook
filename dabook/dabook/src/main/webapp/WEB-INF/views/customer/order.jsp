@@ -176,6 +176,7 @@
 <script>
     var infoList = ${info};
     var addList = ${addr};
+    console.log(infoList);
 
     // 페이지 로드시 주문자 정보 넣기
     window.onload = function() {

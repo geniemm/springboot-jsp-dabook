@@ -21,10 +21,11 @@ public class CartController {
 
     private final CartService cartService;
 
-    //장바구니 페이지 로드
-    @GetMapping("/user/cart/2")
-    public String cart(Model model) throws JsonProcessingException {
-        List<CartDTO> cartData = cartService.cartList("2");
+    //장바구니 페이지 로드 (세션 아이디값으로 사용)
+    @GetMapping("/dabook/user/cart")
+    public String cart(Model model, @RequestParam("id") String userId) throws JsonProcessingException {
+
+        List<CartDTO> cartData = cartService.cartList(userId);
 
         ObjectMapper objectMapper = new ObjectMapper();
         String list = objectMapper.writeValueAsString(cartData);
@@ -32,14 +33,15 @@ public class CartController {
         model.addAttribute("data", cartData);   // html
         model.addAttribute("list", list);       // script
 
-        return "/customer/cart";
+        return "customer/cart";
     }
 
     // 장바구니 변경 후 데이터
-    @GetMapping("/cart/data/2")
+    @GetMapping("/cart/data")
     @ResponseBody
-    public List<CartDTO> cartData() {
-        return cartService.cartList("2");
+    public List<CartDTO> cartData(HttpSession session) {
+        String userId = (String)session.getAttribute("userId");
+        return cartService.cartList(userId);
     }
 
     // 장바구니 수량 변경

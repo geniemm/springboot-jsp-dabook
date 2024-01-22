@@ -19,8 +19,10 @@ public class CartService {
     private final CartRepositoryImpl cartRepositoryImpl;
     private final CartRepository cartRepository;
 
-    public List<CartDTO> cartList(String no) {
-        List<Cart> cartList = cartRepositoryImpl.cartList(no);
+    // 장바구니 리스트
+    public List<CartDTO> cartList(String userId) {
+        List<Cart> cartList = cartRepositoryImpl.cartList(userId);
+        System.out.println(cartList);
         return cartList.stream()
                 .map(CartDTO::new)
                 .collect(Collectors.toList());

@@ -46,20 +46,37 @@
                         <a class="nav-link active" href="/dabook/nowBook">요즘 이 책</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">LOGIN</a>
+                        <c:if test="${not empty userId}">
+                            <a class="nav-link" href="/dabook/main/logout">LOGOUT</a>
+                        </c:if>
+                        <c:if test="${empty userId}">
+                            <a class="nav-link" href="/dabook/main/login">LOGIN</a>
+                        </c:if>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/user/cart/2">CART</a>
+                        <c:if test="${not empty userId}">
+                            <a class="nav-link" href="/dabook/user/cart?id=${userId}">CART</a>
+                        </c:if>
+                        <c:if test="${empty userId}">
+                            <a class="nav-link" onclick="infoAlert()">CART</a>
+                        </c:if>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Mypage
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/mypage">회원정보</a></li>
+                            <c:choose>
+                                <c:when test="${empty userId}">
+                                    <li><a class="dropdown-item" href="/dabook/main/login" onclick="infoAlert()">회원정보</a></li>
+                                </c:when>
+                                <c:otherwise>
+                                    <li><a class="dropdown-item" href="/dabook/user/mypage?id=${userId}">회원정보</a></li>
+                                </c:otherwise>
+                            </c:choose>
                             <li><a class="dropdown-item" href="#">배송조회</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/mypage/address">주소 관리</a></li>
+                            <li><a class="dropdown-item" href="/dabook/mypage/address">주소 관리</a></li>
                         </ul>
                     </li>
 
@@ -73,3 +90,9 @@
         </div>
     </nav>
 </div>
+<script>
+    function infoAlert(){
+        alert("로그인 먼저 해주세요");
+        window.location = '/dabook/main/login';
+    }
+</script>

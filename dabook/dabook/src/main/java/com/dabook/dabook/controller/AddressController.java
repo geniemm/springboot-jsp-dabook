@@ -23,15 +23,20 @@ public class AddressController {
     private final AddressService addressService;
 
     // 주소록 페이지 로드
-    @GetMapping("/mypage/address")
-    public String address(Model model) throws JsonProcessingException {
-        Long no = Long.parseLong("2");
+    @GetMapping("/dabook/mypage/address")
+    public String address(Model model, HttpSession session) throws JsonProcessingException {
+        String userId = (String) session.getAttribute("userId");
+        Long no = addressService.userNo(userId);
+        session.setAttribute("userNo", no);
+
+
         List<AddressDTO> addrDto = addressService.addressList(no);
 
         ObjectMapper objectMapper = new ObjectMapper();
         String addr = objectMapper.writeValueAsString(addrDto);
 
         model.addAttribute("addr", addr);   // script
+        model.addAttribute("no", no);   // script
         model.addAttribute("address", addrDto); // html
 
         return "main/address";
@@ -55,10 +60,10 @@ public class AddressController {
     }
 
     // 주소록 데이터
-    @GetMapping("/address/data/2")
+    @GetMapping("/address/data")
     @ResponseBody
-    public List<AddressDTO> addrData(){
-        Long no = Long.parseLong("2");
+    public List<AddressDTO> addrData(HttpSession session){
+        Long no = (Long)session.getAttribute("userNo");
         return addressService.addressList(no);
     }
 
@@ -77,10 +82,9 @@ public class AddressController {
 
     // 주소 추가
     @PostMapping("/address/add")
-    public ResponseEntity<String> addrAdd(@RequestBody AddressDTO addrData){
-        Long no = Long.parseLong("2");
-        addrData.setUserNo(no);
+    public ResponseEntity<String> addrAdd(@RequestBody AddressDTO addrData, HttpSession session){
 
+        Long no = (Long) session.getAttribute("userNo");
         String zipcode = addrData.getZipcode();
         String address = addrData.getAddress();
         String detail = addrData.getAddressDetail();
@@ -94,6 +98,7 @@ public class AddressController {
         }
     }
 
+    // userNo session에 저장
     @PostMapping("/address/modiNo")
     @ResponseBody
     public String modiNo(@RequestParam("no") String no, HttpSession session) {

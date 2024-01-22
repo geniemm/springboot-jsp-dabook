@@ -10,38 +10,35 @@
 <div class="nav justify-content-center">
     <form style="width: 25rem">
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingId" value="가지고 온 값" disabled />
+            <input type="text" class="form-control" id="floatingId" value="${info.userId}" disabled />
             <label for="floatingId">ID</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingName" value="가지고 온 값" disabled />
+            <input type="password" class="form-control" id="floatingPassword" value="${info.password}" disabled/>
+            <label for="floatingEmail">Password</label>
+        </div>
+        <div class="nav justify-content-end mb-5">
+            <button type="button" class="btn btn-outline-secondary" style="width: 13rem" onclick="location.href='#'">
+                비밀번호 변경
+            </button>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingName" value="${info.username}" disabled />
             <label for="floatingName">Name</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingEmail" value="가지고 온 값" disabled/>
+            <input type="email" class="form-control" id="floatingEmail" value="${info.email}" disabled/>
             <label for="floatingEmail">Email</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="zipcode" value="가지고 온 값" disabled/>
-            <label for="zipcode">zipcode</label>
+            <input type="email" class="form-control" id="floatingPhone" value="${info.phone}" disabled/>
+            <label for="floatingEmail">Phone</label>
         </div>
 
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="address" value="가지고 온 값" disabled />
-            <label for="address">Address</label>
-        </div>
-        <div class="form-floating mb-5">
-            <input type="text" class="form-control" id="addressDetail" value="가지고 온 값" disabled/>
-            <label for="addressDetail">AddressDetail</label>
-        </div>
+
 
         <div class="nav justify-content-end mb-5">
-            <button
-                type="button"
-                class="btn btn-outline-secondary"
-                style="width: 13rem"
-                onclick="location.href='/modifyInfo'"
-            >
+            <button type="button" class="btn btn-outline-secondary" style="width: 13rem" onclick="location.href='/dabook/user/modifyInfo?id=${userId}'">
                 정보 수정
             </button>
         </div>

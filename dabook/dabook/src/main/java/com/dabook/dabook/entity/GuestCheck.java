@@ -1,5 +1,5 @@
 package com.dabook.dabook.entity;
 
 public enum GuestCheck {
-    GUEST, USER
+    ROLE_GUEST, ROLE_USER
 }

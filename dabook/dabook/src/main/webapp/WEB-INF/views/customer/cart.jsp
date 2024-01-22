@@ -15,11 +15,16 @@
 <script>
 
     var CartData = ${list};
+    var UN = 0;
 
 
     // 페이지 로드시 바로 적용
     window.onload = function (){
         itemAll();
+        if(CartData){
+            UN = CartData[0].userNo;
+            console.log(UN);
+        }
     }
 
     // doc checked 상품 정보 (수량,가격,배송비)
@@ -100,7 +105,7 @@
     // 수량 update 후 data reload
     function reloadUpdate(index) {
         $.ajax({
-            url: '/cart/data/2',
+            url: '/cart/data',
             type: 'get',
             success: function (data) {
                 console.log('리로드 성공: ', data);
@@ -167,7 +172,7 @@
     // 삭제 후 데이터 reload
     function reloadDelelte(index) {
         $.ajax({
-            url: '/cart/data/2',
+            url: '/cart/data',
             type: 'get',
             success: function (data) {
                 console.log('리로드 성공');
@@ -228,7 +233,7 @@
                 }),
                 success: function (data){
                     console.log("성공: ", data);
-                    location.href='/order';
+                    location.href='/dabook/user/order?no=' + UN;
                 },
                 error: function (err){
                     console.log('실패 ', err)
