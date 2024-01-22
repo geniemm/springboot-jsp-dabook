@@ -43,6 +43,13 @@
                                 <button class="delBtn" type="button" onclick="delReview(${reviews.no})">삭제</button> </div>
                             </div>
                         </div>
+                        <div id="editModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close" onclick="closeEditModal()">&times;</span>
+                                <textarea id="editedReviewContent"></textarea>
+                                <button onclick="saveEditedReview(${reviews.no})">저장</button>
+                            </div>
+                        </div>
                     </div>
                 </c:forEach>
         </div>
@@ -118,8 +125,37 @@
     }
 </script>
 <script>
+    var reviewNo;
     function modReview(reviewNo){
+        var modal = document.getElementById("editModal");
+        modal.style.display = "block";
+        // 기존 내용 모달에 표시
+        var originalReviewContent = $(`#review-${reviewNo} .review-text`).text();
+        $("#editedReviewContent").val(originalReviewContent);
+        window.reviewNo = reviewNo;
+    }
+        function closeEditModal() {
+            var modal = document.getElementById("editModal");
+            modal.style.display = "none";
+        }
+        function saveEditedReview(reviewNo) {
+            var editedReviewContent = $("#editedReviewContent").val();
 
+            $.ajax({
+                type: 'PUT',
+                url: `/dabook/review/${window.reviewNo}`,
+                data: JSON.stringify({ reviewContent: editedReviewContent}),
+                success: function (response) {
+                    console.log('리뷰 수정 완료', response);
+                    // 수정된 내용을 화면에 반영
+                    $(`#review-${window.reviewNo} .review-text`).text(editedReviewContent);
+                    // 모달 닫기
+                    closeEditModal();
+                },
+                error: function (error) {
+                    console.error('리뷰 수정 실패', error);
+                }
+            });
     }
     function delReview(reviewNo) {
         var result = confirm("리뷰를 삭제하시겠습니까?");
