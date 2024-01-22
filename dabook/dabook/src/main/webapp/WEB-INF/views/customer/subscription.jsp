@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>구독옵션</title>
 </head>
-<link rel="stylesheet" href="/css/subscription.css" />
+<link rel="stylesheet" href="/css/customer/subscription.css" />
 <body>
     <div class="option">
         <h2>구독 옵션</h2>

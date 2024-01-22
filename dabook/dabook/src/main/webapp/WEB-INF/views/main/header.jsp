@@ -18,7 +18,7 @@
 
 <div class="text-center mt-3 mb-5">
     <a href="/">
-        <img src="../../images/DABOOK.jpg"
+        <img src="/images/main/DABOOK.jpg"
              class="rounded"
              alt="asdf"
              width="15%"
@@ -46,15 +46,16 @@
                         <a class="nav-link" href="#">요즘 이 책</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">LOGIN</a>
+                        <a class="nav-link" href="/dabook/main/login">LOGIN</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Mypage
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/mypage">회원정보</a></li>
+                            <li><a class="dropdown-item" href="/dabook/user/mypage?id=${userId}">회원정보</a></li>
                             <li><a class="dropdown-item" href="#">배송조회</a></li>
+                            <li><a class="dropdown-item" href="/dabook/user/addressList">배송주소록</a> </li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">뭐든</a></li>
                         </ul>

@@ -7,8 +7,6 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static jakarta.persistence.FetchType.*;
-
 @Entity
 @Getter
 public class User {
@@ -30,8 +28,8 @@ public class User {
     @OneToMany(mappedBy = "users")
     private List<Address> address;
 
-//    @Enumerated(EnumType.STRING)
-//    private GuestCheck guestCheck;
+    @Enumerated(EnumType.STRING)
+    private GuestCheck guestCheck;
 
     @OneToMany(mappedBy = "users")
     private List<Order> orders = new ArrayList<>();
@@ -42,12 +40,32 @@ public class User {
     @OneToMany(mappedBy = "users")
     private List<Review> review = new ArrayList<>();
 
-    public User(String userId, String password, String phone, String email) {
+    public User() {
+
+    }
+    public User(String userId, String password,String username, String phone, String email, GuestCheck guestCheck) {
         this.userId = userId;
         this.password = password;
+        this.username = username;
+        this.phone = phone;
+        this.email = email;
+        this.guestCheck = guestCheck;
+    }
+
+    public User(String userId, String username, String phone, String email) {
+        this.userId = userId;
+        this.username = username;
         this.phone = phone;
         this.email = email;
     }
 
-    public User() {}
+    public static User toUserEntity(String userId, String password, String name, String phone, String email, GuestCheck guestCheck) {
+        User user = new User(userId, password, name, phone, email, guestCheck);
+        return user;
+    }
+
+    public static User modiToUserEntity(String userId, String name, String phone, String email){
+        User user = new User(userId, name, phone, email);
+        return user;
+    }
 }
