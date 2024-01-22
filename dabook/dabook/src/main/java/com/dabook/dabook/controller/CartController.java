@@ -17,7 +17,6 @@ import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/dabook")
 public class CartController {
 
     private final CartService cartService;

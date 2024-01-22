@@ -37,7 +37,7 @@ public class UserController {
     public String loginSuccess(HttpSession session){
         String id = SecurityContextHolder.getContext().getAuthentication().getName();
         session.setAttribute("userId", id);
-        return "redirect:/dabook/user/mypage?id=" + id ;
+        return "redirect:/dabook";
     }
 
     //회원가입 페이지 연결

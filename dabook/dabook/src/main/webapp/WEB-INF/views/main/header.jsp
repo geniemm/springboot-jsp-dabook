@@ -90,6 +90,7 @@
         </div>
     </nav>
 </div>
+
 <script>
     function infoAlert(){
         alert("로그인 먼저 해주세요");
