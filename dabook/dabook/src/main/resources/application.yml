@@ -22,6 +22,10 @@ server:
     encoding:
       force: true
 
+    jsp:
+      init-parameters:
+        development: true
+
 logging.level:
   org.hibernate.SQL: debug
   # org.hibernate.type: trace

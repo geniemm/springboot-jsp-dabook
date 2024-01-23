@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <jsp:include page="header.jsp" />
-<link rel="stylesheet" href="/css/main/login.css" />
 
 <div class="nav justify-content-center mb-5 mt-5">
     <h1>Login</h1>
@@ -35,7 +34,7 @@
         </div>
 
         <div class="d-flex gap-5 justify-content-center mb-5">
-            <a href="#" class="link-secondary link-underline link-underline-opacity-0">ID/Password 찾기</a>
+            <a href="/dabook/main/idpwFind" class="link-secondary link-underline link-underline-opacity-0">ID/Password 찾기</a>
             <a href="/dabook/main/joinForm" class="link-secondary link-underline link-underline-opacity-0">Join</a>
         </div>
     </form>

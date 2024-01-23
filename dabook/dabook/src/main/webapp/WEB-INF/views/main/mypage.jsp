@@ -18,7 +18,7 @@
             <label for="floatingEmail">Password</label>
         </div>
         <div class="nav justify-content-end mb-5">
-            <button type="button" class="btn btn-outline-secondary" style="width: 13rem" onclick="location.href='#'">
+            <button type="button" class="btn btn-outline-secondary" style="width: 13rem" onclick="location.href='/dabook/user/pwCheck?id=${userId}'">
                 비밀번호 변경
             </button>
         </div>
@@ -46,3 +46,17 @@
 
 </div>
 <jsp:include page="footer.jsp" />
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        showPartialPassword();
+    });
+
+    function showPartialPassword() {
+        var passwordInput = document.getElementById('floatingPassword');
+        var fullPassword = passwordInput.value;
+        var partialPassword = fullPassword.substring(0, 10);
+        passwordInput.value = partialPassword;
+    }
+</script>

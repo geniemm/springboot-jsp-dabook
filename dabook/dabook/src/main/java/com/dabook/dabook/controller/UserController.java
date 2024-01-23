@@ -1,5 +1,6 @@
 package com.dabook.dabook.controller;
 
+import com.dabook.dabook.common.GetMessage;
 import com.dabook.dabook.dto.UserDTO;
 import com.dabook.dabook.service.UserService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -92,7 +94,6 @@ public class UserController {
     @PostMapping("/user/emailCheck")
     @ResponseBody
     public Boolean modiEmailCheck(String email){
-        System.out.println("정보수정 이메일체크");
         return userService.emailCheck(email);
     }
 
@@ -121,6 +122,96 @@ public class UserController {
 
         String msg = userService.modifyInfo(userId, username, phone, email);
 
+        alert(res, msg);
+    }
+
+    // id/pw 찾기 페이지 연결
+    @GetMapping("/main/idpwFind")
+    public String idpwFind(){
+        return "main/idPwFind";
+    }
+
+    // id 찾기
+    @RequestMapping("/main/searchId")
+    public String idFind(String email, Model model, HttpServletResponse res) throws IOException {
+        List<String> findId = userService.findId(email);
+
+        if(findId.size() >= 1){
+            String id = findId.get(0);
+            model.addAttribute("id", id);
+            return "main/searchId";
+        }else{
+            String msg = GetMessage.getMessage("일치하는 아이디를 찾지 못했습니다.", "/dabook/main/idpwFind");
+            alert(res, msg);
+            return  null;
+        }
+    }
+
+    //pw 찾기(변경)
+    @RequestMapping("/main/changePw")
+    public void pwChange(@RequestParam String userId, HttpServletResponse res,
+                           @RequestParam String password1, @RequestParam String password2) throws IOException {
+
+        if(password1.equals(password2)){
+            userService.pwChange(userId, password2);
+
+            String msg = GetMessage.getMessage("비밀번호가 변경되었습니다.", "/dabook/main/login");
+            alert(res, msg);
+        }else{
+            String msg = GetMessage.getMessage("새 비밀번호와 비밀번호 확인이 일치하지 않습니다.", "/dabook/main/idpwFind");
+            alert(res, msg);
+        }
+    }
+
+
+
+    // 비밀번호 변경 페이지
+    @GetMapping("/user/newPw")
+    public String newPw(@RequestParam String userId, Model model){
+        model.addAttribute("userId", userId);
+        return "main/newPw";
+    }
+
+    // mypage - 비밀번호 확인페이지
+    @GetMapping("/user/pwCheck")
+    public String pwCheck(@RequestParam String id, Model model){
+        model.addAttribute("userId", id);
+        return "main/pwCheck";
+    }
+
+    // mypage - 비밀번호 확인 로직
+    @PostMapping("/user/pwCheck")
+    public String pwCheckLogic(@RequestParam String userId, @RequestParam String password, Model model, HttpServletResponse res) throws IOException {
+        boolean check = userService.pwCheck(userId, password);
+
+        model.addAttribute("userId", userId);
+        if(check) {
+            return "main/newPw";
+        }else{
+            String msg =  GetMessage.getMessage("비밀번호 확인에 실패했습니다.", "/dabook/user/pwCheck?id=" + userId);
+            alert(res, msg);
+            return null;
+        }
+
+    }
+
+    // mypage - 비밀번호 수정
+    @PostMapping("/user/changePw")
+    public void changePw(@RequestParam String userId, @RequestParam String password1,
+                         @RequestParam String password2, HttpServletResponse res) throws IOException {
+
+        if(password1.equals(password2)){
+            userService.pwChange(userId, password2);
+
+            String msg = GetMessage.getMessage("비밀번호가 변경되었습니다.", "/dabook/user/mypage?id=" + userId);
+            alert(res, msg);
+        }else{
+            String msg = GetMessage.getMessage("새 비밀번호와 비밀번호 확인이 일치하지 않습니다.", "/dabook/user/pwCheck?id="+userId);
+            alert(res, msg);
+        }
+    }
+
+    public void alert(HttpServletResponse res, String msg) throws IOException {
         res.setContentType("text/html; charset=utf-8");
         PrintWriter out = res.getWriter();
         out.print(msg);

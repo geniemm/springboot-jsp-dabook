@@ -7,6 +7,7 @@ import com.dabook.dabook.entity.User;
 import com.dabook.dabook.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 //import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,7 @@ import java.util.Map;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder encode;
 
 
     //회원가입
@@ -39,7 +41,7 @@ public class UserService {
     }
 
     //회원 정보수정
-    @Transactional //String userId, String name, String phone, String email
+    @Transactional
     public String modifyInfo(String userId, String username, String phone, String email) {
 
         try {
@@ -83,7 +85,6 @@ public class UserService {
     public boolean emailCheck(String email){
         boolean result = true;
 
-
         if(email.trim().isEmpty()){
             result = false;
         }else{
@@ -117,6 +118,37 @@ public class UserService {
 
         return info;
     }
+
+    // 아이디 찾기
+    public List<String> findId(String email) {
+        return userRepository.findId(email);
+    }
+
+    //비밀번호 찾기(변경)
+    @Transactional
+    public void pwChange(String id, String pw) {
+        String encodePw = encode.encode(pw);
+        userRepository.updatePw(encodePw, id);
+    }
+
+    // 비밀번호 확인
+    public boolean pwCheck(String id, String password) {
+        List<User> info = userRepository.findAllByUserId(id);
+        boolean check = true;
+        if(!info.isEmpty()){
+            try {
+                if( encode.matches(password, info.get(0).getPassword()) || password.equals(info.get(0).getPassword()) ){
+                    return check;
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+        check = false;
+        return check;
+    }
+
 
 
 }

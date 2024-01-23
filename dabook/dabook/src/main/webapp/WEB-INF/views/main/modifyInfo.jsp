@@ -2,13 +2,13 @@
 
 <jsp:include page="header.jsp" />
 
-
+<link rel="stylesheet" href="/css/main/modifyInfo.css" />
 <div class="nav justify-content-center mb-5 mt-5">
     <h1>정보 수정</h1>
 </div>
 
 <div class="nav justify-content-center">
-    <form style="width: 25rem" method="post" action="/dabook/user/modifyInfo">
+    <form style="width: 25rem" method="post" action="/dabook/user/modifyInfo" id="modiInfoForm">
         <div class="form-floating mb-2">
             <input type="text" class="form-control" id="floatingId" name="userId" value="${info.userId}" disabled />
             <label for="floatingId">ID</label>
@@ -26,8 +26,10 @@
             <label for="floatingEmail">Email</label>
         </div>
         <div class="form-floating mb-3">
-            <%--기능 따로 만들기--%>
-            <button type="button" class="btn btn-outline-secondary">중복 검사</button>
+            <!-- 이메일 중복 메세지 -->
+                <div class="message">
+                    <label id="emailResult">&emsp;</label>
+                </div>
         </div>
 
 
@@ -54,30 +56,31 @@
 
     $(document).ready(function() {
         //이메일 중복 확인
-        $("#floatingEmail").on("focusout", function(){
+        $("#floatingEmail").on("input", function(){
 
-            var email = $("#floatingEmail").val();
-            console.log("email: " + email);
+                var email = $("#floatingEmail").val();
+                console.log("email: " + email);
 
-            $.ajax({
-                url : '/dabook/user/emailCheck',
-                data : {
-                    email : email
-                },
-                type : 'POST',
-                dataType: 'json',
-                success : function(result){
-                    if(result == true){
-                        $("#emailResult").css("color", "black").text("사용 가능한 email 입니다.");
-                    }else{
-                        $("#emailResult").css("color", "red").text("사용 불가능한 email 입니다.");
-                        $("#floatingEmail").val('');
+                $.ajax({
+                    url : '/dabook/user/emailCheck',
+                    data : {
+                        email : email
+                    },
+                    type : 'POST',
+                    dataType: 'json',
+                    success : function(result){
+                        if(result == true){
+                            $("#emailResult").css("color", "black").text("사용 가능한 email 입니다.");
+                        }else{
+                            $("#emailResult").css("color", "red").text("사용 불가능한 email 입니다.");
+                            $("#floatingEmail").val('');
+                        }
                     }
-                }
+
+                });
 
             });
 
-        });
     })
 
 </script>

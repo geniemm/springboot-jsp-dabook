@@ -16,7 +16,7 @@
 </head>
 
 <div class="text-center mt-3 mb-5">
-    <a href="/">
+    <a href="/dabook">
         <img src="/images/DABOOK.jpg" class="rounded" alt="asdf" width="15%" >
     </a>
 </div>
