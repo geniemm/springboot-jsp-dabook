@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/dabook")
 @RequiredArgsConstructor
 public class HomeController {
 
@@ -23,13 +22,12 @@ public class HomeController {
         return "test";
     }
 
-    @GetMapping("")
+    @GetMapping("/dabook")
     public String home(Model model){
         System.out.println("home");
         List<Book> nowBook = bookService.getNowBook();
         model.addAttribute("books",nowBook);
         return "main/home";
     }
-
 
 }

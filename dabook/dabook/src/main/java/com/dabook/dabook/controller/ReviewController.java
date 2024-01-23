@@ -6,6 +6,7 @@ import com.dabook.dabook.service.BookService;
 import com.dabook.dabook.service.ReviewService;
 import com.dabook.dabook.service.ReviewServiceImpl;
 import com.dabook.dabook.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -30,9 +31,11 @@ public class ReviewController {
 
     //리뷰 보기
     @GetMapping("/review")
-    public String getReview(Model model, @RequestParam(value = "no") Long no){
+    public String getReview(Model model, @RequestParam(value = "no") Long no, HttpSession httpSession){
         List<Review> reviews = reviewServiceImpl.getReviewsByBookNo(no);
+        String userId = (String)httpSession.getAttribute("userId");
         model.addAttribute("reviews",reviews);
+        model.addAttribute("uId",userId);
         return "review/review";
     }
 

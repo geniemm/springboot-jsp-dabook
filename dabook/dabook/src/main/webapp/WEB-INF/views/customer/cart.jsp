@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="/css/cart.css" />
+    <link rel="stylesheet" href="/css/main/cart.css" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>장바구니</title>
 
@@ -15,18 +15,23 @@
 <script>
 
     var CartData = ${list};
+    var UN = 0;
 
 
     // 페이지 로드시 바로 적용
     window.onload = function (){
         itemAll();
+        if(CartData){
+            UN = CartData[0].userNo;
+            console.log(UN);
+        }
     }
 
     // doc checked 상품 정보 (수량,가격,배송비)
     function itemAll(){
         var count = 0;
         var price = 0;
-        var fee = 0;
+        var fee = 3000;
 
         for(var i=0; i < CartData.length; i++){
             if(document.querySelectorAll('.chkBuy')[i].checked) {
@@ -34,8 +39,8 @@
                 price += CartData[i].total;
             }
         }
-        if (price < 30000){
-            fee = 3000;
+        if (price >= 30000 || price === 0){
+            fee = 0;
         }
 
         var chkCount = document.querySelector('.productCount');
@@ -78,7 +83,7 @@
     function countUpdate(cartNo, action, index){
         if(docCount(index, action)){
             $.ajax({
-                url: '/countUpdate/' + cartNo,
+                url: '/dabook/countUpdate/' + cartNo,
                 type: 'put',
                 data: {
                     cartNo : cartNo,
@@ -100,7 +105,7 @@
     // 수량 update 후 data reload
     function reloadUpdate(index) {
         $.ajax({
-            url: '/cart/data/1',
+            url: '/cart/data',
             type: 'get',
             success: function (data) {
                 console.log('리로드 성공: ', data);
@@ -129,8 +134,6 @@
         updateCount.textContent = ' ' + CartData[index].bookCount + ' ';
     }
 
-
-
     // checked 상품 번호 가져오기
     function docChkItems(){
         var del = document.querySelectorAll('.chkBuy');
@@ -153,7 +156,7 @@
     function delCart(cartNo, index){
         console.log("삭제할 cartNo: ", cartNo);
         $.ajax({
-            url: '/delCartItem/' + cartNo,
+            url: '/dabook/delCartItem/' + cartNo,
             type: 'delete',
             data: cartNo,
             success: function (data) {
@@ -169,7 +172,7 @@
     // 삭제 후 데이터 reload
     function reloadDelelte(index) {
         $.ajax({
-            url: '/cart/data/1',
+            url: '/cart/data',
             type: 'get',
             success: function (data) {
                 console.log('리로드 성공');
@@ -200,7 +203,7 @@
         var delList = docChkItems();
 
         $.ajax({
-            url: '/cart/chkDel',
+            url: '/dabook/cart/chkDel',
             type: 'delete',
             contentType: 'application/json',
             data: JSON.stringify({
@@ -208,7 +211,7 @@
             }),
             success: function (data){
                 console.log('성공: ', data);
-                reloadChkDel(delList);
+                location.reload();  // 선택 삭제 후 페이지 리로드
             },
             error: function (err){
                 console.log('실패: ', err);
@@ -216,46 +219,55 @@
         })
     }
 
-    // checked 상품 삭제 후 data,page reload
-    function reloadChkDel(){
-        $.ajax({
-            url: '/cart/data/1',
-            type: 'get',
-            success: function (data) {
-                console.log('리로드 성공');
-                CartData = data;
-                location.reload();  // 선택 삭제 후 페이지 리로드
-            },
-            error: function (err){
-                console.log('리로드 실패', err);
-            }
-        });
+    // checked된 상품 세션 저장, 페이지 넘기기
+    function orderBtn(){
+        var orderList = docChkItems();
+
+        if(orderList.length){
+            $.ajax({
+                url: '/orderList',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    data: orderList
+                }),
+                success: function (data){
+                    console.log("성공: ", data);
+                    location.href='/dabook/user/order?no=' + UN;
+                },
+                error: function (err){
+                    console.log('실패 ', err)
+                }
+            });
+        } else {
+            alert('장바구니가 비어있습니다.');
+        }
     }
 
 </script>
 
 <jsp:include page="../main/header.jsp" />
 
-    <div class="cart-goods-div">
-        <h2 class="mb-5 mt-5">장바구니</h2>
+<div class="cart-goods-div">
+    <h2 class="mb-5 mt-5">장바구니</h2>
 
-        <div class="goods-div">
+    <div class="goods-div">
 
-            <div class="emptyline"></div>
+        <div class="emptyline"></div>
 
-            <div class="selectBy mt-1 mb-1">
-                <div class="chkAll">
-                    <input type="checkbox" class="checkedAll" onclick="checkedAll()" checked> 전체 선택
-                </div>
-                <div class="chkDel">
-                    <button class="btn btn-secondary" onclick="chkDel()"> 선택 삭제 </button>
-                </div>
+        <div class="selectBy mt-1 mb-1">
+            <div class="chkAll">
+                <input type="checkbox" class="checkedAll" onclick="checkedAll()" checked> 전체 선택
             </div>
+            <div class="chkDel">
+                <button class="btn btn-secondary" onclick="chkDel()"> 선택 삭제 </button>
+            </div>
+        </div>
 
-            <c:if test="${not empty data}">
-                <c:forEach var="data" items="${data}" varStatus="status">
+        <c:if test="${not empty data}">
+            <c:forEach var="data" items="${data}" varStatus="status">
 
-                    <div class="line"></div>
+                <div class="line"></div>
 
                 <div class="a-div">
                     <input type="checkbox" class="chkBuy" onclick="itemAll()" checked >
@@ -273,7 +285,7 @@
                             <button class="btn btn-secondary volume-btn"
                                     onclick="countUpdate(${data.cartNo}, 'decrease', ${status.index})">-</button>
 
-                                <span class="count">&nbsp;${data.bookCount}&nbsp;</span>
+                            <span class="count">&nbsp;${data.bookCount}&nbsp;</span>
 
                             <button class="btn btn-secondary volume-btn"
                                     onclick="countUpdate(${data.cartNo}, 'increase', ${status.index})">+</button>
@@ -282,52 +294,52 @@
                         <button class="btn btn-outline-secondary delete mt-3" onclick="delItem(${data.cartNo}, ${status.index})">삭제</button>
                     </div>
                 </div>
-                </c:forEach>
-            </c:if>
-            <c:if test="${empty data}">
+            </c:forEach>
+        </c:if>
+        <c:if test="${empty data}">
 
-                <div class="emptyline"></div>
-                <div class="a-div">
-                    <div class="emptyCart">
-                        <span> 텅 ~ </span>
-                    </div>
+            <div class="emptyline"></div>
+            <div class="a-div">
+                <div class="emptyCart">
+                    <span> 텅 ~ </span>
                 </div>
-            </c:if>
+            </div>
+        </c:if>
+    </div>
+
+    <div class="isLine">
+        <div class="goods-count">
+            <span class="productCount"></span>
         </div>
-
-        <div class="isLine">
-            <div class="goods-count">
-                <span class="productCount"></span>
-            </div>
-            <div class="free-delivery">
-                <span class="feePrice">※ 3만원 이상 구매시 무료배송 ※</span>
-            </div>
-        </div>
-
-
-        <div class="pay-count">
-            <div class="pay-count-div">
-                <div class="pay-number">
-                    <span class="productPay"></span>
-                    <span>+</span>
-                    <span class="fee"></span>
-                    <span>=</span>
-                    <span class="allPrice"></span>
-                </div>
-                <div class="pay-text">
-                    <span>상품금액</span>
-                    <span></span>
-                    <span>배송비</span>
-                    <span></span>
-                    <span>총 금액</span>
-                </div>
-            </div>
+        <div class="free-delivery">
+            <span class="feePrice">※ 3만원 이상 구매시 무료배송 ※</span>
         </div>
     </div>
 
-    <div class="order-btn">
-        <button class="btn btn-outline-success order-button mt-5" onclick="location.href='/user/pay'">주문하기</button>
+
+    <div class="pay-count">
+        <div class="pay-count-div">
+            <div class="pay-number">
+                <span class="productPay"></span>
+                <span>+</span>
+                <span class="fee"></span>
+                <span>=</span>
+                <span class="allPrice"></span>
+            </div>
+            <div class="pay-text">
+                <span>상품금액</span>
+                <span></span>
+                <span>배송비</span>
+                <span></span>
+                <span>총 금액</span>
+            </div>
+        </div>
     </div>
+</div>
+
+<div class="order-btn">
+    <button class="btn btn-outline-success order-button mt-5" onclick="orderBtn()">주문하기</button>
+</div>
 <br />
 <br />
 <br />

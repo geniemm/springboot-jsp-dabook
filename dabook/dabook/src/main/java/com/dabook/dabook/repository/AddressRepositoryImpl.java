@@ -20,9 +20,9 @@ public class AddressRepositoryImpl {
     @Query
     public List<Address> addressList(Long no){
         return em.createQuery(
-                "select a from Address a " +
-                "left join a.users " +
-                "where a.users.no = :no", Address.class)
+                        "select a from Address a " +
+                                "left join a.users " +
+                                "where a.users.no = :no", Address.class)
                 .setParameter("no", no)
                 .getResultList();
     }
