@@ -39,15 +39,14 @@
                     <div class="review-content" id="review-${reviews.no}">
                         <div class="review-text">${reviews.reviewContent}</div>
                         <div class="userSpace">
-                            <c:forEach var="r" items="${reviews}">
-                                <c:if test="${reviews.users.userId eq uId})">
-                            <div class="delModSpace">
-                                <button class="modBtn" type="button" onclick="openEditModal('${reviews.reviewContent}', ${reviews.rating})">수정
-                                </button>
-                                <button class="delBtn" type="button" onclick="delReview(${reviews.no})">삭제</button>
-                            </div>
-                                </c:if>
-                            </c:forEach>
+                            <c:if test="${reviews.users.userId eq uId}">
+                                <div class="delModSpace">
+<%--                                    <button class="modBtn" type="button" data-bs-backdrop="static"--%>
+<%--                                            onclick="openEditModal('${reviews.reviewContent}', ${reviews.rating}, ${reviews.no})">수정--%>
+<%--                                    </button>--%>
+                                    <button class="delBtn" type="button" onclick="delReview(${reviews.no})">삭제</button>
+                                </div>
+                            </c:if>
                         </div>
                     </div>
                 </div>
@@ -55,8 +54,9 @@
         </div>
     </div>
     <div class="write-review">
+        <input type="hidden" id="uId" name="uId" value="${uId}">
         <button type="button" class="reviewBtn"
-                data-bs-toggle="modal" data-bs-target="#WriteReview">리뷰작성
+                data-bs-toggle="modal" data-bs-target="#WriteReview" onclick="openWriteReviewModal('${param.no}')">리뷰작성
         </button>
     </div>
     <!--Modal -->
@@ -67,6 +67,7 @@
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h5 class="modal-title" id="WriteReviewLabel"><b>리뷰 작성</b></h5>
+
                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                 </div>
@@ -122,8 +123,10 @@
             console.error('오류발생');
         }
     }
-    /*리뷰 작성*/
 
+
+
+    /*리뷰 작성*/
     const ratingStars = [...document.getElementsByClassName("rating__star")];
     let selectedStarts = 0;
 
@@ -143,6 +146,35 @@
 
     executeRating(ratingStars);
 
+    function openWriteReviewModal(bookNo) {
+        var userId = $("#uId").val();
+        console.log("아이디:" + userId);
+        if (!userId) {
+            alert("로그인 먼저 해주세요");
+            location.href = "/dabook/main/login";
+        } else {
+            // 여기에 모달을 열기 위한 코드를 추가
+            $.ajax({
+                type: 'GET',
+                url: '/dabook/review/checkByUser',
+                contentType: "application/x-www-form-urlencoded",
+                data: {no: bookNo},
+                success: function (response) {
+                    if (response.hasReview) {
+                        alert("등록된 리뷰가 있습니다.");
+                        location.reload(true);
+                    } else {
+                        var myModal = new bootstrap.Modal(document.getElementById('WriteReview'));
+                        myModal.show();
+                    }
+                },
+                error: function (error) {
+                    console.error("리뷰 확인 실패", error);
+                }
+            });
+        }
+    }
+
     function submitReview() {
         var no = $("#bookNo").val();
         var reviewContent = $("#reviewContent").val();
@@ -151,19 +183,20 @@
         console.log("리뷰:" + reviewContent);
         console.log("별점:" + selectedStarts);
 
-        var reviewRequest = {
-            no: no,
-            reviewContent: reviewContent,
-            rating: selectedStarts,
-        };
+        // 리뷰 등록 AJAX 호출
+        var url = '/dabook/review';
 
         $.ajax({
             type: "POST",
-            url: '/dabook/review?no=' + no,
-            contentType: "application/json",
-            data: JSON.stringify(reviewRequest),
+            url: url,
+            data: {
+                no: no,
+                reviewContent: reviewContent,
+                rating: selectedStarts
+            },
             success: function (response) {
                 closeModalReload();
+
                 console.log("리뷰 등록 성공", response);
             },
             error: function (error) {
@@ -174,7 +207,9 @@
     }
 
     function closeModalReload() {
+
         $('#WriteReview').modal('hide');
+
         location.reload(true);
     }
 
@@ -200,55 +235,28 @@
         }
     }
 
-    /*수정 버튼*/
-    /* 수정 및 새 리뷰 작성 모달 열기 */
-    function openEditModal(existingContent, existingStars) {
-        // 모달 창의 리뷰 내용과 별점 업데이트
-        document.getElementById('reviewContent').value = existingContent || ''; // 기존 내용이 있으면 가져오고, 없으면 빈 문자열로 초기화
+    // /*수정 버튼*/
+    // /* 수정 및 새 리뷰 작성 모달 열기 */
+    // function openEditModal(existingContent, existingStars, reviewNo) {
+    //     // 모달 창의 리뷰 내용과 별점 업데이트
+    //     $("#editReviewContent").val(existingContent || ''); // 기존 내용이 있으면 가져오고, 없으면 빈 문자열로 초기화
+    //
+    //     // 선택된 별점 업데이트
+    //     for (let i = 0; i < ratingStars.length; ++i) {
+    //         ratingStars[i].className = i < existingStars ? "rating__star fas fa-star" : "rating__star far fa-star";
+    //     }
+    //     selectedStarts = existingStars || 0; // 기존 별점이 있으면 가져오고, 없으면 0으로 초기화
+    //
+    //     // 리뷰 번호를 모달에 저장
+    //     $("#editReviewNo").val(reviewNo);
+    //
+    //     // 부트스트랩 5에서 모달 초기화
+    //     var editReviewModal = new bootstrap.Modal(document.getElementById('EditReview'), {
+    //         backdrop: 'static', // 뒷배경 클릭시 모달이 닫히지 않도록 설정
+    //     });
+    //     editReviewModal.show();
+    // }
 
-        // 선택된 별점 업데이트
-        selectedStarts = existingStars || 0; // 기존 별점이 있으면 가져오고, 없으면 0으로 초기화
 
-        // 별점 표시 업데이트
-        for (let i = 0; i < ratingStars.length; ++i) {
-            ratingStars[i].className = i < selectedStarts ? "rating__star fas fa-star" : "rating__star far fa-star";
-        }
-
-        // 모달 창 열기
-        var myModal = new bootstrap.Modal(document.getElementById('WriteReview'));
-        myModal.show();
-    }
-
-
-    // 모달에서 리뷰 내용 및 별점 업데이트 후 제출
-    function updateReviewContent() {
-        var no = $("#bookNo").val();
-        var reviewContent = $("#reviewContent").val();
-
-        console.log("no:" + no);
-        console.log("리뷰:" + reviewContent);
-        console.log("별점:" + selectedStarts);
-
-        var reviewRequest = {
-            no: no,
-            reviewContent: reviewContent,
-            rating: selectedStarts,
-        };
-
-        $.ajax({
-            type: "POST",
-            url: '/dabook/review?no=' + no,
-            contentType: "application/json",
-            data: JSON.stringify(reviewRequest),
-            success: function (response) {
-                closeModalReload();
-                console.log("리뷰 등록 성공", response);
-            },
-            error: function (error) {
-                console.error("리뷰 등록 실패", error);
-                // 실패 시 수행할 동작 추가
-            }
-        });
-    }
 </script>
 </html>

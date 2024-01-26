@@ -3,6 +3,8 @@ package com.dabook.dabook.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.util.List;
+
 import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
@@ -19,5 +21,7 @@ public class OrderHistory {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name="book_no",nullable = false)
     private Book books;
+
+
 
 }
