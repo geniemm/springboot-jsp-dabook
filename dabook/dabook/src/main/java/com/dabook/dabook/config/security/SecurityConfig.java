@@ -1,7 +1,8 @@
 package com.dabook.dabook.config.security;
 
 import com.dabook.dabook.config.auth.RememberMeService;
-import com.dabook.dabook.config.auth.UserDetailsService;
+import com.dabook.dabook.config.auth.PrincipalDetailsService;
+import com.dabook.dabook.config.oauth.PrincipalOauth2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +15,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Autowired UserDetailsService userDetailsService;
+    @Autowired
+    PrincipalDetailsService userDetailsService;
+    @Autowired private PrincipalOauth2UserService principalOauth2UserService;
 
     @Bean
     public RememberMeService rememberMeService(){
@@ -23,7 +26,7 @@ public class SecurityConfig {
 
     //비밀번호 암호화
     @Bean
-    public BCryptPasswordEncoder encode(){
+    public static BCryptPasswordEncoder encode(){
         return new BCryptPasswordEncoder();
     }
 
@@ -48,6 +51,7 @@ public class SecurityConfig {
                             .failureHandler(loginFailHandler());
 
                 });
+
         http
                 .rememberMe((remember)-> {
                     remember.rememberMeParameter("remember")
@@ -57,12 +61,20 @@ public class SecurityConfig {
 
                 });
 
-
-
         http
                 .logout((logout)->{
                     logout.logoutUrl("/dabook/main/logout")
                             .logoutSuccessUrl("/dabook");
+
+                });
+
+        http
+                .oauth2Login((oauth) -> {
+                    oauth.loginPage("/dabook/main/login")
+                            .defaultSuccessUrl("/dabook/main/success")
+                            .userInfoEndpoint((user)->{
+                                user.userService(principalOauth2UserService);
+                            });
 
                 });
 

@@ -107,6 +107,7 @@ public class UserService {
         String username =  userInfo.get(0).getUsername();
         String email =  userInfo.get(0).getEmail();
         String phone = userInfo.get(0).getPhone();
+        String provider = userInfo.get(0).getProvider();
 
 
         Map<String, String> info = new HashMap<>();
@@ -115,6 +116,7 @@ public class UserService {
         info.put("username", username);
         info.put("email", email);
         info.put("phone", phone);
+        info.put("provider", provider);
 
         return info;
     }

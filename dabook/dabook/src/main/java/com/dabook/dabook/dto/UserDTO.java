@@ -13,6 +13,7 @@ public class UserDTO {
     private String userId;
     private String password;
     private String email;
+    private String provider;
     private GuestCheck guestCheck;
 
     public UserDTO(){ }
