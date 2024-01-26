@@ -17,6 +17,7 @@
     var CartData = ${list};
     var UN = 0;
 
+    console.log(CartData);
 
     // 페이지 로드시 바로 적용
     window.onload = function (){
@@ -124,13 +125,13 @@
         itemAll();
 
         console.log('실행: ', index);
-        var cartItem = document.querySelectorAll('.a-div')[index];
+        var cartBook = document.querySelectorAll('.a-div')[index];
 
-        let updateTotal = cartItem.querySelector('.total-price');
+        let updateTotal = cartBook.querySelector('.total-price');
         updateTotal.textContent = CartData[index].total + ' 원';
         console.log("docUpdateTotal: ", CartData[index].total);
 
-        let updateCount = cartItem.querySelector('.count');
+        let updateCount = cartBook.querySelector('.count');
         updateCount.textContent = ' ' + CartData[index].bookCount + ' ';
     }
 
@@ -188,9 +189,9 @@
     // doc 삭제
     function  docItemDelete(index){
         console.log('해당 doc index: ', index);
-        var cartItem = document.querySelectorAll('.a-div')[index];
-        if (cartItem) {
-            cartItem.remove();
+        var cartBook = document.querySelectorAll('.a-div')[index];
+        if (cartBook) {
+            cartBook.remove();
             console.log('doc 삭제 성공');
             itemAll();                      // chk 된 상품 정보
         }else {
@@ -272,10 +273,13 @@
                 <div class="a-div">
                     <input type="checkbox" class="chkBuy" onclick="itemAll()" checked >
                     <div>
-                        <img class="img-class" src="/images/cartImage/곰돌이.jpg" alt="- 이미지 -">
+                        <button type="submit" onclick="location.href=`/dabook/book?no=${data.bookNo}`" style="border: none;background: none">
+                        <img class="img-class" src="/images/bookImage/book${data.bookNo}.jpg" alt="- 이미지 -" style="width:140px">
+                    </button>
                     </div>
                     <div class="goods-title">
-                        <span class="title-fontsize">${data.bookName}</span><br><br>
+                        <button type="submit" onclick="location.href=`/dabook/book?no=${data.bookNo}`" style="border: none;background: none">
+                            <span class="title-fontsize">${data.bookName}</span></button><br><br>
                         <span class="price">${data.bookPrice}</span>
                     </div>
                     <div class="volume-div">

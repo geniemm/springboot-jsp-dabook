@@ -1,9 +1,13 @@
 package com.dabook.dabook.dto;
 
+import com.dabook.dabook.entity.Book;
 import com.dabook.dabook.entity.Cart;
+import com.dabook.dabook.entity.CartBook;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 @Data
+@Slf4j
 public class CartDTO {
 
     private Long userNo;
@@ -16,6 +20,11 @@ public class CartDTO {
     private int bookCount;
     private int total;
 
+    // 무인자 생성자 추가
+    public CartDTO() {
+    }
+
+    // 기존 생성자
     public CartDTO(Cart cart) {
         userNo = cart.getUsers().getNo();
         bookNo = cart.getBooks().getNo();
@@ -26,7 +35,24 @@ public class CartDTO {
         bookPrice = cart.getBooks().getPrice();
         bookPhoto = cart.getBooks().getBookDetail().getPhoto();
         total = bookPrice * bookCount;
+        log.info("userNo: {}", userNo);
+        log.info("bookNo: {}", bookNo);
+        log.info("cartNo: {}", cartNo);
+        log.info("userId: {}", userId);
+        log.info("bookCount: {}", bookCount);
+        log.info("bookName: {}", bookName);
+        log.info("bookPrice: {}", bookPrice);
+        log.info("bookPhoto: {}", bookPhoto);
+        log.info("total: {}", total);
     }
 
+    public CartDTO(Book book, int count) {
+        bookNo = book.getNo();
+        bookName = book.getBookName();
+        bookPrice = book.getPrice();
+        bookPhoto = book.getBookDetail().getPhoto();
+        bookCount = count;
+        total = bookPrice * bookCount;
+    }
 
 }

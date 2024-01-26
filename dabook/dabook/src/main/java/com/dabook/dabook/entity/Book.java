@@ -37,6 +37,9 @@ public class Book {
     @OneToMany(mappedBy = "books")
     private List<Review> reviews = new ArrayList<>();
 
+    @OneToMany(mappedBy = "books")
+    private List<OrderHistory> orderHistories = new ArrayList<>();
+
     public void setPublishDate(LocalDateTime publishDate) {
         this.publishDate = publishDate;
     }

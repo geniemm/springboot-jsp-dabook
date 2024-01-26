@@ -3,6 +3,9 @@ package com.dabook.dabook.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
@@ -22,5 +25,25 @@ public class Cart {
     private Book books;
 
     private int count;
+
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CartBook> cartBooks = new ArrayList<>();
+
+    public Cart() {
+
+    }
+    private Cart(User users, Book book, int count){
+        this.users=users;
+        this.books=book;
+        this.count=count;
+    }
+    public static Cart createCart(User user,Book book, int count){
+        return new Cart(user,book,count);
+    }
+
+    public void changeCount(int count){
+        this.count = count;
+    }
+
 
 }

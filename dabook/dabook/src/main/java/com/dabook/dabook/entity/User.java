@@ -2,7 +2,10 @@ package com.dabook.dabook.entity;
 
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +46,7 @@ public class User {
     public User() {
 
     }
+
     public User(String userId, String password,String username, String phone, String email, GuestCheck guestCheck) {
         this.userId = userId;
         this.password = password;
