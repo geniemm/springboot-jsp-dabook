@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <jsp:include page="header.jsp" />
-<link rel="stylesheet" href="/css/main/login.css" />
+<link rel="stylesheet" href="/css/customer/login.css" />
 
 <div class="nav justify-content-center mb-5 mt-5">
     <h1>Login</h1>

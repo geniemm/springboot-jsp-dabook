@@ -2,7 +2,7 @@
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ include file="../default/style.jsp" %>
-<link rel="stylesheet" href="/css/main/order.css"/>
+<link rel="stylesheet" href="/css/customer/order.css"/>
 
 
 

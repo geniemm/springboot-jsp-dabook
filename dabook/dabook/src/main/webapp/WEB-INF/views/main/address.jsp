@@ -89,7 +89,7 @@
 <br>
 <jsp:include page="footer.jsp"/>
 
-<link rel="stylesheet" href="/css/main/address.css" />
+<link rel="stylesheet" href="/css/customer/address.css" />
 
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
