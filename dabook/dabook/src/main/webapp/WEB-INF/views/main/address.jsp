@@ -30,7 +30,7 @@
                     <div class="twoBtn">
                         <button class="btn btn-outline-primary"
                                 onclick="modiAddr(${status.index}, ${data.addressNo})"
-                                > 수정
+                        > 수정
                         </button>
 
                         <button class="btn btn-outline-secondary"
@@ -98,7 +98,7 @@
 
     window.onload = function (){
         if (addrInfo){
-           var userNo = addrInfo[0].userNo;
+            var userNo = addrInfo[0].userNo;
         }
     }
 
@@ -106,7 +106,7 @@
     function delAddr(addressNo){
         console.log("삭제할 addressNo: ", addressNo);
         $.ajax({
-            url: '/addressDel/' + addressNo,
+            url: '/dabook/user/addressDel/' + addressNo,
             type: 'delete',
             data: addressNo,
             success: function (data) {
@@ -147,7 +147,7 @@
         var delList = docChkItems();
 
         $.ajax({
-            url: '/address/chkDel',
+            url: '/dabook/user/address/chkDel',
             type: 'delete',
             contentType: 'application/json',
             data: JSON.stringify({
@@ -202,7 +202,7 @@
         var list = Data();
 
         $.ajax({
-            url: '/address/add',
+            url: '/dabook/user/address/add',
             type: 'post',
             contentType: 'application/json',
             data: JSON.stringify({
@@ -238,7 +238,7 @@
 
         console.log("session 저장: ", index);
         $.ajax({
-            url: '/address/modiNo',
+            url: '/dabook/user/address/modiNo',
             type: 'post',
             data: {
                 no : no
@@ -257,7 +257,7 @@
         var list = Data();
 
         $.ajax({
-            url: '/address/modi',
+            url: '/dabook/user/address/modi',
             type: 'post',
             contentType: 'application/json',
             data: JSON.stringify({

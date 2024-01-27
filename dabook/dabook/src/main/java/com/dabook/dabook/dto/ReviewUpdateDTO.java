@@ -1,6 +1,8 @@
 package com.dabook.dabook.dto;
 
 import com.dabook.dabook.entity.Review;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -14,9 +16,16 @@ public class ReviewUpdateDTO {
     private LocalDateTime update_date;
 
 
-    public ReviewUpdateDTO(Review review) {
-        this.reviewContent = review.getReviewContent();
-        this.rating = review.getRating();
-        this.no = review.getBooks().getNo();
+    @JsonCreator
+    public ReviewUpdateDTO(@JsonProperty("no") Long no,
+                           @JsonProperty("rating") int rating,
+                           @JsonProperty("reviewContent") String reviewContent,
+                           @JsonProperty("create_date") LocalDateTime create_date,
+                           @JsonProperty("update_date") LocalDateTime update_date) {
+        this.no = no;
+        this.rating = rating;
+        this.reviewContent = reviewContent;
+        this.create_date = create_date;
+        this.update_date = update_date;
     }
 }

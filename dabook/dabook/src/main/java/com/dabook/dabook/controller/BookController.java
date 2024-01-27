@@ -2,6 +2,7 @@ package com.dabook.dabook.controller;
 
 import com.dabook.dabook.entity.Book;
 import com.dabook.dabook.service.BookService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -42,9 +43,12 @@ public class BookController {
 
     // 책 정보 가져오기
     @GetMapping("/book")
-    public String bookInfo(Model model, @RequestParam(value = "no") Long no){
+    public String bookInfo(Model model, @RequestParam(value = "no") Long no, HttpSession httpSession){
         Book bookInfo = bookService.getBookInfo(no);
+        String userId=(String)httpSession.getAttribute("userId");
         model.addAttribute("book",bookInfo);
+        model.addAttribute("userId",userId);
+        log.info("아아디값:"+userId);
         log.info("책번호: "+bookInfo.getNo());
         return "book/bookInfo";
     }

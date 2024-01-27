@@ -101,5 +101,8 @@ public class UserService {
         return info;
     }
 
+    public User getUserById(String userId) {
+        return userRepository.findOneUser(userId);
+    }
 
 }

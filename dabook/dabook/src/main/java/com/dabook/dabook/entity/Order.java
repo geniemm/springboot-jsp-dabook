@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static jakarta.persistence.FetchType.LAZY;
 
@@ -30,4 +31,6 @@ public class Order {
     @OneToOne(fetch = LAZY, mappedBy = "orders")
     private Payment payment;
 
+    @OneToMany(mappedBy = "orders")
+    private List<OrderHistory> orderHistory;
 }

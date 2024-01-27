@@ -28,7 +28,7 @@ public class OrderService {
                 .map(UserDTO::new)
                 .collect(Collectors.toList());
     }
-    
+
     // 주문 페이지 로드 시 주문자 주소
     public List<AddressDTO> userAddress(Long no){
         List<Address> addresses = addressRepository.addressList(no);

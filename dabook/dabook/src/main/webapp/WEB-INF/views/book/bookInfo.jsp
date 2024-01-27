@@ -11,33 +11,50 @@
 </head>
 
 <script>
-    let quantity = 0;
+    let quantity = 1;
 
     function changeQuantity(amount) {
         // 수량이 음수가 되지 않도록 체크
-        if (quantity + amount >= 0) {
+        if (quantity + amount >= 1) {
             quantity += amount;
             document.getElementById('quantity').innerText = quantity;
         }
     }
 
-    $.ajax({
-        url: "/cart",
-        method: "POST",
-        data: {
-            quantity: parseInt($("#quantity").text())
-        },
-        success: function (response) {
-            console.log("Ajax request successful:", response);
-        },
-        error: function (error) {
-            console.error("Ajax request failed:", error);
-        }
-    });
+    function addToCart(bookNo) {
+        var userId = $("#userId").val();
+        var bookCount = quantity;
+
+        console.log("userId:" + userId);
+        console.log("bookNo:" + bookNo);
+        console.log("bookCount:" + bookCount);
+
+        // AJAX를 사용하여 서버에 장바구니에 추가할 정보 전송
+        $.ajax({
+            type: "POST",
+            url: "/dabook/user/cart",
+            data: {
+                userId: userId,
+                bookNo: bookNo,
+                bookCount: bookCount
+            },
+            contentType: "application/x-www-form-urlencoded", // 데이터 전송 방식 명시
+
+            success: function (response) {
+                alert("상품을 담았습니다.");
+                location.href = "/dabook/user/cart?id=" + userId;
+                console.log("장바구니에 추가되었습니다.", response);
+            },
+            error: function (xhr, status, error) {
+                console.error("AJAX 요청 실패:", status, error);
+                alert("장바구니 추가에 실패했습니다. " + xhr.responseText);
+            }
+        });
+    }
 </script>
 
 <link rel="stylesheet" href="/css/book/bookInfo.css"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 <body>
 <jsp:include page="../main/header.jsp" />
 <div class="bookInfoSpace">
@@ -57,11 +74,12 @@
         <div class="count">
             주문수량&nbsp;&nbsp;
             <button class="btn-count" onclick="changeQuantity(-1)">-</button>&nbsp;&nbsp;&nbsp;
-            <span id="quantity">0</span>&nbsp;&nbsp;&nbsp;
+            <span id="quantity">1</span>&nbsp;&nbsp;&nbsp;
             <button class="btn-count" onclick="changeQuantity(1)">+</button>
         </div>
         <div class="cart">
-            <button class="cartBtn" onclick="">장바구니</button>&nbsp;&nbsp;
+            <input type="hidden" id="userId" name="userId" value="${userId}">
+            <button class="cartBtn" onclick="addToCart('${book.no}')">장바구니</button>&nbsp;&nbsp;
             <button class="payBtn" onclick="">바로구매</button>
         </div>
     </div>

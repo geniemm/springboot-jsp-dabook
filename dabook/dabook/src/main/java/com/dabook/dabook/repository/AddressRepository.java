@@ -25,7 +25,7 @@ public interface AddressRepository extends JpaRepository<Address, Long> {
     @Query(value = "insert into Address (user_no, zipcode, city, street) " +
             "values (:userNo, :zipcode, :address, :detail)", nativeQuery = true)
     void addrAdd(@Param("userNo") Long userNo, @Param("zipcode") String zipcode,
-                        @Param("address") String address, @Param("detail") String detail);
+                 @Param("address") String address, @Param("detail") String detail);
 
     @Modifying
     @Query("update Address a set a.zipcode= :zipcode, a.city= :address, a.street= :detail " +
