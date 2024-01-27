@@ -37,4 +37,9 @@ public class BookService {
         return bookRepository.findNowBook();
     }
 
+    @Transactional(readOnly = true) // 찾는 책
+    public List<Book> getSearchBook(String data){
+        return bookRepository.findSearchBook(data);
+    }
+
 }

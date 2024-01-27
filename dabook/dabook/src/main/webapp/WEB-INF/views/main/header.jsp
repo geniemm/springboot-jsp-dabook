@@ -7,12 +7,20 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <title>DABOOK</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
 
-    <title>DABOOK</title>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function infoAlert(){
+            alert("로그인 먼저 해주세요");
+            window.location = '/dabook/main/login';
+        }
+    </script>
+
 </head>
 <body >
 
@@ -82,18 +90,11 @@
 
                 </ul>
                 SEARCH &nbsp;
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <form class="d-flex" action="/dabook/searchBook" method="get">
+                    <input class="form-control me-2" id="searchInput" name="data" type="text" placeholder="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>
         </div>
     </nav>
 </div>
-
-<script>
-    function infoAlert(){
-        alert("로그인 먼저 해주세요");
-        window.location = '/dabook/main/login';
-    }
-</script>

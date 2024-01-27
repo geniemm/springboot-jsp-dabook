@@ -22,4 +22,8 @@ public interface BookRepository extends JpaRepository<Book,Long> {
     @Query("select b from Book b order by b.publishDate desc")
     List<Book> findNowBook();
 
+    // SearchBook
+    @Query("select b from Book b where b.bookName like %:data% or b.author like %:data% or b.publisher like %:data%")
+    List<Book> findSearchBook(@Param("data") String data);
+
 }
