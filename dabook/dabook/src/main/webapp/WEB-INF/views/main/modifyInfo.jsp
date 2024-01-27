@@ -2,13 +2,13 @@
 
 <jsp:include page="header.jsp" />
 
-
+<link rel="stylesheet" href="/css/main/modifyInfo.css" />
 <div class="nav justify-content-center mb-5 mt-5">
     <h1>정보 수정</h1>
 </div>
 
 <div class="nav justify-content-center">
-    <form style="width: 25rem" method="post" action="/dabook/user/modifyInfo">
+    <form style="width: 25rem" method="post" action="/dabook/user/modifyInfo" id="modiInfoForm">
         <div class="form-floating mb-2">
             <input type="text" class="form-control" id="floatingId" name="userId" value="${info.userId}" disabled />
             <label for="floatingId">ID</label>
@@ -25,6 +25,12 @@
             <input type="email" class="form-control" id="floatingEmail" name="email" value="${info.email}" />
             <label for="floatingEmail">Email</label>
         </div>
+        <div class="form-floating mb-3">
+            <!-- 이메일 중복 메세지 -->
+                <div class="message">
+                    <label id="emailResult">&emsp;</label>
+                </div>
+        </div>
 
 
         <div class="d-flex gap-5 justify-content-center">
@@ -39,6 +45,7 @@
 <br/>
 <jsp:include page="footer.jsp" />
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
 
     const onlyNumber = (target) => {
@@ -46,5 +53,34 @@
             .replace(/[^0-9]/g, '')
             .replace(/^(\d{3})(\d{4})(\d{4})$/, `$1-$2-$3`);
     }
+
+    $(document).ready(function() {
+        //이메일 중복 확인
+        $("#floatingEmail").on("input", function(){
+
+                var email = $("#floatingEmail").val();
+                console.log("email: " + email);
+
+                $.ajax({
+                    url : '/dabook/user/emailCheck',
+                    data : {
+                        email : email
+                    },
+                    type : 'POST',
+                    dataType: 'json',
+                    success : function(result){
+                        if(result == true){
+                            $("#emailResult").css("color", "black").text("사용 가능한 email 입니다.");
+                        }else{
+                            $("#emailResult").css("color", "red").text("사용 불가능한 email 입니다.");
+                            $("#floatingEmail").val('');
+                        }
+                    }
+
+                });
+
+            });
+
+    })
 
 </script>

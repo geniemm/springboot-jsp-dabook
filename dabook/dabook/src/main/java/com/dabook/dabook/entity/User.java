@@ -2,10 +2,8 @@ package com.dabook.dabook.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,9 +41,9 @@ public class User {
     @OneToMany(mappedBy = "users")
     private List<Review> review = new ArrayList<>();
 
-    public User() {
+    private String provider;
 
-    }
+    public User() {    }
 
     public User(String userId, String password,String username, String phone, String email, GuestCheck guestCheck) {
         this.userId = userId;
@@ -68,8 +66,16 @@ public class User {
         return user;
     }
 
-    public static User modiToUserEntity(String userId, String name, String phone, String email){
-        User user = new User(userId, name, phone, email);
-        return user;
+    @Builder
+    public User(String userId, String password, String username, String phone, String email, GuestCheck guestCheck, String provider){
+        this.userId = userId;
+        this.password = password;
+        this.username = username;
+        this.phone = phone;
+        this.email = email;
+        this.guestCheck = guestCheck;
+        this.provider = provider;
     }
+
+
 }

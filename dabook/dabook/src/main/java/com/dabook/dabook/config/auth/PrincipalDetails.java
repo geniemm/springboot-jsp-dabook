@@ -1,18 +1,40 @@
 package com.dabook.dabook.config.auth;
 
 import com.dabook.dabook.entity.User;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
-public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
+@Data
+public class PrincipalDetails implements UserDetails, OAuth2User {
 
     private User user;
+    private Map<String, Object> attreibutes;
 
+    @Override
+    public Map<String, Object> getAttributes() {
+        return attreibutes;
+    }
 
-    public UserDetails(User user) {
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    // 일반로그인 생성자
+    public PrincipalDetails(User user) {
         this.user = user;
+    }
+
+    // oauth - 로셜 로그인 생성자
+    public PrincipalDetails(User user, Map<String, Object> attreibutes) {
+        this.user = user;
+        this.attreibutes = attreibutes;
     }
 
     @Override
@@ -45,6 +67,8 @@ public class UserDetails implements org.springframework.security.core.userdetail
         return true;
     }
 
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> collection = new ArrayList<>();
@@ -56,4 +80,6 @@ public class UserDetails implements org.springframework.security.core.userdetail
         });
         return collection;
     }
+
+
 }

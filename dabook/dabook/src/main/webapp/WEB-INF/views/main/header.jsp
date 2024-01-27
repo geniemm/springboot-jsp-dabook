@@ -22,7 +22,6 @@
     </script>
 
 </head>
-<body >
 
 <div class="text-center mt-3 mb-5">
     <a href="/dabook">

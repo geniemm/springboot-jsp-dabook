@@ -6,6 +6,7 @@ import com.dabook.dabook.entity.GuestCheck;
 import com.dabook.dabook.entity.User;
 import com.dabook.dabook.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,7 @@ import java.util.Map;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder encode;
 
 
     //회원가입
@@ -38,7 +40,7 @@ public class UserService {
     }
 
     //회원 정보수정
-    @Transactional //String userId, String name, String phone, String email
+    @Transactional
     public String modifyInfo(String userId, String username, String phone, String email) {
 
         try {
@@ -65,8 +67,8 @@ public class UserService {
         return result;
     }
 
-    //회원가입 - email체크
-    public boolean emailCheck(String email) {
+    //db - email체크
+    public boolean email(String email) {
 
         boolean result = true;
         List<User> emailCheck = userRepository.findByEmail(email);
@@ -74,6 +76,22 @@ public class UserService {
             return result;
         }else {
             result = false;
+        }
+        return result;
+    }
+
+    //input - email체크
+    public boolean emailCheck(String email){
+        boolean result = true;
+
+        if(email.trim().isEmpty()){
+            result = false;
+        }else{
+            if(email(email)){
+                result = false;
+            }else{
+                return result;
+            }
         }
         return result;
     }
@@ -88,6 +106,7 @@ public class UserService {
         String username =  userInfo.get(0).getUsername();
         String email =  userInfo.get(0).getEmail();
         String phone = userInfo.get(0).getPhone();
+        String provider = userInfo.get(0).getProvider();
 
 
         Map<String, String> info = new HashMap<>();
@@ -96,12 +115,46 @@ public class UserService {
         info.put("username", username);
         info.put("email", email);
         info.put("phone", phone);
+        info.put("provider", provider);
 
         return info;
     }
 
+    // login user 정보
     public User getUserById(String userId) {
         return userRepository.findOneUser(userId);
     }
+
+    // 아이디 찾기
+    public List<String> findId(String email) {
+        return userRepository.findId(email);
+    }
+
+    //비밀번호 찾기(변경)
+    @Transactional
+    public void pwChange(String id, String pw) {
+        String encodePw = encode.encode(pw);
+        userRepository.updatePw(encodePw, id);
+    }
+
+    // 비밀번호 확인
+    public boolean pwCheck(String id, String password) {
+        List<User> info = userRepository.findAllByUserId(id);
+        boolean check = true;
+        if(!info.isEmpty()){
+            try {
+                if( encode.matches(password, info.get(0).getPassword()) || password.equals(info.get(0).getPassword()) ){
+                    return check;
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+        check = false;
+        return check;
+    }
+
+
 
 }
