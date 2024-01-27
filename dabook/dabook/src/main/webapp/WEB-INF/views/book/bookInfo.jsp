@@ -29,27 +29,31 @@
         console.log("bookNo:" + bookNo);
         console.log("bookCount:" + bookCount);
 
-        // AJAX를 사용하여 서버에 장바구니에 추가할 정보 전송
-        $.ajax({
-            type: "POST",
-            url: "/dabook/user/cart",
-            data: {
-                userId: userId,
-                bookNo: bookNo,
-                bookCount: bookCount
-            },
-            contentType: "application/x-www-form-urlencoded", // 데이터 전송 방식 명시
+        if(userId !== ''){
+            // AJAX를 사용하여 서버에 장바구니에 추가할 정보 전송
+            $.ajax({
+                type: "POST",
+                url: "/dabook/user/cart",
+                data: {
+                    userId: userId,
+                    bookNo: bookNo,
+                    bookCount: bookCount
+                },
+                contentType: "application/x-www-form-urlencoded",
+                success: function (response) {
+                    alert("상품을 담았습니다.");
+                    location.href = "/dabook/user/cart?id=" + userId;
+                    console.log("장바구니에 추가되었습니다.", response);
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX 요청 실패:", status, error);
+                    alert("장바구니 추가에 실패했습니다. " + xhr.responseText);
+                }
+            });
+        }else {
+            infoAlert();
+        }
 
-            success: function (response) {
-                alert("상품을 담았습니다.");
-                location.href = "/dabook/user/cart?id=" + userId;
-                console.log("장바구니에 추가되었습니다.", response);
-            },
-            error: function (xhr, status, error) {
-                console.error("AJAX 요청 실패:", status, error);
-                alert("장바구니 추가에 실패했습니다. " + xhr.responseText);
-            }
-        });
     }
 </script>
 

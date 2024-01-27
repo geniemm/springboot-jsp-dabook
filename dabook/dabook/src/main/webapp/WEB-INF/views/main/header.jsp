@@ -76,7 +76,7 @@
                         <ul class="dropdown-menu">
                             <c:choose>
                                 <c:when test="${empty userId}">
-                                    <li><a class="dropdown-item" href="/dabook/main/login" onclick="infoAlert()">회원정보</a></li>
+                                    <li><a class="dropdown-item" onclick="infoAlert()">회원정보</a></li>
                                 </c:when>
                                 <c:otherwise>
                                     <li><a class="dropdown-item" href="/dabook/user/mypage?id=${userId}">회원정보</a></li>

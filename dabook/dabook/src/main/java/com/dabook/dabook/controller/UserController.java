@@ -98,14 +98,14 @@ public class UserController {
 
     //마이페이지
     @GetMapping("/user/mypage")
-    public String mypage(@RequestParam String id, Model model){
+    public String mypage(@RequestParam("id") String id, Model model){
         model.addAttribute("info", userService.info(id));
         return "main/mypage";
     }
 
     //정보수정 페이지
     @GetMapping("/user/modifyInfo")
-    public String modifyInfo(@RequestParam String id, Model model){
+    public String modifyInfo(@RequestParam("id") String id, Model model){
         model.addAttribute("info", userService.info(id));
         return "main/modifyInfo";
     }

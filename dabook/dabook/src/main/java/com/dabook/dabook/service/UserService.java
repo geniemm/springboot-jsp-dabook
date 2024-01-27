@@ -6,7 +6,6 @@ import com.dabook.dabook.entity.GuestCheck;
 import com.dabook.dabook.entity.User;
 import com.dabook.dabook.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -149,7 +149,7 @@
     function openWriteReviewModal(bookNo) {
         var userId = $("#uId").val();
         console.log("아이디:" + userId);
-        if (!userId) {
+        if (userId !== '') {
             alert("로그인 먼저 해주세요");
             location.href = "/dabook/main/login";
         } else {

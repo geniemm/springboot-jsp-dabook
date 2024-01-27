@@ -12,6 +12,12 @@ import java.util.Optional;
 
 public interface CartRepository extends JpaRepository<Cart, Long> {
 
+    @Query("select c from Cart c " +
+            "join fetch c.users u " +
+            "join fetch c.books b " +
+            "where u.userId = :userId")
+    List<Cart> cartList(@Param("userId") String userId);
+
     // 아이디값으로 장바구니 가져오기
     @Transactional(readOnly = true)
     @Query("select c from Cart c where c.users.userId = :userId")
