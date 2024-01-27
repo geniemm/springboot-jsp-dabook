@@ -2,7 +2,6 @@ package com.dabook.dabook.dto;
 
 import com.dabook.dabook.entity.Book;
 import com.dabook.dabook.entity.Cart;
-import com.dabook.dabook.entity.CartBook;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 

@@ -106,7 +106,7 @@
     function delAddr(addressNo){
         console.log("삭제할 addressNo: ", addressNo);
         $.ajax({
-            url: '/dabook/user/addressDel/' + addressNo,
+            url: '/addressDel/' + addressNo,
             type: 'delete',
             data: addressNo,
             success: function (data) {
@@ -147,7 +147,7 @@
         var delList = docChkItems();
 
         $.ajax({
-            url: '/dabook/user/address/chkDel',
+            url: '/address/chkDel',
             type: 'delete',
             contentType: 'application/json',
             data: JSON.stringify({
@@ -202,7 +202,7 @@
         var list = Data();
 
         $.ajax({
-            url: '/dabook/user/address/add',
+            url: '/address/add',
             type: 'post',
             contentType: 'application/json',
             data: JSON.stringify({
@@ -234,11 +234,12 @@
         zipcode.value = addrInfo[index].zipcode;
         addr.value = addrInfo[index].address;
         detail.value = addrInfo[index].addressDetail;
-        let no = addrInfo[index].addressNo;
+
+        var no = addrInfo[index].addressNo;
 
         console.log("session 저장: ", index);
         $.ajax({
-            url: '/dabook/user/address/modiNo',
+            url: '/address/modiSetNo',
             type: 'post',
             data: {
                 no : no
@@ -257,7 +258,7 @@
         var list = Data();
 
         $.ajax({
-            url: '/dabook/user/address/modi',
+            url: '/address/modi',
             type: 'post',
             contentType: 'application/json',
             data: JSON.stringify({

@@ -83,7 +83,7 @@
     function countUpdate(cartNo, action, index){
         if(docCount(index, action)){
             $.ajax({
-                url: '/dabook/countUpdate/' + cartNo,
+                url: '/countUpdate/' + cartNo,
                 type: 'put',
                 data: {
                     cartNo : cartNo,
@@ -156,7 +156,7 @@
     function delCart(cartNo, index){
         console.log("삭제할 cartNo: ", cartNo);
         $.ajax({
-            url: '/dabook/delCartItem/' + cartNo,
+            url: '/delCartItem/' + cartNo,
             type: 'delete',
             data: cartNo,
             success: function (data) {
@@ -175,9 +175,13 @@
             url: '/cart/data',
             type: 'get',
             success: function (data) {
-                console.log('리로드 성공');
-                CartData = data;
-                docItemDelete(index);           // doc 삭제
+                console.log('리로드 성공', data);
+                if(data.length !== 0){
+                    CartData = data;
+                    docItemDelete(index);           // doc 삭제
+                }else {
+                    location.reload();  // page reload
+                }
             },
             error: function (err){
                 console.log('리로드 실패', err);
@@ -203,7 +207,7 @@
         var delList = docChkItems();
 
         $.ajax({
-            url: '/dabook/cart/chkDel',
+            url: '/cart/chkDel',
             type: 'delete',
             contentType: 'application/json',
             data: JSON.stringify({
@@ -296,8 +300,8 @@
                 </div>
                 </c:forEach>
             </c:if>
-            <c:if test="${empty data}">
 
+            <c:if test="${empty data}">
                 <div class="emptyline"></div>
                 <div class="a-div">
                     <div class="emptyCart">
@@ -315,7 +319,6 @@
                 <span class="feePrice">※ 3만원 이상 구매시 무료배송 ※</span>
             </div>
         </div>
-
 
         <div class="pay-count">
             <div class="pay-count-div">

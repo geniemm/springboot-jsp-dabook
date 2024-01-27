@@ -1,12 +1,9 @@
 package com.dabook.dabook.repository;
 
-import com.dabook.dabook.dto.AddressDTO;
 import com.dabook.dabook.entity.Address;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

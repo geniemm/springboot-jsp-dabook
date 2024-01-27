@@ -1,6 +1,5 @@
 package com.dabook.dabook.entity;
 
-import com.dabook.dabook.dto.AddressDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 

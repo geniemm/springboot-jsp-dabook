@@ -51,7 +51,7 @@
                 }
             });
         }else {
-            infoAlert();
+            infoAlert('/dabook/main/login');
         }
 
     }

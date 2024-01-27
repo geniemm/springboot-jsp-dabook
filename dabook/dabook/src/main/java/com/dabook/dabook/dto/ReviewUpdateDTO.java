@@ -1,6 +1,5 @@
 package com.dabook.dabook.dto;
 
-import com.dabook.dabook.entity.Review;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

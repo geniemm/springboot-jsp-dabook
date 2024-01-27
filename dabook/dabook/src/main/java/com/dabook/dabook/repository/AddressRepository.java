@@ -1,6 +1,5 @@
 package com.dabook.dabook.repository;
 
-import com.dabook.dabook.dto.AddressDTO;
 import com.dabook.dabook.entity.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

@@ -26,7 +26,7 @@ public class Cart {
 
     private int count;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cart", orphanRemoval = true)
     private List<CartBook> cartBooks = new ArrayList<>();
 
     public Cart() {

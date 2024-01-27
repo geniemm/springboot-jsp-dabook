@@ -15,9 +15,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        function infoAlert(){
-            alert("로그인 먼저 해주세요");
-            window.location = '/dabook/main/login';
+        function infoAlert(url){
+            if(${not empty userId}){
+                window.location = url;
+            }else {
+                alert("로그인 먼저 해주세요");
+                window.location="/dabook/main/login";
+            }
         }
     </script>
 
@@ -61,29 +65,17 @@
                         </c:if>
                     </li>
                     <li class="nav-item">
-                        <c:if test="${not empty userId}">
-                            <a class="nav-link" href="/dabook/user/cart?id=${userId}">CART</a>
-                        </c:if>
-                        <c:if test="${empty userId}">
-                            <a class="nav-link" onclick="infoAlert()">CART</a>
-                        </c:if>
+                        <a class="nav-link" onclick="infoAlert('/dabook/user/cart?id=${userId}')">CART</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Mypage
                         </a>
                         <ul class="dropdown-menu">
-                            <c:choose>
-                                <c:when test="${empty userId}">
-                                    <li><a class="dropdown-item" onclick="infoAlert()">회원정보</a></li>
-                                </c:when>
-                                <c:otherwise>
-                                    <li><a class="dropdown-item" href="/dabook/user/mypage?id=${userId}">회원정보</a></li>
-                                </c:otherwise>
-                            </c:choose>
+                            <li><a class="dropdown-item" onclick="infoAlert('/dabook/user/mypage?id=${userId}')">회원정보</a></li>
                             <li><a class="dropdown-item" href="#">배송조회</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/dabook/mypage/address">주소 관리</a></li>
+                            <li><a class="dropdown-item" onclick="infoAlert('/dabook/mypage/address')">주소 관리</a></li>
                         </ul>
                     </li>
 

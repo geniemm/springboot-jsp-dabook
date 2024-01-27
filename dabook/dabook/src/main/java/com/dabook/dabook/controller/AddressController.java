@@ -6,7 +6,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -99,7 +98,7 @@ public class AddressController {
     }
 
     // userNo session에 저장
-    @PostMapping("/address/modiNo")
+    @PostMapping("/address/modiSetNo")
     @ResponseBody
     public String modiNo(@RequestParam("no") String no, HttpSession session) {
         session.setAttribute("modiAddr", no);
