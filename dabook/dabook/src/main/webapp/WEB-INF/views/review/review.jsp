@@ -17,47 +17,57 @@
     <span class="sub-title"> REVIEW</span>
     <div class="review-wrap">
         <div class="review-list">
-            <c:forEach var="reviews" items="${reviews}" varStatus="loop">
-                <div class="review-item">
-                    <div class="user-info-box">
-                        <div class="left-info">
-                            <span class="info-item" id="userIdSpan-${loop.index}">${reviews.users.userId}</span>
-                            <span class="info-item">&nbsp;|&nbsp;</span>
-                            <span class="info-item" id="reviewDateSpan-${loop.index}">${reviews.reviewDate}</span>
-                        </div>
-                        <div class="right-info">
-                            <div class="rating">
-                                <c:forEach var="i" begin="1" end="${reviews.rating}">
-                                    <span class="material-icons">star</span>
-                                </c:forEach>
-                                <c:forEach var="i" begin="${reviews.rating + 1}" end="5">
-                                    <span class="material-icons">star_outline</span>
-                                </c:forEach>
+            <c:choose>
+                <c:when test="${empty reviews}">
+                    <p class="nothingReview"><b>등록된 리뷰가 없습니다! 첫번째 리뷰를 등록해보세요</b></p>
+                </c:when>
+                <c:otherwise>
+                    <c:forEach var="reviews" items="${reviews}" varStatus="loop">
+                        <div class="review-item">
+                            <div class="user-info-box">
+                                <div class="left-info">
+                                    <span class="info-item" id="userIdSpan-${loop.index}">${reviews.users.userId}</span>
+                                    <span class="info-item">&nbsp;|&nbsp;</span>
+                                    <span class="info-item"
+                                          id="reviewDateSpan-${loop.index}">${reviews.reviewDate}</span>
+                                </div>
+                                <div class="right-info">
+                                    <div class="rating">
+                                        <c:forEach var="i" begin="1" end="${reviews.rating}">
+                                            <span class="material-icons">star</span>
+                                        </c:forEach>
+                                        <c:forEach var="i" begin="${reviews.rating + 1}" end="5">
+                                            <span class="material-icons">star_outline</span>
+                                        </c:forEach>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="review-content" id="review-${reviews.no}">
+                                <div class="review-text">${reviews.reviewContent}</div>
+                                <div class="userSpace">
+                                    <c:if test="${reviews.users.userId eq uId}">
+                                        <div class="delModSpace">
+                                                <%--                                    <button class="modBtn" type="button" data-bs-backdrop="static"--%>
+                                                <%--                                            onclick="openEditModal('${reviews.reviewContent}', ${reviews.rating}, ${reviews.no})">수정--%>
+                                                <%--                                    </button>--%>
+                                            <button class="delBtn" type="button" onclick="delReview(${reviews.no})">삭제
+                                            </button>
+                                        </div>
+                                    </c:if>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="review-content" id="review-${reviews.no}">
-                        <div class="review-text">${reviews.reviewContent}</div>
-                        <div class="userSpace">
-                            <c:if test="${reviews.users.userId eq uId}">
-                                <div class="delModSpace">
-<%--                                    <button class="modBtn" type="button" data-bs-backdrop="static"--%>
-<%--                                            onclick="openEditModal('${reviews.reviewContent}', ${reviews.rating}, ${reviews.no})">수정--%>
-<%--                                    </button>--%>
-                                    <button class="delBtn" type="button" onclick="delReview(${reviews.no})">삭제</button>
-                                </div>
-                            </c:if>
-                        </div>
-                    </div>
-                </div>
-            </c:forEach>
+                    </c:forEach>
+                </c:otherwise>
+            </c:choose>
         </div>
     </div>
     <div class="write-review">
         <input type="hidden" id="uId" name="uId" value="${uId}">
-        <button type="button" class="reviewBtn"
-                data-bs-toggle="modal" data-bs-target="#WriteReview" onclick="openWriteReviewModal('${param.no}')">리뷰작성
-        </button>
+        <input type="hidden" id="orderedCheck" name="orderedCheck" value="${orderedCheck}">
+            <button type="button" class="reviewBtn" data-bs-toggle="modal" data-bs-target="#WriteReview" onclick="openWriteReviewModal('${param.no}')">
+                리뷰작성
+            </button>
     </div>
     <!--Modal -->
     <div class="modal fade" id="WriteReview" tabindex="-1"
@@ -125,7 +135,6 @@
     }
 
 
-
     /*리뷰 작성*/
     const ratingStars = [...document.getElementsByClassName("rating__star")];
     let selectedStarts = 0;
@@ -148,6 +157,7 @@
 
     function openWriteReviewModal(bookNo) {
         var userId = $("#uId").val();
+
         console.log("아이디:" + userId);
         if (!userId) {
             alert("로그인 먼저 해주세요");
@@ -163,7 +173,11 @@
                     if (response.hasReview) {
                         alert("등록된 리뷰가 있습니다.");
                         location.reload(true);
-                    } else {
+                    }else if(!response.hasOrderedBook){
+                        alert("구매이력이 없습니다. 먼저 책을 구매해주세요!");
+                        location.reload(true);
+                    }
+                    else {
                         var myModal = new bootstrap.Modal(document.getElementById('WriteReview'));
                         myModal.show();
                     }

@@ -22,6 +22,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User saveAndFlush(User user);
 
+
     List<User> findAllByUserId(String id);
 
     @Modifying

@@ -82,7 +82,7 @@ public class UserService {
     //마이페이지
     public Map<String, String> info(String id) {
 
-        List<User> userInfo = userRepository.findAllByUserId(id);
+        List<User> userInfo = userRepository.findByUserId(id);
 
         String userId = userInfo.get(0).getUserId();
         String password =  userInfo.get(0).getPassword();
