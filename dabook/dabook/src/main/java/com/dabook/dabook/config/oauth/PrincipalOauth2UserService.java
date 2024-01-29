@@ -40,7 +40,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
             oAuth2UserInfo = new NaverUserInfo((Map)oAuth2User.getAttributes().get("response") );
         }
 
-        String userId = oAuth2UserInfo.getProvider() + "-" + oAuth2UserInfo.getUsername();
+        String userId = oAuth2UserInfo.getProvider() + "-" + oAuth2UserInfo.getProviderId();
         String password = SecurityConfig.encode().encode(userId);
         String username = oAuth2UserInfo.getUsername();
         String email = oAuth2UserInfo.getEmail();
