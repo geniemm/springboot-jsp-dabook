@@ -1,13 +1,13 @@
-.naver{
-    width: 40px
-}
 .google{
-    height: 40px;
+    width: 35px;
+    background-color: white;
+}
+.naver{
+    width: 35px;
+    background-color: white;
 }
 .login{
-    display: flex;
-}
-.social{
     border: none;
     background-color: white;
+    border-radius: 70%;
 }

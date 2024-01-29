@@ -6,7 +6,7 @@
 <html>
 <%@ include file="../default/style.jsp"%>
 <head>
-    <link rel="stylesheet" href="/css/pay.css" />
+    <link rel="stylesheet" href="/css/customer/pay.css" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>결제</title>
 

@@ -38,7 +38,16 @@
 
 
         <div class="nav justify-content-end mb-5">
+<<<<<<<<< Temporary merge branch 1
             <button type="button" class="btn btn-outline-secondary" style="width: 13rem" onclick="location.href='/dabook/user/modifyInfo?id=${userId}'">
+=========
+            <button
+                type="button"
+                class="btn btn-outline-secondary"
+                style="width: 13rem"
+                onclick="location.href='/dabook/modifyInfo'"
+            >
+>>>>>>>>> Temporary merge branch 2
                 정보 수정
             </button>
         </div>

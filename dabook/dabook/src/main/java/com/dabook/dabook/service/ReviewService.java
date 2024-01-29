@@ -4,7 +4,6 @@ import com.dabook.dabook.dto.ReviewUpdateDTO;
 import com.dabook.dabook.entity.Review;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service

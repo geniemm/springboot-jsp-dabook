@@ -36,7 +36,11 @@
 
         <div class="d-flex gap-5 justify-content-center mb-5">
             <a href="#" class="link-secondary link-underline link-underline-opacity-0">ID/Password 찾기</a>
+<<<<<<<<< Temporary merge branch 1
             <a href="/dabook/main/joinForm" class="link-secondary link-underline link-underline-opacity-0">Join</a>
+=========
+            <a href="/dabook/join" class="link-secondary link-underline link-underline-opacity-0">Join</a>
+>>>>>>>>> Temporary merge branch 2
         </div>
     </form>
 
