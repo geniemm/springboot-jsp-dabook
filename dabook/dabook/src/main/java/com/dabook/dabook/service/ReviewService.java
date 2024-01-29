@@ -8,6 +8,6 @@ import java.util.Optional;
 
 @Service
 public interface ReviewService {
-//    Review updateReview(Long reviewNo, ReviewUpdateDTO reviewUpdateDTO ,String userId);
+    // 작성한 리뷰있는지 확인
     boolean hasReviewByUserAndBook(String userId, Long bookNo);
 }

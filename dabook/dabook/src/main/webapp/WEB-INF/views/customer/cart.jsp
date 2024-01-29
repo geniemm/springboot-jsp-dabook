@@ -84,7 +84,7 @@
     function countUpdate(cartNo, action, index){
         if(docCount(index, action)){
             $.ajax({
-                url: '/dabook/countUpdate/' + cartNo,
+                url: '/countUpdate/' + cartNo,
                 type: 'put',
                 data: {
                     cartNo : cartNo,
@@ -157,7 +157,7 @@
     function delCart(cartNo, index){
         console.log("삭제할 cartNo: ", cartNo);
         $.ajax({
-            url: '/dabook/delCartItem/' + cartNo,
+            url: '/delCartItem/' + cartNo,
             type: 'delete',
             data: cartNo,
             success: function (data) {
@@ -204,7 +204,7 @@
         var delList = docChkItems();
 
         $.ajax({
-            url: '/dabook/cart/chkDel',
+            url: '/cart/chkDel',
             type: 'delete',
             contentType: 'application/json',
             data: JSON.stringify({

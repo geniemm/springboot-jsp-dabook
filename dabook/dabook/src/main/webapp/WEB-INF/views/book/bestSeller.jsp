@@ -18,26 +18,26 @@
         가장 많이 판매된 도서 순위입니다.</h3></div>
 <div class="bannerSpace">
     <div class="w3-content">
-        <c:forEach var="book" items="${books}" varStatus="b" begin="0" end="2">
+        <c:forEach var="banner" items="${banner}" varStatus="b" begin="0" end="2">
             <div class="mainContent">
                 <c:if test="${b.index == 0}">
-                    <a href="/dabook/book?no=${book.no}" class="nowBookInfo">
-                        <img class="mySlides" src="/images/bookImage/book${book.no}.jpg"></a>
+                    <a href="/dabook/book?no=${banner.no}" class="nowBookInfo">
+                        <img class="mySlides" src="/images/bookImage/book${banner.no}.jpg"></a>
                     <div class="bookInfoSpace">
-                        <div class="bookName"><b>${book.bookName}</b></div>
-                        <div class="authorAndPublisher">${book.author} · ${book.publisher}</div>
-                        <div class="bookPrice">${book.price}원</div>
+                        <div class="bookName"><b>${banner.bookName}</b></div>
+                        <div class="authorAndPublisher">${banner.author} · ${banner.publisher}</div>
+                        <div class="bookPrice">${banner.price}원</div>
                         <div class="bookReference"><b>책을 나타내는 문구</b><br>
                             <p>세상과어쩌고저쩌고저쩌고</p></div>
                     </div>
                 </c:if>
                 <c:if test="${b.index != 0}">
-                    <a href="/dabook/book?no=${book.no}" class="nowBookInfo">
-                        <img class="mySlides" src="/images/bookImage/book${book.no}.jpg" style="display: none"></a>
+                    <a href="/dabook/book?no=${banner.no}" class="nowBookInfo">
+                        <img class="mySlides" src="/images/bookImage/book${banner.no}.jpg" style="display: none"></a>
                     <div class="bookInfoSpace" style="display: none">
-                        <div class="bookName"><b>${book.bookName}</b></div>
-                        <div class="authorAndPublisher">${book.author} · ${book.publisher}</div>
-                        <div class="bookPrice">${book.price}원</div>
+                        <div class="bookName"><b>${banner.bookName}</b></div>
+                        <div class="authorAndPublisher">${banner.author} · ${banner.publisher}</div>
+                        <div class="bookPrice">${banner.price}원</div>
                         <div class="bookReference"><b>내마음에도 체력이 필요해</b><br>
                             <p>정신과 전문의 윤횽균저자가 어쩌고저쩌고 추천하는책!</p></div>
                     </div>
@@ -45,9 +45,9 @@
             </div>
         </c:forEach>
         <div class="w3-row-padding w3-section">
-            <c:forEach var="book" items="${books}" varStatus="b" begin="0" end="2">
+            <c:forEach var="banner" items="${banner}" varStatus="b" begin="0" end="2">
                 <div class="w3-col s4">
-                    <img class="demo w3-opacity w3-hover-opacity-off" src="/images/bookImage/book${book.no}.jpg" style="height: 200px; width: 140px" onclick="currentDiv(${b.index + 1})">
+                    <img class="demo w3-opacity w3-hover-opacity-off" src="/images/bookImage/book${banner.no}.jpg" style="height: 200px; width: 140px" onclick="currentDiv(${b.index + 1})">
                 </div>
             </c:forEach>
         </div>
@@ -74,6 +74,27 @@
                     </div>
                 </c:if>
             </c:forEach>
+        </div>
+    </div>
+    <!-- Pagination -->
+    <div class="bottomSpace">
+        <div class="pagination" style="text-align:center">
+            <c:if test="${currentPage > 1}">
+                <a href="/dabook/bestSeller?page=${currentPage - 2}&size=${size}" style="border: none">&laquo;</a>
+            </c:if>
+            <c:forEach var="i" begin="1" end="${totalPages}">
+                <c:choose>
+                    <c:when test="${currentPage eq i}">
+                        <a class="active" href="#">${i}</a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="/dabook/bestSeller?page=${i-1}&size=${size}">${i}</a>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+            <c:if test="${currentPage < totalPages}">
+                <a href="/dabook/bestSeller?page=${currentPage}&size=${size}" style="border: none">&raquo;</a>
+            </c:if>
         </div>
     </div>
 </div>
@@ -106,5 +127,20 @@
         dots[slideIndex-1].className += " w3-opacity-off";
         bookInfo[slideIndex-1].style.display = "block"; // 선택된 책 정보 표시
     }
+</script>
+<script>
+    // 좌측 화살표 클릭 시 이전 페이지로 이동
+    document.querySelector('.pagination a[href*="page=' + (currentPage - 1) + '"]').onclick = function () {
+        if (currentPage >= 0) {
+            window.location.href = '/dabook/bestSeller?page=' + (currentPage - 1) + '&size=' + ${size};
+        }
+    };
+
+    // 우측 화살표 클릭 시 다음 페이지로 이동
+    document.querySelector('.pagination a[href*="page=' + (currentPage + 1) + '"]').onclick = function () {
+        if (currentPage <= totalPages - 1) {
+            window.location.href = '/dabook/bestSeller?page=' + (currentPage + 1) + '&size=' + ${size};
+        }
+    };
 </script>
 </html>

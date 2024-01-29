@@ -30,9 +30,9 @@ public class ReviewServiceImpl implements ReviewService {
     private final UserRepository userRepository;
 
 
+    // 리뷰 리스트 가져오기
     @Transactional(readOnly = true)
     public List<Review> getReviewsByBookNo(Long no) {
-
         return reviewRepository.findReviewsByBookNo(no);
     }
 
