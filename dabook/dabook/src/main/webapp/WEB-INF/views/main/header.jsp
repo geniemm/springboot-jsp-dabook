@@ -17,32 +17,19 @@
 <body >
 
 <div class="text-center mt-3 mb-5">
-<<<<<<<<< Temporary merge branch 1
-<<<<<<<<< Temporary merge branch 1
-    <a href="/">
-        <img src="/images/DABOOK.jpg" class="rounded" alt="asdf" width="15%" >
-=========
     <a href="/dabook">
-=========
-    <a href="#">
->>>>>>>>> Temporary merge branch 2
         <img src="/images/DABOOK.jpg"
              class="rounded"
              alt="asdf"
              width="15%"
         >
->>>>>>>>> Temporary merge branch 2
     </a>
 </div>
 
 <div>
     <nav class="navbar navbar-expand-lg mt-3 mb-5">
         <div class="container-xl">
-<<<<<<<<< Temporary merge branch 1
-            <a class="navbar-brand" href="#">DABOOK</a>
-=========
             <a class="navbar-brand" href="/dabook">DABOOK</a>
->>>>>>>>> Temporary merge branch 2
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -73,32 +60,26 @@
                         <c:if test="${empty userId}">
                             <a class="nav-link" onclick="infoAlert()">CART</a>
                         </c:if>
->>>>>>>>> Temporary merge branch 2
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Mypage
                         </a>
                         <ul class="dropdown-menu">
-<<<<<<<<< Temporary merge branch 1
-<<<<<<<<< Temporary merge branch 1
-                            <li><a class="dropdown-item" href="/dabook/user/mypage?id=${userId}">회원정보</a></li>
-=========
-                            <li><a class="dropdown-item" href="/dabook/mypage">회원정보</a></li>
->>>>>>>>> Temporary merge branch 2
-=========
                             <c:choose>
                                 <c:when test="${empty userId}">
                                     <li><a class="dropdown-item" href="/dabook/main/login" onclick="infoAlert()">회원정보</a></li>
+                                    <li><a class="dropdown-item" href="/dabook/main/login" onclick="infoAlert()">구매내역</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/dabook/main/login" onclick="infoAlert()">주소 관리</a></li>
                                 </c:when>
                                 <c:otherwise>
                                     <li><a class="dropdown-item" href="/dabook/user/mypage?id=${userId}">회원정보</a></li>
+                            <li><a class="dropdown-item" href="/dabook/user/order/history?id=${userId}">구매내역</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/dabook/user/mypage/address">주소 관리</a></li>
                                 </c:otherwise>
                             </c:choose>
->>>>>>>>> Temporary merge branch 2
-                            <li><a class="dropdown-item" href="#">배송조회</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/dabook/mypage/address">주소 관리</a></li>
                         </ul>
                     </li>
 
@@ -112,6 +93,7 @@
         </div>
     </nav>
 </div>
+
 <script>
     function infoAlert(){
         alert("로그인 먼저 해주세요");

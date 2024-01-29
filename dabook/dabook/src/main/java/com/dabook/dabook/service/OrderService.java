@@ -50,17 +50,20 @@ public class OrderService {
                 .collect(Collectors.toList());
 
     }
-
+    
+    //구매내역가져오기
     public List<Order> getHistory(String id){
         List<Order> orders = orderRepository.findByUserId(id);
         return orders;
     }
 
+    //구매내역 상세정보 가져오기
     public List<OrderHistory> getHistoryDetail(Long orderNo){
         List<OrderHistory> orderHistories = orderHistoryRepository.findByOrderNo(orderNo);
         return orderHistories;
     }
 
+    //책 구매여부 확인
     public boolean hasOrderedBook(String userId, Long bookNo) {
         boolean result = false;
         List<Order> orderList = orderRepository.findByUserId(userId);

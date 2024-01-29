@@ -34,8 +34,6 @@ public class CartController {
     public String cart(Model model, @RequestParam("id") String userId) throws JsonProcessingException {
 
         List<CartDTO> cartData = cartService.cartList(userId);
-        log.info("카트데이터0:"+cartData.get(0));
-        log.info("카트데이터1:"+cartData.get(1));
         ObjectMapper objectMapper = new ObjectMapper();
         String list = objectMapper.writeValueAsString(cartData);
 

@@ -273,12 +273,12 @@
                 <div class="a-div">
                     <input type="checkbox" class="chkBuy" onclick="itemAll()" checked >
                     <div>
-                        <button type="submit" onclick="location.href=`/dabook/book?no=${data.bookNo}`" style="border: none;background: none">
+                        <button type="submit" class="cart-img" onclick="location.href=`/dabook/book?no=${data.bookNo}`">
                         <img class="img-class" src="/images/bookImage/book${data.bookNo}.jpg" alt="- 이미지 -" style="width:140px">
                     </button>
                     </div>
                     <div class="goods-title">
-                        <button type="submit" onclick="location.href=`/dabook/book?no=${data.bookNo}`" style="border: none;background: none">
+                        <button class="cart-bookName" type="submit" onclick="location.href=`/dabook/book?no=${data.bookNo}`">
                             <span class="title-fontsize">${data.bookName}</span></button><br><br>
                         <span class="price">${data.bookPrice}</span>
                     </div>

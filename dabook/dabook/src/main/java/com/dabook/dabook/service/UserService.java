@@ -151,6 +151,9 @@ public class UserService {
         return check;
     }
 
-
+    //유저값 가져오기
+    public User getUserById(String userId) {
+        return userRepository.findOneUser(userId);
+    }
 
 }

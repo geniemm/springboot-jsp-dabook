@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -31,12 +32,10 @@ public class CartService {
     // 장바구니 리스트
     public List<CartDTO> cartList(String userId) {
         Cart cart = cartRepository.findByUserId(userId);
-        List<CartBook> cartBooks = cartBookRepository.cartList(cart.getNo()); // 수정된 부분
-        System.out.println(cartBooks);
-        log.info("수정 카트0"+cartBooks.get(0).getNo());
-        log.info("수정 카트1"+cartBooks.get(1).getNo());
-
-//       return cartBOok
+        if (cart == null) {
+            return Collections.emptyList();
+        }
+        List<CartBook> cartBooks = cartBookRepository.cartList(cart.getNo());
         return cartBooks.stream()
                 .map(cartBook -> new CartDTO(cartBook.getBook(), cartBook.getCount()))
                 .collect(Collectors.toList());
