@@ -3,6 +3,12 @@ package com.dabook.dabook.controller;
 import com.dabook.dabook.entity.Review;
 import com.dabook.dabook.service.ReviewService;
 import com.dabook.dabook.service.ReviewServiceImpl;
+import com.dabook.dabook.common.GetMessage;
+import com.dabook.dabook.dto.ReviewUpdateDTO;
+import com.dabook.dabook.entity.OrderHistory;
+import com.dabook.dabook.entity.Review;
+import com.dabook.dabook.service.*;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -10,7 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/dabook")
@@ -20,7 +28,7 @@ public class ReviewController {
 
     private final ReviewService reviewService;
     private final ReviewServiceImpl reviewServiceImpl;
-
+    private final OrderService orderService;
 
 
     //리뷰 보기
@@ -34,8 +42,13 @@ public class ReviewController {
     //리뷰 작성
     @PostMapping("/review")
     public String addReview(@RequestParam(value = "no") Long no,
-                            @RequestBody Review review){
-        reviewServiceImpl.saveReview(no,review);
+                            @RequestParam(value="reviewContent")String reviewContent,
+                            @RequestParam(value = "rating")int rating,
+                            HttpSession httpSession){
+        log.info("review:"+reviewContent);
+        String userId = (String)httpSession.getAttribute("userId");
+        reviewServiceImpl.saveReview(reviewContent, userId,no,rating);
+
         return "redirect:/";
     }
 
@@ -47,6 +60,22 @@ public class ReviewController {
 //        Optional<Review> review = this.reviewService.updateReview(reviewNo,reviewUpdateDTO);
 //        return new ResponseEntity(reviewUpdateDTO,HttpStatus.OK);
 //    }
+
+
+    // 작성한 리뷰, 구매이력 있는지 확인
+    @GetMapping("/review/checkByUser")
+    @ResponseBody
+    public Map<String, Boolean> checkReviewByUser(@RequestParam(name = "no") Long bookNo, HttpSession httpSession) {
+        String userId = (String) httpSession.getAttribute("userId");
+        boolean hasReview = reviewService.hasReviewByUserAndBook(userId, bookNo);
+        boolean hasOrderedBook = orderService.hasOrderedBook(userId, bookNo);
+        Map<String, Boolean> result = new HashMap<>();
+        result.put("hasReview", hasReview);
+        result.put("hasOrderedBook",hasOrderedBook);
+        log.info("리뷰있는지?"+result.get(hasReview));
+        log.info("구매했는지?"+result.get(hasOrderedBook));
+        return result;
+    }
 
     // 리뷰삭제
     @DeleteMapping("/review")

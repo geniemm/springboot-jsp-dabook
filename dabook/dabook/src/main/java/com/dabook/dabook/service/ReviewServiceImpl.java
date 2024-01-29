@@ -3,8 +3,10 @@ package com.dabook.dabook.service;
 import com.dabook.dabook.dto.ReviewUpdateDTO;
 import com.dabook.dabook.entity.Book;
 import com.dabook.dabook.entity.Review;
+import com.dabook.dabook.entity.User;
 import com.dabook.dabook.repository.BookRepository;
 import com.dabook.dabook.repository.ReviewRepository;
+import com.dabook.dabook.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,7 @@ public class ReviewServiceImpl implements ReviewService{
 
     private final ReviewRepository reviewRepository;
     private final BookRepository bookRepository;
+    private final UserRepository userRepository;
 
 
     @Transactional(readOnly = true)
@@ -31,30 +34,37 @@ public class ReviewServiceImpl implements ReviewService{
     }
 
 
-    public Review saveReview(Long bookNo, Review review){
-        Book book = bookRepository.findBookInfo(bookNo);
-        review.setBooks(book);
-        book.getReviews().add(review);
+    //리뷰 등록
+    public Review saveReview(String review, String userId, Long bookNo,int rating) {
+        Book book = bookRepository.findBookInfo(bookNo); //책번호로 책엔티티
+        User user = userRepository.findOneUser(userId); // 아이디값으로 유저엔티티
 
-        return reviewRepository.save(review);
+        Review saveReview = Review.saveReview(user, book, review, rating);
+        return reviewRepository.save(saveReview);
     }
 
     public void deleteReview(Long review_no){
         reviewRepository.deleteById(review_no);
     }
 
+//    @Override
+//    public Optional<Review> updateReview(Long review_no, ReviewUpdateDTO reviewUpdateDTO) {
+//        Optional<Review> review = this.reviewRepository.findById(review_no);
+//        review.ifPresent(r->{
+//            r.setRating(reviewUpdateDTO.getRating());
+//            r.setReviewDate(LocalDateTime.now());
+//            if(reviewUpdateDTO.getReviewContent()!=null){
+//                r.setReviewContent(reviewUpdateDTO.getReviewContent());
+//            }
+//            this.reviewRepository.save(r);
+//        });
+//        log.info("----r:---"+review);
+//        return review;
+//    }
+
+    // 이미 등록된 리뷰 있는지 확인
     @Override
-    public Optional<Review> updateReview(Long review_no, ReviewUpdateDTO reviewUpdateDTO) {
-        Optional<Review> review = this.reviewRepository.findById(review_no);
-        review.ifPresent(r->{
-            r.setRating(reviewUpdateDTO.getRating());
-            r.setReviewDate(LocalDateTime.now());
-            if(reviewUpdateDTO.getReviewContent()!=null){
-                r.setReviewContent(reviewUpdateDTO.getReviewContent());
-            }
-            this.reviewRepository.save(r);
-        });
-        log.info("----r:---"+review);
-        return review;
+    public boolean hasReviewByUserAndBook(String userId, Long bookNo) {
+        return reviewRepository.existsByBooksNoAndUsersUserId(bookNo, userId);
     }
 }

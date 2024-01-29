@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Service
 public interface ReviewService {
-    Optional<Review> updateReview(Long reviewNo, ReviewUpdateDTO reviewUpdateDTO);
-}
+//    Review updateReview(Long reviewNo, ReviewUpdateDTO reviewUpdateDTO ,String userId);
+    boolean hasReviewByUserAndBook(String userId, Long bookNo);}

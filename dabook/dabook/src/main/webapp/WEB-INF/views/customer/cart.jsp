@@ -280,6 +280,13 @@
                     </div>
                     <div class="goods-title">
                         <span class="title-fontsize">${data.bookName}</span><br><br>
+                        <button type="submit" class="cart-img" onclick="location.href=`/dabook/book?no=${data.bookNo}`">
+                        <img class="img-class" src="/images/bookImage/book${data.bookNo}.jpg" alt="- 이미지 -" style="width:140px">
+                    </button>
+                    </div>
+                    <div class="goods-title">
+                        <button class="cart-bookName" type="submit" onclick="location.href=`/dabook/book?no=${data.bookNo}`">
+                            <span class="title-fontsize">${data.bookName}</span></button><br><br>
                         <span class="price">${data.bookPrice}</span>
                     </div>
                     <div class="volume-div">
@@ -342,7 +349,7 @@
 
     <div class="order-btn">
         <button class="btn btn-outline-success order-button mt-5" onclick="orderBtn()">주문하기</button>
-    </div>
+
 
 <br />
 <br />

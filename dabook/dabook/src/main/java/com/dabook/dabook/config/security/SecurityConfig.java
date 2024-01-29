@@ -37,7 +37,6 @@ public class SecurityConfig {
         http
                 .csrf((auth) -> auth.disable());
 
-
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/dabook/user/**").hasRole("USER")
@@ -76,6 +75,7 @@ public class SecurityConfig {
                             .userInfoEndpoint((user)->{
                                 user.userService(principalOauth2UserService);
                             });
+
                 });
 
 

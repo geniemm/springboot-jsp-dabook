@@ -37,4 +37,17 @@ public class Review {
 
     private int rating; // 별점
 
+
+    public Review(User user, Book book,String reviewContent,int rating) {
+        this.users=user;
+        this.books=book;
+        this.rating=rating;
+        this.reviewContent=reviewContent;
+    }
+
+
+    public static Review saveReview(User user, Book book,String reviewContent,int rating ){
+        return new Review(user,book,reviewContent,rating);
+    }
+
 }

@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap');
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+.wholeSpace{
+    margin: 100px 250px;
+    height: 1000px;
+    width: auto;
+}
+.wholeSpace h3{
+    font-family: 'Pretendard-Regular', serif;
+    margin-bottom: 30px;
+}
+.detailSpace{
+    border-top: 3px solid black;
+
+}
+.detailTitle{
+    border-bottom: 1px solid black;
+    padding: 20px 0;
+    display: flex;
+    width:100%;
+}
+.title{
+    font-family: 'Pretendard-Regular', serif;
+    margin: 0 100px 0 5px;
+}
+#orderDateSpan{
+    width:70%;
+    text-align: left;
+}
+#orderNo{
+    margin-left: 450px;
+    width:20%;
+    text-align: right;
+}
+
+.detailContent{
+    font-family: 'Pretendard-Regular', serif;
+    border-bottom: 1px solid darkgray;
+    padding: 30px 0;
+    display: flex;
+}
+.content{
+    text-align: left;
+}
+#imgContent{
+    margin-left: 10px;
+    width:30%;
+}
+#bookImg{
+    width:40%;
+}
+#bookImg img{
+    height: 80px;
+    width:auto;
+}
+#bookImg a{
+    text-decoration: none;
+    color:black;
+}
+#bookName{
+    padding: 40px 0;
+    width:50%;
+}
+#bookName a{
+    font-size: large ;
+    text-decoration: none;
+    color:black;
+}
+#bookInfo{
+    font-size: medium;
+    color: darkgray;
+    margin: 10px 0 0 -5px;
+}
+#price{
+    padding: 50px 10px 50px 45px;
+    width:15%;
+}
+
