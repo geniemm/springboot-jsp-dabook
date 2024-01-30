@@ -1,6 +1,7 @@
 package com.dabook.dabook.controller;
 
 import com.dabook.dabook.dto.CartDTO;
+import com.dabook.dabook.entity.Cart;
 import com.dabook.dabook.entity.User;
 import com.dabook.dabook.service.CartService;
 import com.dabook.dabook.service.UserService;
@@ -25,7 +26,6 @@ import java.util.Map;
 public class CartController {
 
     private final CartService cartService;
-    private final UserService userService;
 
 
     //장바구니 페이지 로드 (세션 아이디값으로 사용)
@@ -33,8 +33,6 @@ public class CartController {
     public String cart(Model model, @RequestParam("id") String userId) throws JsonProcessingException {
 
         List<CartDTO> cartData = cartService.cartList(userId);
-//        log.info("카트데이터0:"+cartData.get(0));
-//        log.info("카트데이터1:"+cartData.get(1));
         ObjectMapper objectMapper = new ObjectMapper();
         String list = objectMapper.writeValueAsString(cartData);
 
@@ -44,39 +42,6 @@ public class CartController {
         return "customer/cart";
     }
 
-    @PostMapping("/dabook/user/cart")
-    @ResponseBody
-    public ResponseEntity<String> addCart(@RequestParam("userId") String userId,
-                                          @RequestParam("bookNo") Long bookNo,
-                                          @RequestParam("bookCount") int bookCount) {
-        User user = userService.getUserById(userId);
-        // 코드 수정 (login 판단 jsp에서)
-
-        try {
-            cartService.addCartItem(user.getNo(), bookNo, bookCount, userId);
-            return new ResponseEntity<>("상품을 성공적으로 담았습니다.", HttpStatus.OK);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            return new ResponseEntity<>("장바구니 추가에 실패했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-
-    // 로그인된 user 확인 -> 다른 컨트롤러에서도 사용할수있게 static
-    private static User getUser(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-
-        // 세션이 없거나 세션에 저장된 데이터가 null 또는 비어있는 경우
-        if (session == null || session.getAttribute("userId") == null || !(session.getAttribute("userId") instanceof User)) {
-            return null;
-        }
-        // 세션에 저장된 데이터가 User 객체인 경우
-        User user = (User) session.getAttribute("userId");
-        return user;
-    }
-
-
     // 장바구니 변경 후 데이터
     @GetMapping("/cart/data")
     @ResponseBody
@@ -85,7 +50,7 @@ public class CartController {
         return cartService.cartList(userId);
     }
 
-    // 장바구니 수량 변경
+    // 상품 수량 변경
     @PutMapping("/countUpdate/{cartNo}")
     @ResponseBody
     public ResponseEntity<String> countUpdate(@PathVariable("cartNo") String cartNo, @RequestParam("action") String action) {
@@ -103,7 +68,7 @@ public class CartController {
         }
     }
 
-    // 장바구니 상품 삭제
+    // 상품 단독 삭제
     @DeleteMapping("/delCartItem/{cartNo}")
     public ResponseEntity<String> delCartItem(@PathVariable("cartNo") String cartNo) {
         Long no = Long.parseLong(cartNo);
@@ -147,4 +112,37 @@ public class CartController {
 
         return items;
     }
+
+    // 상품 장바구니 담기
+    @PostMapping("/cart/inputBook")
+    public ResponseEntity<String> addBook(@RequestParam("bookNo") String bookNo,
+                                          @RequestParam("bookCount") int bookCount,
+                                          HttpSession session){
+
+        String userId = (String)session.getAttribute("userId");
+//        System.out.println(bookCount);
+//        System.out.println(bookNo);
+//        System.out.println(userId);
+        Long b_no = Long.parseLong(bookNo);
+
+        List<Cart> carts = cartService.ifBook(b_no, userId);
+
+        boolean cartUpdate;
+
+        if(carts.isEmpty()){
+            // 같은 상품이 없다면
+            cartUpdate = cartService.insertBook(userId, b_no, bookCount);
+        }else {
+            // 같은 상품이 있다면
+            cartUpdate = cartService.editCount(userId, b_no, bookCount);
+        }
+
+        if(cartUpdate) {
+            return new ResponseEntity<>("장바구니 성공", HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>("장바구니 넣기 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 }

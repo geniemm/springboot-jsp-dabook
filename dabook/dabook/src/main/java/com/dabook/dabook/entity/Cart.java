@@ -12,7 +12,7 @@ import static jakarta.persistence.FetchType.LAZY;
 @Getter
 public class Cart {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cart_no")
     private Long no;
 
@@ -25,9 +25,6 @@ public class Cart {
     private Book books;
 
     private int count;
-
-    @OneToMany(mappedBy = "cart", orphanRemoval = true)
-    private List<CartBook> cartBooks = new ArrayList<>();
 
     public Cart() {
 
@@ -44,6 +41,5 @@ public class Cart {
     public void changeCount(int count){
         this.count = count;
     }
-
 
 }
