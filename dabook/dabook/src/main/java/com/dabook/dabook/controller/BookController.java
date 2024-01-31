@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -86,10 +85,10 @@ public class BookController {
     // 찾는 책
     @GetMapping("/searchBook")
     public String SearchBook(@RequestParam("data") String data, Model model){
-        System.out.println("bookController: "+ data);
+        System.out.println(data);
         List<Book> searchBook = bookService.getSearchBook(data);
-        System.out.println("searchBook = " + searchBook);
         model.addAttribute("books", searchBook);
+        System.out.println(searchBook);
         return "book/searchBook";
     }
 }

@@ -25,7 +25,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("update User u set u.password = :password where u.userId = :userId")
     void updatePw(@Param("password") String password, @Param("userId") String userId);
 
-
     List<User> findByEmail(String email);
 
     User saveAndFlush(User user);

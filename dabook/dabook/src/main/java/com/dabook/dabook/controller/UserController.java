@@ -100,7 +100,7 @@ public class UserController {
 
     //마이페이지
     @GetMapping("/user/mypage")
-    public String mypage(@RequestParam("id") String id, Model model){
+    public String mypage(@RequestParam(name="id") String id, Model model) {
         model.addAttribute("info", userService.info(id));
         return "main/mypage";
     }

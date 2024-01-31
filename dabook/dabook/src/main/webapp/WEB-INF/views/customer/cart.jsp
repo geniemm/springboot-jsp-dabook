@@ -252,37 +252,33 @@
 
 <jsp:include page="../main/header.jsp" />
 
-    <div class="cart-goods-div">
-        <h2 class="mb-5 mt-5">장바구니</h2>
+<div class="cart-goods-div">
+    <h2 class="mb-5 mt-5">장바구니</h2>
 
-        <div class="goods-div">
+    <div class="goods-div">
 
-            <div class="emptyline"></div>
+        <div class="emptyline"></div>
 
-            <div class="selectBy mt-1 mb-1">
-                <div class="chkAll">
-                    <input type="checkbox" class="checkedAll" onclick="checkedAll()" checked> 전체 선택
-                </div>
-                <div class="chkDel">
-                    <button class="btn btn-secondary" onclick="chkDel()"> 선택 삭제 </button>
-                </div>
+        <div class="selectBy mt-1 mb-1">
+            <div class="chkAll">
+                <input type="checkbox" class="checkedAll" onclick="checkedAll()" checked> 전체 선택
             </div>
+            <div class="chkDel">
+                <button class="btn btn-secondary" onclick="chkDel()"> 선택 삭제 </button>
+            </div>
+        </div>
 
-            <c:if test="${not empty data}">
-                <c:forEach var="data" items="${data}" varStatus="status">
+        <c:if test="${not empty data}">
+            <c:forEach var="data" items="${data}" varStatus="status">
 
-                    <div class="line"></div>
+                <div class="line"></div>
 
                 <div class="a-div">
                     <input type="checkbox" class="chkBuy" onclick="itemAll()" checked >
                     <div>
-                        <img class="img-class" src="/images/cartImage/곰돌이.jpg" alt="- 이미지 -">
-                    </div>
-                    <div class="goods-title">
-                        <span class="title-fontsize">${data.bookName}</span><br><br>
                         <button type="submit" class="cart-img" onclick="location.href=`/dabook/book?no=${data.bookNo}`">
-                        <img class="img-class" src="/images/bookImage/book${data.bookNo}.jpg" alt="- 이미지 -" style="width:140px">
-                    </button>
+                            <img class="img-class" src="/images/bookImage/book${data.bookNo}.jpg" alt="- 이미지 -" style="width:140px">
+                        </button>
                     </div>
                     <div class="goods-title">
                         <button class="cart-bookName" type="submit" onclick="location.href=`/dabook/book?no=${data.bookNo}`">
@@ -296,7 +292,7 @@
                             <button class="btn btn-secondary volume-btn"
                                     onclick="countUpdate(${data.cartNo}, 'decrease', ${status.index})">-</button>
 
-                                <span class="count">&nbsp;${data.bookCount}&nbsp;</span>
+                            <span class="count">&nbsp;${data.bookCount}&nbsp;</span>
 
                             <button class="btn btn-secondary volume-btn"
                                     onclick="countUpdate(${data.cartNo}, 'increase', ${status.index})">+</button>
@@ -305,58 +301,55 @@
                         <button class="btn btn-outline-secondary delete mt-3" onclick="delItem(${data.cartNo}, ${status.index})">삭제</button>
                     </div>
                 </div>
-                </c:forEach>
-            </c:if>
+            </c:forEach>
+        </c:if>
 
-            <c:if test="${empty data}">
-                <div class="emptyline"></div>
-                <div class="a-div">
-                    <div class="emptyCart">
-                        <span> 텅 ~ </span>
-                    </div>
+        <c:if test="${empty data}">
+            <div class="emptyline"></div>
+            <div class="a-div">
+                <div class="emptyCart">
+                    <span> 텅 ~ </span>
                 </div>
-            </c:if>
+            </div>
+        </c:if>
+    </div>
+
+    <div class="isLine">
+        <div class="goods-count">
+            <span class="productCount"></span>
         </div>
-
-        <div class="isLine">
-            <div class="goods-count">
-                <span class="productCount"></span>
-            </div>
-            <div class="free-delivery">
-                <span class="feePrice">※ 3만원 이상 구매시 무료배송 ※</span>
-            </div>
-        </div>
-
-        <div class="pay-count">
-            <div class="pay-count-div">
-                <div class="pay-number">
-                    <span class="productPay"></span>
-                    <span>+</span>
-                    <span class="fee"></span>
-                    <span>=</span>
-                    <span class="allPrice"></span>
-                </div>
-                <div class="pay-text">
-                    <span>상품금액</span>
-                    <span></span>
-                    <span>배송비</span>
-                    <span></span>
-                    <span>총 금액</span>
-                </div>
-            </div>
+        <div class="free-delivery">
+            <span class="feePrice">※ 3만원 이상 구매시 무료배송 ※</span>
         </div>
     </div>
 
-    <div class="order-btn">
-        <button class="btn btn-outline-success order-button mt-5" onclick="orderBtn()">주문하기</button>
+    <div class="pay-count">
+        <div class="pay-count-div">
+            <div class="pay-number">
+                <span class="productPay"></span>
+                <span>+</span>
+                <span class="fee"></span>
+                <span>=</span>
+                <span class="allPrice"></span>
+            </div>
+            <div class="pay-text">
+                <span>상품금액</span>
+                <span></span>
+                <span>배송비</span>
+                <span></span>
+                <span>총 금액</span>
+            </div>
+        </div>
+    </div>
+</div>
 
+<div class="order-btn">
+    <button class="btn btn-outline-success order-button mt-5" onclick="orderBtn()">주문하기</button>
+</div>
 
 <br />
 <br />
 <br />
 <br />
+
 <jsp:include page="../main/footer.jsp" />
-
-
-</body>
-</html>

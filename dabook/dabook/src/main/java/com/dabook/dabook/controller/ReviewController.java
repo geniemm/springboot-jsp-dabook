@@ -1,6 +1,7 @@
 package com.dabook.dabook.controller;
 
 import com.dabook.dabook.entity.Review;
+import com.dabook.dabook.service.OrderService;
 import com.dabook.dabook.service.ReviewService;
 import com.dabook.dabook.service.ReviewServiceImpl;
 import com.dabook.dabook.common.GetMessage;
@@ -33,9 +34,11 @@ public class ReviewController {
 
     //리뷰 보기
     @GetMapping("/review")
-    public String getReview(Model model, @RequestParam(value = "no") Long no){
+    public String getReview(Model model, @RequestParam(value = "no") Long no, HttpSession httpSession){
         List<Review> reviews = reviewServiceImpl.getReviewsByBookNo(no);
+        String userId = (String)httpSession.getAttribute("userId");
         model.addAttribute("reviews",reviews);
+        model.addAttribute("uId",userId);
         return "review/review";
     }
 
@@ -53,12 +56,15 @@ public class ReviewController {
     }
 
 //    // 리뷰수정
-//    @PutMapping("/review/{reviewNo}")
+//    @PutMapping("/review")
 //    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public ResponseEntity<Review> updateReview(@PathVariable Long reviewNo, @RequestBody ReviewUpdateDTO reviewUpdateDTO) {
-//        log.info("--------수정하기----------"+reviewUpdateDTO+"no:"+reviewNo);
-//        Optional<Review> review = this.reviewService.updateReview(reviewNo,reviewUpdateDTO);
-//        return new ResponseEntity(reviewUpdateDTO,HttpStatus.OK);
+//    public String updateReview(@RequestParam(value = "no") Long bookNo,
+//                               @RequestBody ReviewUpdateDTO reviewUpdateDTO,
+//                               HttpSession httpSession) {
+//        log.info("--------수정하기----------" + reviewUpdateDTO + "bookNo:" + bookNo);
+//        String userId = (String) httpSession.getAttribute("userId");
+//        reviewService.updateReview(bookNo, reviewUpdateDTO, userId);
+//        return "redirect:/";
 //    }
 
 

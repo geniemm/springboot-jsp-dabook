@@ -75,7 +75,6 @@ public class SecurityConfig {
                             .userInfoEndpoint((user)->{
                                 user.userService(principalOauth2UserService);
                             });
-
                 });
 
 

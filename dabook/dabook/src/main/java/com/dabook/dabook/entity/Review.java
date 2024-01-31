@@ -37,7 +37,6 @@ public class Review {
 
     private int rating; // 별점
 
-
     public Review(User user, Book book,String reviewContent,int rating) {
         this.users=user;
         this.books=book;

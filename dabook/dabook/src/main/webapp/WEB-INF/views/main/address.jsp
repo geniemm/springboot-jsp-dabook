@@ -239,7 +239,7 @@
 
         console.log("session 저장: ", index);
         $.ajax({
-            url: '/dabook/user/address/modiNo',
+            url: '/dabook/user/address/modiSetNo',
             type: 'post',
             data: {
                 no : no

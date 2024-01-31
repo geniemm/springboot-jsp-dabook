@@ -22,28 +22,27 @@
     }
 
     function addToCart(bookNo) {
-        var userId = $("#userId").val();
         var bookCount = quantity;
 
-        console.log("userId:" + userId);
         console.log("bookNo:" + bookNo);
-        console.log("bookCount:" + bookCount);
+        console.log(typeof bookNo);
 
-        if(userId !== ''){
+        console.log("bookCount:" + bookCount);
+        console.log(typeof bookCount);
+
+        if(${not empty userId}){
             // AJAX를 사용하여 서버에 장바구니에 추가할 정보 전송
             $.ajax({
                 type: "POST",
-                url: "/dabook/user/cart",
+                url: "/cart/inputBook",
                 data: {
-                    userId: userId,
                     bookNo: bookNo,
                     bookCount: bookCount
                 },
-                contentType: "application/x-www-form-urlencoded",
                 success: function (response) {
-                    alert("상품을 담았습니다.");
-                    location.href = "/dabook/user/cart?id=" + userId;
-                    console.log("장바구니에 추가되었습니다.", response);
+                    confirm("상품을 담았습니다. 장바구니로 가시겠습니까?")
+                        ? window.location='/dabook/user/cart?id=${userId}'
+                        : console.log("장바구니에 추가되었습니다.", response);
                 },
                 error: function (xhr, status, error) {
                     console.error("AJAX 요청 실패:", status, error);
@@ -51,7 +50,7 @@
                 }
             });
         }else {
-            infoAlert('/dabook/main/login');
+            infoAlert();
         }
 
     }

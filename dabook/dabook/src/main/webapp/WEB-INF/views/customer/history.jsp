@@ -62,7 +62,6 @@
     </div>
 </div>
 <jsp:include page="../main/footer.jsp"/>
-</body>
 <script>
     for (var i = 0; i <${orders.size()}; i++) {
         var orderDateSpan = document.getElementById('orderDateSpan-' + i);
@@ -75,4 +74,3 @@
         }
     }
 </script>
-</html>
