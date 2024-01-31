@@ -18,6 +18,12 @@
 }
 .review-wrap{
     border-top : 1px solid darkgray;
+    font-family: 'Pretendard-Regular', serif;
+}
+.nothingReview{
+    height: 150px;
+    text-align: center;
+    margin: 50px 0;
 }
 .review-item{
     border-bottom: 1px solid darkgray;
@@ -50,8 +56,13 @@
 .userSpace .delModSpace{
     margin-left: 10px;
 }
+.material-icons{
+    color: olive;
+}
 
 .userSpace .delBtn{
+    margin-left: 25px;
+    color:indianred;
     height: 20px;
     width: 40px;
     border: none;

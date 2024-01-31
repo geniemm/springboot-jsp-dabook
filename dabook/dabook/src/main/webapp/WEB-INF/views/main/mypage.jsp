@@ -51,15 +51,15 @@
 
 
         <c:otherwise>
-        <form style="width: 25rem">
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" value="${info.username}" disabled />
-                <label for="floatingName">Name</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="email" class="form-control" value="${info.email}" disabled/>
-                <label for="floatingEmail">Email</label>
-            </div>
+            <form style="width: 25rem">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" value="${info.username}" disabled />
+                    <label for="floatingName">Name</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" value="${info.email}" disabled/>
+                    <label for="floatingEmail">Email</label>
+                </div>
 
                 <c:if test="${info.provider == 'naver' }">
                     <div class="form-floating mb-3">
@@ -68,11 +68,11 @@
                     </div>
                 </c:if>
 
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control" value="${info.provider}" disabled/>
-                <label for="floatingEmail">소셜 로그인</label>
-            </div>
-        </form>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" value="${info.provider}" disabled/>
+                    <label for="floatingEmail">소셜 로그인</label>
+                </div>
+            </form>
 
         </c:otherwise>
 

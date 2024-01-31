@@ -98,14 +98,14 @@ public class UserController {
 
     //마이페이지
     @GetMapping("/user/mypage")
-    public String mypage(@RequestParam("id") String id, Model model){
+    public String mypage(@RequestParam(name="id") String id, Model model) {
         model.addAttribute("info", userService.info(id));
         return "main/mypage";
     }
 
     //정보수정 페이지
     @GetMapping("/user/modifyInfo")
-    public String modifyInfo(@RequestParam("id") String id, Model model){
+    public String modifyInfo(@RequestParam(name="id") String id, Model model) {
         model.addAttribute("info", userService.info(id));
         return "main/modifyInfo";
     }
@@ -148,7 +148,7 @@ public class UserController {
 
     //pw 찾기(변경)
     @RequestMapping("/main/changePw")
-    public void pwChange(@RequestParam String userId, HttpServletResponse res,
+    public void pwChange(@RequestParam(name="id") String userId, HttpServletResponse res,
                          @RequestParam String password1, @RequestParam String password2) throws IOException {
 
         if (password1.equals(password2)) {
@@ -165,21 +165,21 @@ public class UserController {
 
     // 비밀번호 변경 페이지
     @GetMapping("/user/newPw")
-    public String newPw(@RequestParam String userId, Model model) {
+    public String newPw(@RequestParam(name="id") String userId, Model model) {
         model.addAttribute("userId", userId);
         return "main/newPw";
     }
 
     // mypage - 비밀번호 확인페이지
     @GetMapping("/user/pwCheck")
-    public String pwCheck(@RequestParam String id, Model model) {
+    public String pwCheck(@RequestParam(name="id") String id, Model model) {
         model.addAttribute("userId", id);
         return "main/pwCheck";
     }
 
     // mypage - 비밀번호 확인 로직
     @PostMapping("/user/pwCheck")
-    public String pwCheckLogic(@RequestParam String userId, @RequestParam String password, Model model, HttpServletResponse res) throws IOException {
+    public String pwCheckLogic(@RequestParam(name="userId") String userId, @RequestParam(name="password") String password, Model model, HttpServletResponse res) throws IOException {
         boolean check = userService.pwCheck(userId, password);
 
         model.addAttribute("userId", userId);
@@ -195,8 +195,8 @@ public class UserController {
 
     // mypage - 비밀번호 수정
     @PostMapping("/user/changePw")
-    public void changePw(@RequestParam String userId, @RequestParam String password1,
-                         @RequestParam String password2, HttpServletResponse res) throws IOException {
+    public void changePw(@RequestParam(name="userId") String userId, @RequestParam(name="password1") String password1,
+                         @RequestParam(name="password2") String password2, HttpServletResponse res) throws IOException {
 
         if (password1.equals(password2)) {
             userService.pwChange(userId, password2);

@@ -34,15 +34,6 @@ public class CartDTO {
         bookPrice = cart.getBooks().getPrice();
         bookPhoto = cart.getBooks().getBookDetail().getPhoto();
         total = bookPrice * bookCount;
-        log.info("userNo: {}", userNo);
-        log.info("bookNo: {}", bookNo);
-        log.info("cartNo: {}", cartNo);
-        log.info("userId: {}", userId);
-        log.info("bookCount: {}", bookCount);
-        log.info("bookName: {}", bookName);
-        log.info("bookPrice: {}", bookPrice);
-        log.info("bookPhoto: {}", bookPhoto);
-        log.info("total: {}", total);
     }
 
     public CartDTO(Book book, int count) {

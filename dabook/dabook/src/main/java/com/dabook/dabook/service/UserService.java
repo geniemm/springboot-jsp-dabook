@@ -120,11 +120,6 @@ public class UserService {
         return info;
     }
 
-    // login user 정보
-    public User getUserById(String userId) {
-        return userRepository.findOneUser(userId);
-    }
-
     // 아이디 찾기
     public List<String> findId(String email) {
         return userRepository.findId(email);
@@ -155,6 +150,9 @@ public class UserService {
         return check;
     }
 
-
+    //유저값 가져오기
+    public User getUserById(String userId) {
+        return userRepository.findOneUser(userId);
+    }
 
 }

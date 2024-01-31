@@ -37,7 +37,6 @@ public class SecurityConfig {
         http
                 .csrf((auth) -> auth.disable());
 
-
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/dabook/user/**").hasRole("USER")

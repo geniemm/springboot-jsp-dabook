@@ -2,12 +2,9 @@ package com.dabook.dabook.controller;
 
 import com.dabook.dabook.dto.CartDTO;
 import com.dabook.dabook.entity.Cart;
-import com.dabook.dabook.entity.User;
 import com.dabook.dabook.service.CartService;
-import com.dabook.dabook.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -120,9 +117,6 @@ public class CartController {
                                           HttpSession session){
 
         String userId = (String)session.getAttribute("userId");
-//        System.out.println(bookCount);
-//        System.out.println(bookNo);
-//        System.out.println(userId);
         Long b_no = Long.parseLong(bookNo);
 
         List<Cart> carts = cartService.ifBook(b_no, userId);

@@ -2,7 +2,6 @@ package com.dabook.dabook.service;
 
 import com.dabook.dabook.dto.CartDTO;
 import com.dabook.dabook.entity.Cart;
-import com.dabook.dabook.entity.User;
 import com.dabook.dabook.repository.CartRepository;
 import com.dabook.dabook.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -10,8 +9,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

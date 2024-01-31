@@ -26,6 +26,7 @@
     </script>
 
 </head>
+<body >
 
 <div class="text-center mt-3 mb-5">
     <a href="/dabook">
@@ -73,7 +74,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" onclick="infoAlert('/dabook/user/mypage?id=${userId}')">회원정보</a></li>
-                            <li><a class="dropdown-item" href="#">배송조회</a></li>
+                            <li><a class="dropdown-item" onclick="infoAlert('/dabook/user/order/history?id=${userId}')">구매내역</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" onclick="infoAlert('/dabook/mypage/address')">주소 관리</a></li>
                         </ul>
