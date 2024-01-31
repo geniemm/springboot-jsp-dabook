@@ -6,7 +6,7 @@
     font-style: normal;
 }
 .wholeSpace{
-    margin: 100px 250px;
+    margin: 100px 350px;
     height: 1000px;
     width: auto;
 }
@@ -20,21 +20,21 @@
 }
 .detailTitle{
     border-bottom: 1px solid black;
-    padding: 20px 0;
+    padding: 30px 10px 10px 30px;
     display: flex;
     width:100%;
 }
 .title{
     font-family: 'Pretendard-Regular', serif;
-    margin: 0 100px 0 5px;
+    margin-bottom: 15px;
 }
 #orderDateSpan{
-    width:70%;
+    width:60%;
     text-align: left;
 }
 #orderNo{
-    margin-left: 450px;
-    width:20%;
+    margin-left: 300px;
+    width:40%;
     text-align: right;
 }
 
@@ -49,7 +49,7 @@
 }
 #imgContent{
     margin-left: 10px;
-    width:30%;
+    width:40%;
 }
 #bookImg{
     width:40%;
@@ -63,8 +63,8 @@
     color:black;
 }
 #bookName{
-    padding: 40px 0;
-    width:50%;
+    padding: 60px 0;
+    width:35%;
 }
 #bookName a{
     font-size: large ;
@@ -74,10 +74,11 @@
 #bookInfo{
     font-size: medium;
     color: darkgray;
-    margin: 10px 0 0 -5px;
+    margin-top: 10px;
 }
 #price{
-    padding: 50px 10px 50px 45px;
-    width:15%;
+    padding: 70px 10px 30px 45px;
+    width:20%;
+    font-size: large;
 }
 

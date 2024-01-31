@@ -22,7 +22,7 @@ public class AddressController {
     private final AddressService addressService;
 
     // 주소록 페이지 로드
-    @GetMapping("/dabook/mypage/address")
+    @GetMapping("/dabook/user/mypage/address")
     public String address(Model model, HttpSession session) throws JsonProcessingException {
         String userId = (String) session.getAttribute("userId");
         Long no = addressService.userNo(userId);
@@ -42,7 +42,7 @@ public class AddressController {
     }
 
     // 주소록 checked 삭제
-    @DeleteMapping("/address/chkDel")
+    @DeleteMapping("/dabook/user/address/chkDel")
     public ResponseEntity<String> chkDel(@RequestBody Map<String, List<Integer>> delList){
         List<Integer> list = (delList.get("data"));
         List<Long> noList =  list.stream()
@@ -59,7 +59,7 @@ public class AddressController {
     }
 
     // 주소록 데이터
-    @GetMapping("/address/data")
+    @GetMapping("/dabook/user/address/data")
     @ResponseBody
     public List<AddressDTO> addrData(HttpSession session){
         Long no = (Long)session.getAttribute("userNo");
@@ -67,7 +67,7 @@ public class AddressController {
     }
 
     // 한개 주소 삭제
-    @DeleteMapping("/addressDel/{addressNo}")
+    @DeleteMapping("/dabook/user/addressDel/{addressNo}")
     public ResponseEntity<String> addrDel(@PathVariable("addressNo") String addressNo){
         Long no = Long.parseLong(addressNo);
         boolean isDelete = addressService.addrDel(no);
@@ -80,7 +80,7 @@ public class AddressController {
     }
 
     // 주소 추가
-    @PostMapping("/address/add")
+    @PostMapping("/dabook/user/address/add")
     public ResponseEntity<String> addrAdd(@RequestBody AddressDTO addrData, HttpSession session){
 
         Long no = (Long) session.getAttribute("userNo");
@@ -98,7 +98,7 @@ public class AddressController {
     }
 
     // userNo session에 저장
-    @PostMapping("/address/modiSetNo")
+    @PostMapping("/dabook/user/address/modiNo")
     @ResponseBody
     public String modiNo(@RequestParam("no") String no, HttpSession session) {
         session.setAttribute("modiAddr", no);
@@ -106,7 +106,7 @@ public class AddressController {
     }
 
     // 주소 추가
-    @PostMapping("/address/modi")
+    @PostMapping("/dabook/user/address/modi")
     public ResponseEntity<String> addrModi(@RequestBody AddressDTO addrData, HttpSession session){
         String modiAddr = (String) session.getAttribute("modiAddr");
         Long no = Long.parseLong(modiAddr);

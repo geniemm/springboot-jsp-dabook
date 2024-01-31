@@ -18,11 +18,11 @@
     font-size: x-large;
 }
 .wholeSpace{
-    height: 1000px;
+    height: 900px;
 }
 
 .bookSpace{
-   margin: 30px 0 30px 180px;
+   margin: 30px 0 30px 200px;
 }
 .row{
     height: 200px;
@@ -49,4 +49,30 @@ button{
     margin: 10px 0 0 5px;
     font-size: small;
     color: darkgray;
+}
+.bottomSpace {
+    margin: 500px auto;
+    width: 150px;
+    font-size: medium;
+}
+
+.bottomSpace a.active {
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(85, 107, 47, 0.7); /* 선택된 링크의 배경색 */
+    color: white; /* 선택된 링크의 글자색 */
+}
+
+.bottomSpace a {
+    border-radius: 50%;
+    border: none;
+    color: grey; /* 나머지 링크의 글자색 */
+    padding: 8px 16px; /* 링크의 패딩 설정 */
+    text-decoration: none; /* 링크에 밑줄 제거 */
+}
+
+.bottomSpace a:hover {
+    border-radius: 50%;
+    border: 1px solid darkgray;
+    color: grey; /* 호버 시 글자색 변경 */
 }

@@ -27,6 +27,7 @@ public class ReviewServiceImpl implements ReviewService{
     private final UserRepository userRepository;
 
 
+    // 리뷰 리스트 가져오기
     @Transactional(readOnly = true)
     public List<Review> getReviewsByBookNo(Long no){
 
@@ -35,7 +36,7 @@ public class ReviewServiceImpl implements ReviewService{
 
 
     //리뷰 등록
-    public Review saveReview(String review, String userId, Long bookNo,int rating) {
+    public Review saveReview(String review, String userId, Long bookNo, int rating) {
         Book book = bookRepository.findBookInfo(bookNo); //책번호로 책엔티티
         User user = userRepository.findOneUser(userId); // 아이디값으로 유저엔티티
 

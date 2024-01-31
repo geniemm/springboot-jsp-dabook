@@ -7,24 +7,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>DABOOK</title>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
 
+    <title>DABOOK</title>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        function infoAlert(url){
-            if(${not empty userId}){
-                window.location = url;
-            }else {
-                alert("로그인 먼저 해주세요");
-                window.location="/dabook/main/login";
-            }
-        }
-    </script>
-
 </head>
 <body >
 
@@ -66,17 +54,18 @@
                         </c:if>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" onclick="infoAlert('/dabook/user/cart?id=${userId}')">CART</a>
+                        <c:if test="${not empty userId}">
+                            <a class="nav-link" href="/dabook/user/cart?id=${userId}">CART</a>
+                        </c:if>
+                        <c:if test="${empty userId}">
+                            <a class="nav-link" onclick="infoAlert()">CART</a>
+                        </c:if>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Mypage
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" onclick="infoAlert('/dabook/user/mypage?id=${userId}')">회원정보</a></li>
-                            <li><a class="dropdown-item" href="#">배송조회</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" onclick="infoAlert('/dabook/mypage/address')">주소 관리</a></li>
                             <c:choose>
                                 <c:when test="${empty userId}">
                                     <li><a class="dropdown-item" href="/dabook/main/login" onclick="infoAlert()">회원정보</a></li>
@@ -96,8 +85,8 @@
 
                 </ul>
                 SEARCH &nbsp;
-                <form class="d-flex" action="/dabook/searchBook" method="get">
-                    <input class="form-control me-2" id="searchInput" name="data" type="text" placeholder="Search">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>

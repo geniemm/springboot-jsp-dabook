@@ -20,32 +20,45 @@
             <span class="title" id="title2">주문내역</span>
             <span class="title" id="title3">주문번호</span>
             <span class="title" id="title4">주문상태</span>
+            <span class="title" id="title5">결제금액</span>
         </div>
-        <c:forEach var="order" items="${orders}" varStatus="loop">
-            <div class="historyContent">
+        <c:choose>
+            <c:when test="${empty orders}">
+                <div class="historyContent">
+                    <span class="content" ><b style="text-align: center">구매내역이 없습니다</b></span>
+                </div>
+            </c:when>
+            <c:otherwise>
+                <c:forEach var="order" items="${orders}" varStatus="loop">
+                    <div class="historyContent">
         <span class="content" id="orderDateSpan-${loop.index}">
                 ${order.orderDate}</span>
-                <span class="content" id="content2" >
+                        <span class="content" id="content2">
             <a href="/dabook/user/order/historyDetail?no=${order.no}">
                 <b>${order.orderHistory.get(0).getBooks().getBookName()} 외 ${order.orderHistory.size() - 1} 건</b>
         </a></span>
-                <span class="content" id="content3">${order.no}</span>
-                <span class="content" id="content4"> <c:choose>
-                    <c:when test="${order.orderStatus eq 'READY'}">
-                        상품준비
-                    </c:when>
-                    <c:when test="${order.orderStatus eq 'CANCEL'}">
-                        주문취소
-                    </c:when>
-                    <c:when test="${order.orderStatus eq 'COMP'}">
-                        주문완료
-                    </c:when>
-                    <c:otherwise>기타 상태
+                        <span class="content" id="content3">${order.no}</span>
+                        <span class="content" id="content4"> <c:choose>
+                            <c:when test="${order.orderStatus eq 'READY'}">
+                                상품준비
+                            </c:when>
+                            <c:when test="${order.orderStatus eq 'CANCEL'}">
+                                주문취소
+                            </c:when>
+                            <c:when test="${order.orderStatus eq 'COMP'}">
+                                주문완료
+                            </c:when>
+                            <c:otherwise>기타 상태
 
-                    </c:otherwise>
-                </c:choose></span>
-            </div>
-        </c:forEach>
+                            </c:otherwise>
+                        </c:choose></span>
+                        <span class="content" id="content5">
+                            ${order.totalPrice}원
+                        </span>
+                    </div>
+                </c:forEach>
+            </c:otherwise>
+        </c:choose>
     </div>
 </div>
 <jsp:include page="../main/footer.jsp"/>

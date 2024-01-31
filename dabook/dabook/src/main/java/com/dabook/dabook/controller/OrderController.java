@@ -58,7 +58,6 @@ public class OrderController {
             List<OrderHistory> orderHistories = orderService.getHistoryDetail(orderNo);
             model.addAttribute("orderHistories",orderHistories);
         }
-
         log.info("오더리스트개수:"+orders.size());
         model.addAttribute("orders", orders);
         return "customer/history";
@@ -74,5 +73,4 @@ public class OrderController {
 
         return "customer/historyDetail";
     }
-
 }
