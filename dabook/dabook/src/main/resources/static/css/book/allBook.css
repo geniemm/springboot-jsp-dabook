@@ -19,9 +19,6 @@
 }
 .wholeSpace{
     height: 900px;
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: space-between;
 }
 
 .bookSpace{
