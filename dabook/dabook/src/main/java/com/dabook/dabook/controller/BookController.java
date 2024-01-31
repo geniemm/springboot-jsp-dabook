@@ -29,7 +29,7 @@ public class BookController {
     @GetMapping("/allBook")
     public String allBook(Model model,
                           @RequestParam(defaultValue = "0",name="page")int page,
-                          @RequestParam(defaultValue = "12",name="size")int size){
+                          @RequestParam(defaultValue = "10",name="size")int size){
         // 페이지랑 사이즈 정보로 Pagealbe 객체 만듬
         PageRequest pageRequest = PageRequest.of(page, size);
         //페이지 정보를 포함한 BookList 가져오기
@@ -44,7 +44,7 @@ public class BookController {
     // 베스트 셀러
     @GetMapping("/bestSeller")
     public String bestSeller(Model model, @RequestParam(defaultValue = "0",name="page")int page,
-                                        @RequestParam(defaultValue = "12",name="size")int size){
+                                        @RequestParam(defaultValue = "10",name="size")int size){
         PageRequest pageRequest = PageRequest.of(page,size);
         Page<Book> bookPage = bookService.getBestSeller(pageRequest);
 
@@ -60,7 +60,7 @@ public class BookController {
     // 지금 이 책
     @GetMapping("/nowBook")
     public String nowBook(Model model,@RequestParam(defaultValue = "0",name="page")int page,
-                          @RequestParam(defaultValue = "12",name="size")int size){
+                          @RequestParam(defaultValue = "10",name="size")int size){
         PageRequest pageRequest = PageRequest.of(page,size);
         Page<Book> bookPage = bookService.getNowBook(pageRequest);
         List<Book> nowBook = bookPage.getContent();

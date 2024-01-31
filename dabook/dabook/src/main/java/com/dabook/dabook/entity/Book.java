@@ -21,6 +21,7 @@ public class Book {
     @Column(name = "book_no")
     private Long no;
 
+
     private String bookName;
     private int price;
     private String author;

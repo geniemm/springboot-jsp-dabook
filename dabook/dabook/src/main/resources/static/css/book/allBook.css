@@ -13,6 +13,7 @@
     margin: 30px 70px;
     font-family: 'Pretendard-Regular', serif;
     font-size: medium;
+    white-space: pre-line;
 }
 .pageTitle .title{
     font-size: x-large;
@@ -22,36 +23,40 @@
 }
 
 .bookSpace{
-   margin: 30px 0 30px 200px;
+   margin: 50px 0 30px 100px;
 }
 .row{
-    height: 200px;
+    height: 240px;
 }
 .oneBookLine{
     display: flex;
 }
 .oneBookSpace{
     margin: 10px 20px;
+    width:200px
 }
 button{
     background: none;
     border-style: none;
 }
 .oneBookSpace img{
-    height: 180px;
+    margin-left: 28px;
+    height: 200px;
     width: auto;
 }
 #bookTitle{
+    text-align: center;
     margin-top: 10px;
     font-size: medium;
 }
 #author{
+    text-align: center;
     margin: 10px 0 0 5px;
     font-size: small;
     color: darkgray;
 }
 .bottomSpace {
-    margin: 500px auto;
+    margin: 600px auto;
     width: 150px;
     font-size: medium;
 }
