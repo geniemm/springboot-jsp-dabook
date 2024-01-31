@@ -17,7 +17,7 @@
         <c:forEach var="orderHistory" begin="0" end="0" items="${orderHistories}" varStatus="loop">
             <div class="detailTitle">
                 <span class="title" id="orderDateSpan-${loop.index}">${orderHistory.orders.orderDate}</span>
-                <span class="title" id="orderNo">${orderHistory.orders.no}</span>
+                <span class="title" id="orderNo">주문번호  ${orderHistory.orders.no}</span>
             </div>
         </c:forEach>
         <c:forEach var="orderHistory" items="${orderHistories}" varStatus="loop">
