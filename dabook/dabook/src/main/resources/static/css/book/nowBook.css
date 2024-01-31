@@ -39,7 +39,7 @@
 }
 .mainContent .bookInfoSpace{
     margin: 80px 0 0 20px;
-    width:200px;
+    width:210px;
     font-family: 'Pretendard-Regular', serif;
     font-size: medium;
 }
@@ -71,7 +71,7 @@
     height: 800px;
 }
 .bookSpace{
-    margin: 50px 0 50px 180px;
+    margin: 50px 0 50px 100px;
 }
 .row{
     height: 200px;
@@ -81,21 +81,25 @@
     width:auto;
 }
 .oneBookSpace{
-    margin: 10px 25px;
+    margin: 10px 20px;
+    width:200px;
 }
 button{
     background: none;
     border-style: none;
 }
 .oneBookSpace img{
-    height: 180px;
+    margin-left: 28px;
+    height: 200px;
     width: auto;
 }
 #bookTitle{
+    text-align: center;
     margin-top: 10px;
     font-size: medium;
 }
 #author{
+    text-align: center;
     margin: 10px 0 0 5px;
     font-size: small;
     color: darkgray;

@@ -31,8 +31,9 @@
             <div class="bookCard">
                 <a href="/dabook/book?no=${books.no}" class="nowBookInfo">
                     <img class="nowSlides" src="/images/bookImage/book${books.no}.jpg" alt="nowBook"></a>
-                <div class="bookInfo"><a href="/dabook/book?no=${books.no}" class="nowBookInfo">${books.bookName} · ${books.author}</a></div>
-            </div>
+                <div class="bookInfo"><a href="/dabook/book?no=${books.no}" class="nowBookInfo">${books.bookName}</a></div>
+                    <div class="authorInfo">${books.author}</div>
+                </div>
             </c:forEach>
         </div>
     </div>
@@ -63,7 +64,7 @@
       nextArrow: '<button type="button" class="next-arrow"> > </button>',
       slidesToShow: 3,
       slidesToScroll :1,
-      autoplay:true,
+      autoplay:false,
       autoplaySpeed: 3000,
   });
 </script>

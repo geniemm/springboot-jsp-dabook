@@ -27,8 +27,7 @@
                         <div class="bookName"><b>${banner.bookName}</b></div>
                         <div class="authorAndPublisher">${banner.author} · ${banner.publisher}</div>
                         <div class="bookPrice">${banner.price}원</div>
-                        <div class="bookReference"><b>책을 나타내는 문구</b><br>
-                            <p>세상과어쩌고저쩌고저쩌고</p></div>
+                        <div class="bookReference"><b>${banner.bookDetail.content}</b><br></div>
                     </div>
                 </c:if>
                 <c:if test="${b.index != 0}">
@@ -38,8 +37,8 @@
                         <div class="bookName"><b>${banner.bookName}</b></div>
                         <div class="authorAndPublisher">${banner.author} · ${banner.publisher}</div>
                         <div class="bookPrice">${banner.price}원</div>
-                        <div class="bookReference"><b>내마음에도 체력이 필요해</b><br>
-                            <p>정신과 전문의 윤횽균저자가 어쩌고저쩌고 추천하는책!</p></div>
+                        <div class="bookReference"><b>${banner.bookDetail.content}</b><br>
+                        </div>
                     </div>
                 </c:if>
             </div>
@@ -57,7 +56,7 @@
     <div class="bookSpace">
         <div class="row">
             <c:forEach var="books" items="${books}" varStatus="rowStatus">
-                <c:if test="${rowStatus.index % 6 ==0}">
+                <c:if test="${rowStatus.index % 5 ==0}">
                 <div class="oneBookLine">
                  </c:if>
                 <div class="oneBookSpace">
@@ -70,7 +69,7 @@
                             ${books.author}
                     </div>
                 </div>
-                <c:if test="${rowStatus.index % 6 == 5 or rowStatus.last}">
+                <c:if test="${rowStatus.index % 5 == 4 or rowStatus.last}">
                     </div>
                 </c:if>
             </c:forEach>

@@ -93,7 +93,7 @@
     </div>
     <div class="content">
         <div class="content-bookDetail">
-            <img src="/images/bookContent/${book.bookDetail.content}.jpg" alt="${book.bookName}">
+            <img src="/images/bookContent/book${book.no}.jpg" alt="${book.bookName}">
         </div>
         <div id="reviewContainer">
         </div>

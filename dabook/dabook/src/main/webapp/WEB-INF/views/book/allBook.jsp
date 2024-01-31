@@ -20,7 +20,7 @@
     <div class="bookSpace">
         <div class="row">
             <c:forEach var="books" items="${books}" varStatus="rowStatus">
-                <c:if test="${rowStatus.index % 6 ==0}">
+                <c:if test="${rowStatus.index % 5 ==0}">
                     <div class="oneBookLine">
                 </c:if>
                 <div class="oneBookSpace">
@@ -34,7 +34,7 @@
                             ${books.author}
                     </div>
                 </div>
-                    <c:if test="${rowStatus.index % 6 == 5 or rowStatus.last}">
+                    <c:if test="${rowStatus.index % 5 == 4 or rowStatus.last}">
                         </div>
                     </c:if>
             </c:forEach>
@@ -42,7 +42,7 @@
     </div>
         <!-- Pagination -->
         <div class="bottomSpace">
-        <div class="pagination" style="text-align:center">
+        <div class="pagination" style="text-align:center; margin-left: 15px" >
             <c:if test="${currentPage > 1}">
                 <a href="/dabook/allBook?page=${currentPage - 2}&size=${size}" style="border: none">&laquo;</a>
             </c:if>
