@@ -46,7 +46,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         String email = oAuth2UserInfo.getEmail();
         String phone = oAuth2UserInfo.getPhone();
         String role = "ROLE_USER";
-        String provider = oAuth2UserInfo.getProvider() + "-" + oAuth2UserInfo.getProviderId();
+        String provider = oAuth2UserInfo.getProvider();
 
         List<User> idCheck = userRepository.findByUserId(userId);
         List<User> emailCheck = userRepository.findByEmail(email);
