@@ -25,7 +25,7 @@
         <c:choose>
             <c:when test="${empty orders}">
                 <div class="historyContent">
-                    <span class="content" ><b style="text-align: center">구매내역이 없습니다</b></span>
+                    <span class="noContent"><b>구매내역이 없습니다</b></span>
                 </div>
             </c:when>
             <c:otherwise>
